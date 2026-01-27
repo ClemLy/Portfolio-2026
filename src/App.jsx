@@ -1,9 +1,15 @@
+import Header from './components/Header/Header';
+
 function App() {
   return (
-    <main>
-      <h1>Portfolio Clémentin LY</h1>
-    </main>
+    <>
+      <Header />
+      <main style={{ marginTop: '100px', padding: '0 5%' }}>
+         {/*  */}
+         <h1>Concevoir des expériences web performantes</h1>
+      </main>
+    </>
   )
 }
 
-export default App
+export default App;
