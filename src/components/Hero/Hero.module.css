@@ -1,15 +1,15 @@
 .hero {
-  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 80px 5% 0;
+  padding: 140px 5% 80px;
 }
 
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
   align-items: center;
 }
 
@@ -108,7 +108,7 @@
 
 .svgIllustration {
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   height: auto;
 }
 

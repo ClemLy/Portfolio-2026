@@ -1,0 +1,183 @@
+.detailPage {
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  padding-top: 120px;
+  color: var(--text-main);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 40px;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  color: var(--accent-cyan);
+}
+
+/* Header de la page */
+.header {
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  padding: 6px 14px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: var(--accent-blue);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Visuel principal */
+.heroImage {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 80px;
+}
+
+.heroImage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Grille Défis & Architecture */
+.gridTwoCols {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  margin-bottom: 100px;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  margin-bottom: 32px;
+}
+
+.subBlue {
+  color: var(--accent-blue);
+  font-size: 1.1rem;
+  margin: 24px 0 8px 0;
+}
+
+.text {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* Carte Architecture */
+.architectureCard {
+  background: rgba(30, 41, 59, 0.3);
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.archTitle {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.archItem {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px var(--accent-blue);
+}
+
+/* Jauges Lighthouse */
+.lighthouseSection {
+  padding-bottom: 100px;
+}
+
+.lighthouseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+
+.scoreItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.progressCircle {
+  --size: 100px;
+  --thickness: 8px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(closest-side, var(--bg-dark) 80%, transparent 0 99.9%, var(--bg-dark) 0),
+    conic-gradient(var(--accent-cyan) calc(var(--percent) * 1%), rgba(255, 255, 255, 0.1) 0);
+  position: relative;
+}
+
+.scoreValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.scoreLabel {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+@media (max-width: 900px) {
+  .gridTwoCols {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+}
