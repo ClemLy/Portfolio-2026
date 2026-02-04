@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import styles from './Hero.module.css';
 
 const Hero = () => {
@@ -8,7 +9,7 @@ const Hero = () => {
         {/* Contenu textuel */}
         <div className={styles.content}>
           <div className={styles.badge}>
-            <svg className={styles.sparkle} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"></path></svg>
+            <Sparkles className={styles.sparkle} size={16} />
             Développeur Full-Stack
           </div>
 
@@ -24,7 +25,7 @@ const Hero = () => {
           <div className={styles.actions}>
             <button className={styles.primaryBtn}>
               Voir mes projets
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <ArrowRight size={16} />
             </button>
             <button className={styles.secondaryBtn}>Me contacter</button>
           </div>

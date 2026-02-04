@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ExternalLink, Gauge, ArrowLeft } from 'lucide-react';
 import { projectsData } from '../../data/projectsData';
 import styles from './ProjectDetail.module.css';
 
@@ -14,9 +15,7 @@ const ProjectDetail = () => {
     <main className={styles.detailPage}>
       <div className={styles.container}>
         <Link to="/" className={styles.backLink}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
+          <ArrowLeft size={20} />
           Retour aux projets
         </Link>
         
@@ -35,9 +34,7 @@ const ProjectDetail = () => {
             {project.link ? (
               <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.primaryBtn}>
                 Découvrir le résultat
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-                </svg>
+                <ExternalLink size={18} />
               </a>
             ) : (
               <button className={styles.disabledBtn} disabled>
@@ -116,9 +113,7 @@ const ProjectDetail = () => {
         {project.lighthouse && (
           <section className={styles.lighthouseCard}>
             <div className={styles.lighthouseHeader}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.gaugeIcon}>
-                <path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>
-              </svg>
+              <Gauge size={32} className={styles.gaugeIcon} color="#22D3EE" />
               <h2 className={styles.lighthouseTitle}>Performance & Éco-conception</h2>
             </div>
 

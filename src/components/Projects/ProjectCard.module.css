@@ -107,7 +107,3 @@
 .card:hover .link {
   color: #3b82f6;
 }
-
-.card:hover .link svg {
-  transform: translateX(5px);
-}
