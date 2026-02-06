@@ -65,17 +65,13 @@
   transition: all 0.3s ease;
 }
 
-.diagramNode:hover .iconCircle {
-  transform: translateY(-5px);
-  border-color: var(--node-color);
-}
-
 .connector {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   color: var(--accent-cyan);
+  min-width: 100px;
 }
 
 .connectorText {
@@ -109,6 +105,7 @@
   border-radius: var(--radius-md);
   margin-bottom: 2rem;
   border: 1px solid rgba(51, 65, 85, 0.3);
+  position: relative;
 }
 
 .tabBtn {
@@ -124,18 +121,24 @@
   color: var(--text-muted);
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
+  position: relative;
 }
 
-.tabBtn:hover:not(.activeTab) {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-main);
+.activeTabIndicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(59, 130, 246, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+  z-index: 1;
 }
 
 .activeTab {
-  background: rgba(59, 130, 246, 0.15);
   color: var(--accent-blue);
-  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
 }
 
 .techGrid {
@@ -149,7 +152,7 @@
   border: 1px solid rgba(51, 65, 85, 0.4);
   padding: 1.25rem;
   border-radius: var(--radius-md);
-  transition: all 0.3s ease;
+  height: fit-content;
 }
 
 .techCardHeader {
@@ -173,11 +176,11 @@
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: all 0.3s ease-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .showTooltip {
-  max-height: 120px;
+  max-height: 150px;
   opacity: 1;
   margin-top: 12px;
 }
@@ -196,8 +199,6 @@
   border: 1px solid rgba(34, 211, 238, 0.2);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
 }
 
 .ecoHeader {
@@ -245,13 +246,11 @@
   height: 6px;
   background: rgba(15, 23, 42, 0.8);
   border-radius: 20px;
-  overflow: hidden;
 }
 
 .progressBar {
   height: 100%;
   border-radius: 20px;
-  transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1);
 }
 
 .certifCards { display: flex; flex-direction: column; gap: 12px; }
@@ -261,12 +260,6 @@
   padding: 1rem;
   border-radius: var(--radius-md);
   border: 1px solid rgba(34, 211, 238, 0.1);
-  transition: all 0.3s ease;
-}
-
-.certCard:hover {
-  border-color: var(--accent-cyan);
-  transform: translateX(5px);
 }
 
 .certHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
@@ -282,7 +275,10 @@
   border-radius: 4px;
 }
 
-.certCard p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+.isCertified {
+  background: #10b981; /* Vert pour certifié */
+  color: white;
+}
 
 @media (max-width: 1024px) { .mainGrid { grid-template-columns: 1fr; } }
 
@@ -298,5 +294,6 @@
   .connector {
     transform: rotate(90deg);
     margin: 0.5rem 0;
+    min-width: auto;
   }
 }

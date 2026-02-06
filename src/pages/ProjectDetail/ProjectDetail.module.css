@@ -3,6 +3,7 @@
   min-height: 100vh;
   padding-top: 120px;
   color: var(--text-main);
+  overflow-x: hidden;
 }
 
 .container {
@@ -245,11 +246,17 @@
   transition: transform 0.3s ease;
 }
 
+.galleryItem:hover img {
+  transform: scale(1.05);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .galleryItem img {
   width: 100%;
   height: 500px;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
@@ -317,47 +324,55 @@
   color: var(--text-main);
 }
 
-.progressCircle {
-  --size: 120px;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
+.progressCircleWrapper {
   position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 25px;
 }
 
-.cyanCircle {
-  background: radial-gradient(closest-side, #111827 82%, transparent 0 99.9%, #111827 0),
-    conic-gradient(var(--accent-cyan) calc(var(--percent) * 1%), rgba(255, 255, 255, 0.05) 0);
-}
-
-.blueCircle {
-  background: radial-gradient(closest-side, #111827 82%, transparent 0 99.9%, #111827 0),
-    conic-gradient(var(--accent-blue) calc(var(--percent) * 1%), rgba(255, 255, 255, 0.05) 0);
+.svgCircle {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Pour que le cercle commence en haut */
 }
 
 .scoreValueInside {
+  position: absolute;
   font-size: 1.8rem;
   font-weight: 800;
+  color: var(--text-main);
 }
 
 .bottomBar {
   width: 100%;
-  height: 6px;
+  height: 8px; /* Un peu plus épais pour correspondre au cercle */
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
+  position: relative;
 }
 
 .barFill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
-.cyanBar .barFill { background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
-.blueBar .barFill { background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue); }
+.cyanBar .barFill { 
+  background: var(--accent-cyan); 
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.3); 
+}
+
+.blueBar .barFill { 
+  background: var(--accent-blue); 
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); 
+}
 
 .ecoBox {
   background: rgba(15, 23, 42, 0.4);

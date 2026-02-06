@@ -1,6 +1,7 @@
 .card {
   background: rgba(30, 41, 59, 0.5);
   border: 1px solid rgba(51, 65, 85, 0.5);
+  height: 100%;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;

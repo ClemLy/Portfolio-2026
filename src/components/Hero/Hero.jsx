@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import styles from './Hero.module.css';
 
@@ -13,25 +14,45 @@ const Hero = () => {
             Développeur Full-Stack
           </div>
 
-          <h1 className={styles.title}>
+          <motion.h1 
+            className={styles.title}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Concevoir des expériences web <span className={styles.gradientText}>performantes</span> et responsables
-          </h1>
+          </motion.h1>
 
           <p className={styles.description}>
             Passionné par le développement web moderne, je transforme des concepts en solutions Full-Stack élégantes. 
             Fort d'une expertise WordPress/PHP et d'une transition vers l'écosystème React/Node.js, j'allie performance technique et éco-conception.
           </p>
 
-          <div className={styles.actions}>
-            <a href="#projets" className={styles.primaryBtn}>
+          <motion.div 
+            className={styles.actions}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            <motion.a 
+              href="#projets" 
+              className={styles.primaryBtn}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Voir mes projets
               <ArrowRight size={16} />
-            </a>
+            </motion.a>
             
-            <a href="#contact" className={styles.secondaryBtn}>
+            <motion.a 
+              href="#contact" 
+              className={styles.secondaryBtn}
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
+              whileTap={{ scale: 0.95 }}
+            >
               Me contacter
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
 
           <div className={styles.techStack}>
             {['React', 'Node.js', 'PHP', 'WordPress'].map((tech) => (

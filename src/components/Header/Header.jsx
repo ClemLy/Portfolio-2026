@@ -49,7 +49,7 @@ const Header = () => {
             ))}
           </nav>
 
-          <a href="/cv.pdf" target="_blank" className={styles.cvButton}>
+          <a href="/assets/CV/CV - Clémentin LY.pdf" target="_blank" className={styles.cvButton}>
             <FileText size={18} />
             CV
           </a>
