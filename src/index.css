@@ -20,3 +20,7 @@ body {
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
 }
+
+html {
+  scroll-behavior: smooth;
+}

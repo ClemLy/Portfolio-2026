@@ -1,0 +1,302 @@
+.stackSection {
+  padding: 100px 20px;
+  background-color: var(--bg-deep);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* 1. Architecture Diagram */
+.archDiagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 3rem;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  border-radius: var(--radius-lg);
+  margin-bottom: 3rem;
+  backdrop-filter: blur(12px);
+  flex-wrap: wrap;
+}
+
+.diagramNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.iconCircle {
+  width: 70px;
+  height: 70px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--node-color), transparent 85%);
+  border: 2px solid color-mix(in srgb, var(--node-color), transparent 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--node-color);
+  box-shadow: 0 0 25px color-mix(in srgb, var(--node-color), transparent 90%);
+  transition: all 0.3s ease;
+}
+
+.diagramNode:hover .iconCircle {
+  transform: translateY(-5px);
+  border-color: var(--node-color);
+}
+
+.connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-cyan);
+}
+
+.connectorText {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+}
+
+/* 2. Main Grid Layout */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.7fr 1.3fr;
+  gap: 24px;
+}
+
+/* 3. Tech Panel (Left) */
+.techPanel {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+.tabsList {
+  display: flex;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(51, 65, 85, 0.3);
+}
+
+.tabBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tabBtn:hover:not(.activeTab) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.activeTab {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.techCard {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(51, 65, 85, 0.4);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.techCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.techCardHeader h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tooltip {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+}
+
+.showTooltip {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 12px;
+}
+
+.tooltip p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-top: 1px solid rgba(51, 65, 85, 0.3);
+  padding-top: 12px;
+}
+
+/* 4. Eco Panel (Right) */
+.ecoPanel {
+  background: linear-gradient(145deg, rgba(34, 211, 238, 0.05), rgba(59, 130, 246, 0.05));
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ecoHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.leafIcon { color: var(--accent-cyan); }
+
+.smallTitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-cyan);
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.lighthouseGrid {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+}
+
+.metricsList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.metricItem { display: flex; flex-direction: column; gap: 8px; }
+
+.metricLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.score { color: var(--accent-cyan); }
+
+.progressTrack {
+  height: 6px;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: 20px;
+  transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1);
+}
+
+.certifCards { display: flex; flex-direction: column; gap: 12px; }
+
+.certCard {
+  background: rgba(15, 23, 42, 0.5);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  transition: all 0.3s ease;
+}
+
+.certCard:hover {
+  border-color: var(--accent-cyan);
+  transform: translateX(5px);
+}
+
+.certHeader { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+
+.certHeader h5 { margin: 0; font-size: 0.9rem; color: var(--text-main); }
+
+.certBadge {
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  background: var(--accent-cyan);
+  color: var(--bg-deep);
+  border-radius: 4px;
+}
+
+.certCard p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+
+@media (max-width: 1024px) { .mainGrid { grid-template-columns: 1fr; } }
+
+@media (max-width: 768px) {
+  .techGrid { grid-template-columns: 1fr; }
+
+  .archDiagram {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2.5rem 1rem;
+  }
+
+  .connector {
+    transform: rotate(90deg);
+    margin: 0.5rem 0;
+  }
+}

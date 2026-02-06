@@ -4,7 +4,7 @@ import styles from './Hero.module.css';
 
 const Hero = () => {
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} id="accueil">
       <div className={styles.container}>
         {/* Contenu textuel */}
         <div className={styles.content}>
@@ -23,11 +23,14 @@ const Hero = () => {
           </p>
 
           <div className={styles.actions}>
-            <button className={styles.primaryBtn}>
+            <a href="#projets" className={styles.primaryBtn}>
               Voir mes projets
               <ArrowRight size={16} />
-            </button>
-            <button className={styles.secondaryBtn}>Me contacter</button>
+            </a>
+            
+            <a href="#contact" className={styles.secondaryBtn}>
+              Me contacter
+            </a>
           </div>
 
           <div className={styles.techStack}>

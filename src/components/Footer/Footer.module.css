@@ -1,0 +1,80 @@
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px 20px;
+  background-color: var(--bg-deep);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Alignement horizontal sur tablette et desktop */
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+  }
+}
+
+/* Réseaux Sociaux */
+.socialGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLink {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.socialLink:hover {
+  color: var(--accent-blue);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Copyright */
+.copyright {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Badge Éco */
+.ecoBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.leafIcon {
+  color: var(--accent-cyan);
+}
+
+.ecoText {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../../components/Hero/Hero';
 import ProjectsGrid from '../../components/Projects/ProjectsGrid';
 import Timeline from '../../components/Timeline/Timeline';
+import TechStack from '../../components/TechStack/TechStack';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Hero />
       <ProjectsGrid />
       <Timeline />
+      <TechStack />
     </main>
   );
 };

@@ -8,7 +8,7 @@ export const parcoursData = [
     description: 'Apprentissage de la programmation orientée objet, HTML5 et CSS3.',
     icon: Terminal,
     color: '#3B82F6',
-    side: 'right'
+    side: 'left'
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const parcoursData = [
     description: 'Maîtrise de PHP, JavaScript natif et découverte des frameworks (Symfony, CodeIgniter).',
     icon: Server,
     color: '#22D3EE',
-    side: 'left'
+    side: 'right'
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ export const parcoursData = [
     description: "Spécialisation WordPress, focus sur l'éco-conception, le SEO technique et l'accessibilité numérique (WCAG).",
     icon: Briefcase,
     color: '#3B82F6',
-    side: 'right'
+    side: 'left'
   },
   {
     id: 4,
@@ -35,6 +35,6 @@ export const parcoursData = [
     description: "Spécialisation React.js, développement mobile (React Native), architecture logicielle et création d'API REST avec Node.js (Express).",
     icon: Smartphone,
     color: '#22D3EE',
-    side: 'left'
+    side: 'right'
   }
 ];

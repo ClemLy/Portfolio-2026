@@ -3,6 +3,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projet/:id" element={<ProjectDetail />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

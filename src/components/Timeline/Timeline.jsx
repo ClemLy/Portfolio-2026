@@ -4,7 +4,7 @@ import styles from './Timeline.module.css';
 
 const Timeline = () => {
   return (
-    <section className={styles.timelineSection}>
+    <section className={styles.timelineSection} id="expertise">
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.mainTitle}>Mon Évolution & Parcours</h2>
