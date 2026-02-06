@@ -43,7 +43,7 @@ export const lighthouseMetrics = [
   { label: 'Performance', score: 100, color: '#22D3EE' },
   { label: 'Accessibilité', score: 93, color: '#3B82F6' },
   { label: 'Bonnes Pratiques', score: 100, color: '#22D3EE' },
-  { label: 'SEO', score: 91, color: '#3B82F6' }
+  { label: 'SEO', score: 100, color: '#3B82F6' }
 ];
 
 export const certifications = [
