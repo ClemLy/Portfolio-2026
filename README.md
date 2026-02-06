@@ -1,4 +1,4 @@
-# 🚀 Clémentin LY - Portfolio 2026
+# Clémentin LY - Portfolio 2026
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?logo=framer&logoColor=white)](https://www.framer.com/motion/)
@@ -28,7 +28,7 @@ Si vous souhaitez explorer le code ou le faire tourner en local :
 
 1.  **Cloner le projet**
     ```bash
-    git clone [https://github.com/ClemLy/Portfolio-2026.git](https://github.com/ClemLy/Portfolio-2026.git)
+    git clone https://github.com/ClemLy/Portfolio-2026.git
     cd portfolio-clementin
     ```
 
