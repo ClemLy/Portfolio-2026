@@ -296,4 +296,14 @@
     margin: 0.5rem 0;
     min-width: auto;
   }
+
+  .tabsList {
+    flex-wrap: wrap;
+  }
+  
+  .tabBtn {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+  
 }
