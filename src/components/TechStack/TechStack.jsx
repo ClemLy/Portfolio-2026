@@ -120,7 +120,7 @@ const TechStack = () => {
                   >
                     <div className={styles.techCardHeader}>
                       <div className={styles.indicator} style={{ backgroundColor: activeTabData.color }}></div>
-                      <h4>{tech.name}</h4>
+                      <h3 className={styles.techName}>{tech.name}</h3>
                     </div>
                     <div className={`${styles.tooltip} ${hoveredTech === tech.name ? styles.showTooltip : ''}`}>
                       <p>{tech.description}</p>

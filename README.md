@@ -47,7 +47,7 @@ Si vous souhaitez explorer le code ou le faire tourner en local :
 
 Le portfolio a été conçu pour atteindre des scores d'excellence sur Google Lighthouse :
 - **Performance** : 100
-- **Accessibilité** : 93
+- **Accessibilité** : 95
 - **Bonnes Pratiques** : 100
 - **SEO** : 100
 
