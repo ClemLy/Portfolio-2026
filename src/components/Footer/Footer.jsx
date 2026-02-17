@@ -40,10 +40,16 @@ const Footer = () => {
             © {currentYear} Clémentin LY. Tous droits réservés.
           </div>
 
-          {/* Droite : Badge Éco-conception */}
-          <div className={styles.ecoBadge}>
-            <Leaf size={16} className={styles.leafIcon} />
-            <span className={styles.ecoText}>Score Éco: 100/100</span>
+          {/* Droite : Badge Greenoco */}
+          <div className={styles.ecoBadgeWrapper}>
+            <iframe 
+              src="https://app.greenoco.io/fr/certificat/site_affe16ecd060471b31ad/badge?t=1-light" 
+              name="badge éco-score" 
+              title="badge éco-score" 
+              scrolling="no" 
+              className={styles.greenocoIframe}
+              style={{ border: 0, overflow: 'hidden' }}
+            ></iframe>
           </div>
 
         </div>

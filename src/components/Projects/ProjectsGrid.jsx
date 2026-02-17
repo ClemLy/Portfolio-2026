@@ -53,32 +53,6 @@ const ProjectsGrid = () => {
       });
     }
   };
-
-  // Animations Framer Motion
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3 
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { 
-      y: 100,
-      opacity: 0 
-    },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
-      transition: { 
-        duration: 0.8,
-        ease: [0.215, 0.61, 0.355, 1]
-      } 
-    }
-  };
   
   return (
     <section id="projets" className={styles.section}>
