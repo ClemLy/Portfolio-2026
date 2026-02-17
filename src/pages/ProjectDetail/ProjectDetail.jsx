@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion'; // Ajout de framer-motion
-import { ExternalLink, Gauge, ArrowLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion'; // Ajout de framer-motion
+import { ExternalLink, Gauge, ArrowLeft, X } from 'lucide-react';
 import { projectsData } from '../../data/projectsData';
 import styles from './ProjectDetail.module.css';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const [selectedImage, setSelectedImage] = useState(null);
   const project = projectsData.find((p) => p.id === id);
 
   // Sécurité si l'ID dans l'URL ne correspond à rien
@@ -86,13 +87,13 @@ const ProjectDetail = () => {
 
         {/* Image */}
         {project.image && (
-          <motion.div 
+          <motion.figure 
             className={styles.heroImage}
             variants={itemVariants}
             transition={{ duration: 0.4 }}
           >
             <img src={project.image} alt={project.title} />
-          </motion.div>
+          </motion.figure>
         )}
 
         {/* Section Défi & Architecture */}
@@ -143,26 +144,21 @@ const ProjectDetail = () => {
 
         {/* Section Galerie */}
         {project.gallery && project.gallery.length > 0 && (
-          <motion.section 
-            className={styles.gallerySection}
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
+          <section className={styles.gallerySection}>
             <h2 className={styles.sectionTitle}>Aperçus du projet</h2>
             <div className={styles.galleryGrid}>
               {project.gallery.slice(0, 3).map((img, index) => (
                 <motion.div 
                   key={index} 
                   className={styles.galleryItem}
-                  whileHover={{ y: -10 }}
+                  whileHover={{ y: -5, cursor: 'zoom-in' }} // Curseur zoom pour indiquer l'action
+                  onClick={() => setSelectedImage(img)} // Ouvre l'image au clic
                 >
                   <img src={img} alt={`${project.title} screenshot ${index + 1}`} />
                 </motion.div>
               ))}
             </div>
-          </motion.section>
+          </section>
         )}
         
 
@@ -269,6 +265,37 @@ const ProjectDetail = () => {
           </div>
         </motion.section>
       </div>
+
+
+      {/* LIGHTBOX MODALE */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            className={styles.lightboxOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)} // Ferme au clic sur l'overlay
+          >
+            <motion.button 
+              className={styles.closeLightbox}
+              onClick={() => setSelectedImage(null)}
+            >
+              <X size={32} />
+            </motion.button>
+
+            <motion.img 
+              src={selectedImage} 
+              className={styles.lightboxImage}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()} // Empêche la fermeture si on clique sur l'image
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.main>
   );
 };
