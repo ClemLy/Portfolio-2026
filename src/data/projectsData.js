@@ -82,4 +82,34 @@ export const projectsData = [
       seo: 100 
     }
   },
+  {
+    id: "wp-reservations",
+    title: "WP-Reservations",
+    subtitle: "Système sur-mesure de gestion de flotte automobile pour CSE & Entreprises",
+    image: "/assets/projets/wp-reservations/wp-reservations.webp",
+    techs: ["PHP", "WordPress", "MySQL", "FullCalendar", "JavaScript"],
+    problematique: "Remplacer la gestion opaque sur tableurs Excel par un outil centralisé capable d'éliminer les erreurs de saisie, les doubles réservations et de réguler l'utilisation équitable des véhicules au sein d'une structure.",
+    solution: "Développement d'un plugin complet intégrant un calendrier dynamique pour la visibilité des créneaux, un système de quotas par 'points' pour limiter les abus, et une interface d'administration robuste pour la validation des demandes.",
+    architecture: [
+      { name: "Database", details: "Modélisation de tables relationnelles SQL personnalisées via l'objet global $wpdb" },
+      { name: "Sécurité", details: "Implémentation stricte des Nonces et gestion fine des Rôles & Capacités WordPress" },
+      { name: "Automatisations", details: "Système de notifications transactionnelles par email lors des changements de statuts" }
+    ],
+    link: "https://github.com/ClemLy/wp-reservations"
+  },
+  {
+    id: "greenoco-player",
+    title: "Greenoco Video Player",
+    subtitle: "Lecteur vidéo éco-conçu pour l'optimisation de la performance et de l'empreinte carbone",
+    image: "/assets/projets/gvp/gvp.webp",
+    techs: ["PHP", "JavaScript", "Eco-conception", "Green IT"],
+    problematique: "Réduire l'impact des lecteurs vidéo tiers (YouTube/Vimeo) qui chargent des scripts lourds avant même l'interaction de l'utilisateur, dégradant les scores PageSpeed et augmentant la consommation énergétique.",
+    solution: "Conception d'un plugin basé sur la sobriété numérique : remplacement des iframes par des miniatures légères. Le chargement des scripts tiers est différé jusqu'au clic utilisateur, économisant ~1Mo de données par page.",
+    architecture: [
+      { name: "Performance", details: "Optimisation du chemin critique de rendu avec un Lazy-loading total des iframes" },
+      { name: "Admin UX", details: "Interface de configuration personnalisée avec prévisualisation des shortcodes en temps réel" },
+      { name: "Numérique Responsable", details: "Réduction drastique du poids de la page et des appels serveurs inutiles" }
+    ],
+    link: "https://github.com/ClemLy/greenoco-video-player"
+  }
 ];
