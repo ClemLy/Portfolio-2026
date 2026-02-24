@@ -24,7 +24,7 @@ export const projectsData = [
     title: "Comptoir des Arômes",
     subtitle: "Refonte e-commerce et stratégie de contenu pour une épicerie fine",
     image: "/assets/projets/comptoir-aromes/comptoir-aromes.webp",
-    techs: ["WordPress", "WooCommerce", "Divi", "Custom Post Types"],
+    techs: ["WordPress", "WooCommerce", "Flatsome", "Custom Post Types"],
     problematique: "Moderniser une boutique en ligne vieillissante tout en créant un nouvel espace d'engagement pour la clientèle via du contenu culinaire.",
     solution: "Déploiement d'une solution e-commerce robuste avec une refonte visuelle complète. Mise en place d'une architecture de contenus personnalisés (CPT) pour la gestion autonome d'un catalogue de recettes interactives.",
     architecture: [
@@ -78,6 +78,48 @@ export const projectsData = [
     lighthouse: { 
       performance: 90, 
       accessibilité: 83, 
+      bonnesPratiques: 100, 
+      seo: 100 
+    }
+  },
+  {
+    id: "papaie",
+    title: "Papaïe",
+    subtitle: "Refonte e-commerce premium pour une bijouterie créative",
+    image: "/assets/projets/papaie/papaie.webp",
+    techs: ["WordPress", "WooCommerce", "Flatsome", "UX Design"],
+    problematique: "Transformer un catalogue existant en une expérience d'achat haut de gamme, fluide et sécurisée, tout en facilitant la gestion des stocks de bijoux artisanaux.",
+    solution: "Intégration fidèle d'une maquette graphique sous WordPress. Amélioration de l'expérience d'achat (parcours panier/paiement) et optimisation des images haute définition pour ne pas ralentir le site.",
+    architecture: [
+      { name: "E-commerce", details: "WooCommerce configuré pour la vente d'articles uniques et précieux" },
+      { name: "UI/UX", details: "Développement sur-mesure via Flatsome à partir d'un design graphique externe" },
+      { name: "Performance", details: "Mise en place de solutions de cache et de formats d'image nouvelle génération" }
+    ],
+    link: "https://papaie.fr",
+    lighthouse: { 
+      performance: 75, 
+      accessibilité: 82, 
+      bonnesPratiques: 100, 
+      seo: 92 
+    }
+  },
+  {
+    id: "france-cuisine-concept",
+    title: "France Cuisine Concept",
+    subtitle: "Plateforme institutionnelle pour un fonds de dotation solidaire",
+    image: "/assets/projets/fcc/fcc.webp",
+    techs: ["WordPress", "Divi", "Intégration Maquette", "Design Responsable"],
+    problematique: "Traduire l'engagement social et caritatif d'une fondation à travers un site web sobre et professionnel, tout en respectant une direction artistique précise fournie par un graphiste.",
+    solution: "Développement d'une interface institutionnelle avec le constructeur Divi. Focus sur la clarté de l'information (missions, actus, partenaires) et intégration fidèle de la charte graphique pour renforcer la crédibilité de la fondation.",
+    architecture: [
+      { name: "Intégration", details: "Traduction technique d'une maquette graphique complexe sous l'écosystème Divi" },
+      { name: "Communication", details: "Mise en place d'un module d'actualités dynamique pour valoriser les actions sur le terrain" },
+      { name: "UX", details: "Navigation simplifiée pour faciliter l'accès aux informations légales et aux formulaires de contact" }
+    ],
+    link: "https://francecuisineconcept.org",
+    lighthouse: { 
+      performance: 98, 
+      accessibilité: 71, 
       bonnesPratiques: 100, 
       seo: 100 
     }
