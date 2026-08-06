@@ -1,26 +1,326 @@
-:root {
-  /* Palette de couleurs */
-  --bg-deep: #0F172A;
-  --bg-card: #1E293B;
-  --accent-blue: #3B82F6;
-  --accent-cyan: #22D3EE;
-  --text-main: #F8FAFC;
-  --text-muted: #94A3B8;
+/* ==========================================================================
+   Polices auto-hébergées
+   ========================================================================== */
 
-  /* Système d'espacement et arrondis */
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --container-width: 1200px;
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-body {
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Tokens du système de design
+   ========================================================================== */
+
+:root {
+  /* Palette : crème, sable, terracotta. Les tons clairs (paper, paper-soft,
+     sand) reprennent la palette fournie telle quelle pour les surfaces et
+     bordures ; --accent est une nuance plus soutenue de la même teinte
+     (dérivée du D9A299 fourni), nécessaire pour rester lisible en texte sur
+     fond clair. --accent-soft réutilise le D9A299 d'origine en aplat léger. */
+  --paper: #FAF7F3;
+  --paper-soft: #F0E4D3;
+  --sand: #DCC5B2;
+  --ink: #241610;
+  --ink-soft: #8C7A6D;
+  --line: rgba(36, 22, 16, 0.12);
+  --line-strong: rgba(36, 22, 16, 0.28);
+  --accent: #B5615A;
+  --accent-soft: rgba(217, 162, 153, 0.24);
+
+  /* Typographie */
+  --font-sans: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+
+  /* Échelle fluide */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --display-sm: clamp(1.75rem, 1.2rem + 2.4vw, 3.25rem);
+  --display-md: clamp(2.25rem, 1.4rem + 4vw, 5rem);
+  --display-lg: clamp(3rem, 1.5rem + 7.5vw, 9rem);
+
+  /* Espacements */
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-gap: clamp(5rem, 12vw, 11rem);
+  --header-height: 76px;
+
+  /* Mouvements */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 0.35s;
+  --duration-slow: 0.8s;
+}
+
+/* ==========================================================================
+   Reset et base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: var(--bg-deep);
-  color: var(--text-main);
-  -webkit-font-smoothing: antialiased;
+  padding: 0;
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--paper);
+}
+
+/* Grain de papier discret sur toute la page, purement décoratif */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Scrollbar personnalisée, cohérente avec la palette */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sand) var(--paper);
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--sand);
+  border-radius: 99px;
+  border: 3px solid var(--paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Utilitaires partagés
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  padding-inline: var(--gutter);
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lien d'évitement clavier : invisible tant qu'il n'a pas le focus */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 999;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--ink);
+  color: var(--paper);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: 4px;
+  transition: top 0.25s var(--ease-out-expo);
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+
+/* Réduction des animations pour les utilisateurs qui le demandent */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Contraste renforcé : bordures et texte secondaire plus marqués */
+@media (prefers-contrast: more) {
+  :root {
+    --ink-soft: #4A3F37;
+    --line: rgba(36, 22, 16, 0.35);
+    --line-strong: rgba(36, 22, 16, 0.6);
+    --sand: #A88A6E;
+  }
+
+  :focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* ==========================================================================
+   Impression : version sobre, sans décor ni interactions
+   ========================================================================== */
+
+@media print {
+  body::after {
+    display: none;
+  }
+
+  .skip-link,
+  .print-hide,
+  header,
+  footer {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.75em;
+    font-weight: 400;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
 }

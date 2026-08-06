@@ -1,0 +1,124 @@
+.section {
+  margin-top: var(--section-gap);
+}
+
+.dragHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.railViewport {
+  overflow: hidden;
+  margin-block: 2rem clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.rail {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  width: max-content;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.rail:active {
+  cursor: grabbing;
+}
+
+.group {
+  width: min(80vw, 320px);
+  flex-shrink: 0;
+}
+
+.groupLabel {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--line);
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--line);
+  transition: transform 0.35s var(--ease-out-expo), background-color 0.35s ease;
+}
+
+.item:hover {
+  transform: translateX(0.5rem);
+}
+
+.itemIndex {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  padding-top: 0.3rem;
+}
+
+.itemName {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.itemDescription {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.certs {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.cert {
+  display: flex;
+  gap: 1rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.35s ease;
+}
+
+.cert:hover {
+  background-color: var(--paper-soft);
+}
+
+.certIcon {
+  flex-shrink: 0;
+  color: var(--accent);
+  margin-top: 0.2rem;
+}
+
+.certTitle {
+  font-weight: 600;
+}
+
+.certIssuer {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-block: 0.3rem 0.5rem;
+}
+
+.certDescription {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+@media (min-width: 900px) {
+  .certs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

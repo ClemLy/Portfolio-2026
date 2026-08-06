@@ -1,133 +1,322 @@
 .header {
-  width: 100%;
-  height: 80px;
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  right: 0;
+  z-index: 100;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
 }
 
-.container {
-  max-width: var(--container-width);
-  width: 90%;
-  margin: 0 auto;
+.scrolled {
+  background-color: rgba(250, 247, 243, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--line);
+}
+
+.inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.1rem var(--gutter);
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-main);
-  z-index: 1001;
-  text-decoration: none;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
 }
 
-.logo span {
-  color: var(--accent-blue);
+/* Anneau de progression de lecture, autour d'un point à côté du logo */
+.ring {
+  width: 22px;
+  height: 22px;
+  transform: rotate(-90deg);
 }
 
-/* Bouton Mobile */
-.mobileMenuBtn {
+.ringTrack {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.5;
+}
+
+.ringProgress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.meta {
   display: none;
-  background: none;
-  border: none;
-  color: var(--text-main);
-  cursor: pointer;
-  z-index: 1001;
+  align-items: center;
+  gap: 1.75rem;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
 }
 
-.rightSide {
-  display: flex;
-  align-items: center;
-  gap: 40px;
+.time {
+  font-variant-numeric: tabular-nums;
 }
 
 .nav {
-  display: flex;
-  gap: 32px;
+  display: none;
+  align-items: center;
+  gap: 1.9rem;
 }
 
-.nav a {
-  text-decoration: none;
-  color: var(--text-muted);
+.navLink {
+  position: relative;
+  font-size: var(--text-sm);
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
+  padding-block: 0.3rem;
 }
 
-.nav a:hover {
-  color: var(--accent-blue);
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navLinkActive {
+  color: var(--accent);
+}
+
+.navLinkActive::after {
+  background-color: var(--accent);
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Mega-menu : aperçu des projets récents au survol du lien "Projets" */
+.megaMenu {
+  position: absolute;
+  top: calc(100% + 1.1rem);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 110;
+  width: 19rem;
+  padding: 0.85rem;
+  background-color: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  box-shadow: 0 24px 56px rgba(36, 22, 16, 0.16);
+}
+
+.megaMenuLabel {
+  padding: 0.3rem 0.5rem 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+.megaMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.megaMenuItem:hover {
+  background-color: var(--paper-soft);
+}
+
+.megaMenuThumb {
+  flex-shrink: 0;
+  width: 56px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: var(--paper-soft);
+}
+
+.megaMenuThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.megaMenuTitle {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.megaMenuYear {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.searchButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.65rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--ink-soft);
+  border: 1px solid var(--sand);
+  border-radius: 6px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.searchButton:hover {
+  border-color: var(--accent);
+  color: var(--ink);
 }
 
 .cvButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--accent-blue);
-  text-decoration: none;
-  border-radius: 10px;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  font-weight: 600;
-  transition: all 0.3s ease;
+  gap: 0.3rem;
+  padding: 0.45rem 1rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border: 1px solid var(--sand);
+  border-radius: 99px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .cvButton:hover {
-  background: var(--accent-blue);
-  color: white;
+  background-color: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
 }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 768px) {
-  .mobileMenuBtn {
-    display: block;
-  }
+/* Burger mobile */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  z-index: 210;
+}
 
-  .rightSide {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: #0f172a;
-    flex-direction: column;
-    justify-content: center;
-    gap: 50px;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-  }
+.burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: var(--ink);
+  transition: transform 0.35s var(--ease-out-expo);
+}
 
-  .rightSide.menuOpen {
-    right: 0;
+.burgerOpen span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.burgerOpen span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Menu mobile plein écran */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+  padding: var(--gutter);
+  background-color: var(--paper-soft);
+}
+
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.menuItemMask {
+  display: block;
+  overflow: hidden;
+}
+
+.menuItemInner {
+  display: block;
+}
+
+.menuLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.menuIndex {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.menuFooter {
+  display: flex;
+  gap: 2rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 900px) {
+  .meta {
+    display: flex;
   }
 
   .nav {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    display: flex;
   }
 
-  .nav a {
-    font-size: 1.2rem;
+  .burger {
+    display: none;
   }
 
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 999;
+  .menu {
+    display: none;
   }
 }
