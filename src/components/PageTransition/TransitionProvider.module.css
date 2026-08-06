@@ -1,0 +1,56 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background-color: var(--ink);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Écran scindé du tout premier chargement : deux panneaux qui s'écartent */
+.introPanel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 9997;
+  background-color: var(--ink);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.introPanelLeft {
+  left: 0;
+}
+
+.introPanelRight {
+  right: 0;
+}
+
+.introMark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--paper);
+  pointer-events: none;
+}
+
+.introName {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+}
+
+.introMeta {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(250, 247, 243, 0.6);
+}
