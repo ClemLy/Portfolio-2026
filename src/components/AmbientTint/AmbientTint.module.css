@@ -1,0 +1,12 @@
+.tint {
+  position: fixed;
+  inset: 0;
+  z-index: 9550;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  transition: background-color 4s ease;
+}
+
+:global(html[data-theme='dark']) .tint {
+  mix-blend-mode: screen;
+}

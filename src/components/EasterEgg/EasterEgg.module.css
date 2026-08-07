@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(36, 22, 16, 0.85);
+  background-color: rgba(var(--ink-fixed-rgb), 0.85);
   cursor: pointer;
 }
 
@@ -27,7 +27,7 @@
 .message {
   position: relative;
   text-align: center;
-  color: var(--paper);
+  color: var(--paper-fixed);
 }
 
 .title {
@@ -38,5 +38,5 @@
 .subtitle {
   margin-top: 0.5rem;
   font-size: var(--text-sm);
-  color: rgba(250, 247, 243, 0.7);
+  color: rgba(var(--paper-fixed-rgb), 0.7);
 }

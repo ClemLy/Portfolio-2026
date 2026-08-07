@@ -75,11 +75,41 @@
 /* État vide */
 .empty {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 1rem;
   padding-block: 3rem;
   color: var(--ink-soft);
+}
+
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-sm);
+}
+
+.suggestionChip {
+  padding: 0.4rem 0.9rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.suggestionChip:hover {
+  background-color: var(--paper-soft);
+  border-color: var(--sand);
 }
 
 .emptyReset {
@@ -92,9 +122,9 @@
 }
 
 .emptyReset:hover {
-  background-color: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
+  background-color: var(--ink-fixed);
+  border-color: var(--ink-fixed);
+  color: var(--paper-fixed);
 }
 
 .filter {
@@ -122,13 +152,13 @@
 }
 
 .filterActive {
-  background-color: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
+  background-color: var(--ink-fixed);
+  border-color: var(--ink-fixed);
+  color: var(--paper-fixed);
 }
 
 .filterActive:hover {
-  color: var(--paper);
+  color: var(--paper-fixed);
 }
 
 /* Liste typographique */
@@ -154,19 +184,21 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-color: var(--ink);
+  background-color: var(--ink-fixed);
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.row:hover::before {
+.row:hover::before,
+.rowActive::before {
   transform: scaleY(1);
   transform-origin: top;
 }
 
-.row:hover {
-  color: var(--paper);
+.row:hover,
+.rowActive {
+  color: var(--paper-fixed);
 }
 
 .rowIndex {
@@ -196,7 +228,8 @@
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.row:hover .rowTitle {
+.row:hover .rowTitle,
+.rowActive .rowTitle {
   transform: translateX(clamp(0.5rem, 1.5vw, 1.25rem));
 }
 
@@ -207,8 +240,9 @@
   transition: color 0.3s ease;
 }
 
-.row:hover .rowSubtitle {
-  color: rgba(250, 247, 243, 0.65);
+.row:hover .rowSubtitle,
+.rowActive .rowSubtitle {
+  color: rgba(var(--paper-fixed-rgb), 0.65);
 }
 
 .rowMeta {
@@ -224,8 +258,9 @@
   transition: color 0.3s ease;
 }
 
-.row:hover .rowMeta {
-  color: rgba(250, 247, 243, 0.65);
+.row:hover .rowMeta,
+.rowActive .rowMeta {
+  color: rgba(var(--paper-fixed-rgb), 0.65);
 }
 
 .rowYear {
@@ -237,28 +272,48 @@
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.row:hover .rowArrow {
+.row:hover .rowArrow,
+.rowActive .rowArrow {
   transform: translate(4px, -4px) rotate(45deg);
   color: var(--accent);
 }
 
-/* Preview flottante */
-.preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  width: clamp(260px, 26vw, 380px);
-  aspect-ratio: 4 / 3;
-  margin-top: calc(clamp(260px, 26vw, 380px) * -0.375);
-  margin-left: calc(clamp(260px, 26vw, 380px) * -0.5);
-  overflow: hidden;
-  border-radius: 6px;
-  pointer-events: none;
-  background-color: var(--paper-soft);
+/* Mise en page : liste + panneau de preview fixe (n'existe qu'à partir de
+   1100px, en dessous les vignettes mobiles du tableau suffisent) */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
 }
 
-.preview img {
+.previewPanel {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr 22rem;
+  }
+
+  .previewPanel {
+    display: block;
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+  }
+}
+
+.previewFrame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background-color: var(--paper-soft);
+  will-change: transform;
+}
+
+.previewFrame img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -266,17 +321,41 @@
   object-fit: cover;
 }
 
-/* Coin qui se décolle, façon post-it, à l'apparition de la preview */
+.previewEmpty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+
+/* Coin qui se décolle, façon post-it, quand un projet est survolé */
 .peel {
   position: absolute;
   top: 0;
   right: 0;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   transform-origin: top right;
   background: linear-gradient(135deg, var(--paper) 50%, rgba(36, 22, 16, 0.12) 51%);
   clip-path: polygon(100% 0, 0 0, 100% 100%);
   box-shadow: -2px 2px 6px rgba(36, 22, 16, 0.2);
+  opacity: 0;
+  rotate: -35deg;
+  transition: opacity 0.3s ease, rotate 0.3s var(--ease-out-expo);
+}
+
+.peelActive {
+  opacity: 1;
+  rotate: 0deg;
+  transition-delay: 0.15s;
 }
 
 /* Mobile : vignettes visibles, preview inutile */

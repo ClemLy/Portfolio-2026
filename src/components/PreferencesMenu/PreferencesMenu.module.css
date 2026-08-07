@@ -8,7 +8,7 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(250, 247, 243, 0.25);
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.25);
   border-radius: 50%;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
@@ -23,7 +23,7 @@
   position: fixed;
   inset: 0;
   z-index: 310;
-  background-color: rgba(36, 22, 16, 0.4);
+  background-color: rgba(var(--ink-fixed-rgb), 0.4);
 }
 
 .panel {
@@ -33,10 +33,10 @@
   z-index: 320;
   width: min(20rem, 84vw);
   padding: 1.25rem;
-  background-color: var(--ink);
-  border: 1px solid rgba(250, 247, 243, 0.18);
+  background-color: var(--ink-fixed);
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.18);
   border-radius: 12px;
-  box-shadow: 0 20px 48px rgba(36, 22, 16, 0.35);
+  box-shadow: 0 20px 48px rgba(var(--ink-fixed-rgb), 0.35);
 }
 
 .panelTitle {
@@ -45,7 +45,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: rgba(250, 247, 243, 0.55);
+  color: rgba(var(--paper-fixed-rgb), 0.55);
 }
 
 .switchRow {
@@ -54,9 +54,9 @@
   gap: 0.75rem;
   width: 100%;
   padding-block: 0.75rem;
-  border-top: 1px solid rgba(250, 247, 243, 0.12);
+  border-top: 1px solid rgba(var(--paper-fixed-rgb), 0.12);
   text-align: left;
-  color: var(--paper);
+  color: var(--paper-fixed);
 }
 
 .switchIcon {
@@ -79,7 +79,7 @@
 
 .switchDescription {
   font-size: 0.75rem;
-  color: rgba(250, 247, 243, 0.55);
+  color: rgba(var(--paper-fixed-rgb), 0.55);
 }
 
 .switchTrack {
@@ -88,7 +88,7 @@
   height: 22px;
   padding: 3px;
   border-radius: 99px;
-  background-color: rgba(250, 247, 243, 0.2);
+  background-color: rgba(var(--paper-fixed-rgb), 0.2);
   transition: background-color 0.25s ease;
 }
 
@@ -101,7 +101,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: var(--paper);
+  background-color: var(--paper-fixed);
   transition: transform 0.25s var(--ease-out-expo);
 }
 

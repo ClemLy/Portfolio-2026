@@ -1,7 +1,28 @@
 .footer {
+  position: relative;
+  isolation: isolate;
   margin-top: var(--section-gap);
-  background-color: var(--ink);
-  color: var(--paper);
+  background-color: var(--ink-fixed);
+  color: var(--paper-fixed);
+}
+
+.footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    circle 420px at var(--spot-x, 50%) var(--spot-y, 0px),
+    rgba(var(--paper-fixed-rgb), 0.06),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.footer:hover::after {
+  opacity: 1;
 }
 
 .inner {
@@ -16,12 +37,12 @@
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(250, 247, 243, 0.18);
+  border-bottom: 1px solid rgba(var(--paper-fixed-rgb), 0.18);
   font-size: var(--text-xs);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: rgba(250, 247, 243, 0.6);
+  color: rgba(var(--paper-fixed-rgb), 0.6);
 }
 
 .ctaWrapper {
@@ -55,7 +76,7 @@
 }
 
 .cta:hover .ctaSerif {
-  color: var(--paper);
+  color: var(--paper-fixed);
 }
 
 .ctaArrow {
@@ -80,12 +101,12 @@
   align-items: center;
   gap: 0.75rem;
   font-size: var(--text-lg);
-  color: rgba(250, 247, 243, 0.75);
+  color: rgba(var(--paper-fixed-rgb), 0.75);
   transition: color 0.3s ease;
 }
 
 .emailButton:hover {
-  color: var(--paper);
+  color: var(--paper-fixed);
 }
 
 .copyIcon {
@@ -94,7 +115,7 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(250, 247, 243, 0.25);
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.25);
   border-radius: 50%;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
@@ -113,12 +134,12 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.85rem 1.4rem;
-  background-color: var(--ink);
-  color: var(--paper);
+  background-color: var(--ink-fixed);
+  color: var(--paper-fixed);
   font-size: var(--text-sm);
   font-weight: 500;
   border-radius: 99px;
-  box-shadow: 0 12px 32px rgba(36, 22, 16, 0.28);
+  box-shadow: 0 12px 32px rgba(var(--ink-fixed-rgb), 0.28);
   white-space: nowrap;
 }
 
@@ -133,7 +154,7 @@
   justify-content: space-between;
   gap: 1.5rem;
   padding-block: 1.5rem;
-  border-top: 1px solid rgba(250, 247, 243, 0.18);
+  border-top: 1px solid rgba(var(--paper-fixed-rgb), 0.18);
 }
 
 .links {
@@ -155,15 +176,15 @@
   padding: 0.5rem 1.1rem;
   font-size: var(--text-sm);
   font-weight: 500;
-  border: 1px solid rgba(250, 247, 243, 0.25);
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.25);
   border-radius: 99px;
   transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
 
 .link:hover {
-  background-color: var(--paper);
-  border-color: var(--paper);
-  color: var(--ink);
+  background-color: var(--paper-fixed);
+  border-color: var(--paper-fixed);
+  color: var(--ink-fixed);
 }
 
 .topButton {
@@ -172,7 +193,7 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border: 1px solid rgba(250, 247, 243, 0.25);
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.25);
   border-radius: 50%;
   transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
@@ -188,8 +209,8 @@
   justify-content: space-between;
   gap: 0.75rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(250, 247, 243, 0.18);
+  border-top: 1px solid rgba(var(--paper-fixed-rgb), 0.18);
   font-size: var(--text-xs);
-  color: rgba(250, 247, 243, 0.5);
+  color: rgba(var(--paper-fixed-rgb), 0.5);
 }
 

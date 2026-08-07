@@ -2,52 +2,38 @@ import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  X,
-  Leaf,
-  Clock,
-  Plus,
-  Search,
-  PenTool,
-  Layers,
-  Rocket,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, X, Leaf } from 'lucide-react';
 import TransitionLink from '../../components/PageTransition/TransitionLink';
 import { Reveal, Fade } from '../../components/Reveal/Reveal';
 import { useLenis, scrollTo } from '../../components/SmoothScroll/lenisContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import useActiveSection from '../../hooks/useActiveSection';
 import useFocusTrap from '../../hooks/useFocusTrap';
+import useSpotlight from '../../hooks/useSpotlight';
 import { projectsData } from '../../data/projectsData';
+import { localize } from '../../i18n/localize';
 import NotFound from '../NotFound/NotFound';
 import styles from './ProjectDetail.module.css';
-
-const WORDS_PER_MINUTE = 200;
-
-/* Positions génériques des annotations sur l'image principale */
-const ANNOTATION_POSITIONS = [
-  { x: '18%', y: '24%' },
-  { x: '50%', y: '74%' },
-  { x: '82%', y: '30%' },
-];
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const lenis = useLenis();
-  const { tick } = usePreferences();
+  const { tick, pageTurn } = usePreferences();
+  const { lang, dict } = useLanguage();
+  const pd = dict.projectDetail;
   const [lightboxImage, setLightboxImage] = useState(null);
-  const [activeAnnotation, setActiveAnnotation] = useState(null);
+  const [loadedHeroes, setLoadedHeroes] = useState(() => new Set());
   const heroRef = useRef(null);
   const lightboxRef = useRef(null);
+  const handleSpotlight = useSpotlight();
 
   const projectIndex = projectsData.findIndex((p) => p.id === id);
-  const project = projectsData[projectIndex];
+  const rawProject = projectsData[projectIndex];
+  const project = localize(rawProject, lang);
   const total = projectsData.length;
-  const nextProject = projectsData[(projectIndex + 1 + total) % total];
-  const prevProject = projectsData[(projectIndex - 1 + total) % total];
+  const nextProject = localize(projectsData[(projectIndex + 1 + total) % total], lang);
+  const prevProject = localize(projectsData[(projectIndex - 1 + total) % total], lang);
 
   /* Parallaxe douce sur l'image principale */
   const { scrollYProgress } = useScroll({
@@ -61,11 +47,11 @@ const ProjectDetail = () => {
 
   /* Sommaire flottant : sections disponibles selon les données du projet */
   const caseSections = [
-    { id: 'contexte', label: 'Contexte' },
-    { id: 'solution', label: 'Solution' },
-    ...(project?.architecture?.length ? [{ id: 'architecture', label: 'Architecture' }] : []),
-    ...(project?.gallery?.length ? [{ id: 'galerie', label: 'Aperçus' }] : []),
-    ...(project?.lighthouse ? [{ id: 'performance', label: 'Performance' }] : []),
+    { id: 'contexte', label: pd.contexte },
+    { id: 'solution', label: pd.solution },
+    ...(project?.architecture?.length ? [{ id: 'architecture', label: pd.architectureTechnique }] : []),
+    ...(project?.gallery?.length ? [{ id: 'galerie', label: pd.apercus }] : []),
+    ...(project?.lighthouse ? [{ id: 'performance', label: pd.performanceMesuree }] : []),
   ];
   const caseSectionIds = caseSections.map((s) => s.id);
   const activeCaseSection = useActiveSection(caseSectionIds);
@@ -73,42 +59,9 @@ const ProjectDetail = () => {
   /* Piège le focus dans la lightbox tant qu'elle est ouverte */
   useFocusTrap(lightboxRef, { active: Boolean(lightboxImage), onClose: () => setLightboxImage(null) });
 
-  if (!project) return <NotFound />;
+  if (!rawProject) return <NotFound />;
 
   const isGithub = project.link?.includes('github.com');
-
-  /* Frise de développement : les mêmes données réelles du projet, reformulées
-     en étapes de processus plutôt qu'en rubriques */
-  const timelineStages = [
-    { icon: Search, label: 'Recherche', text: project.problematique },
-    { icon: PenTool, label: 'Conception', text: project.solution },
-    ...(project.architecture?.length
-      ? [
-          {
-            icon: Layers,
-            label: 'Développement',
-            text: project.architecture.map((item) => item.name).join(' · '),
-          },
-        ]
-      : []),
-    {
-      icon: Rocket,
-      label: 'Livraison',
-      text: project.link
-        ? isGithub
-          ? 'Code source publié et documenté sur GitHub.'
-          : 'Site mis en ligne, accessible et mesuré en production.'
-        : 'Développement en cours, prochaine étape à venir.',
-    },
-  ];
-
-  /* Temps de lecture estimé à partir du contenu réel de l'étude de cas */
-  const wordCount = [project.problematique, project.solution, ...(project.architecture || []).map((a) => a.details)]
-    .filter(Boolean)
-    .join(' ')
-    .split(/\s+/)
-    .filter(Boolean).length;
-  const readingMinutes = Math.max(1, Math.round(wordCount / WORDS_PER_MINUTE));
 
   const goToSection = (sectionId) => scrollTo(lenis, `#${sectionId}`, { offset: -96 });
 
@@ -121,9 +74,9 @@ const ProjectDetail = () => {
       />
 
       <Helmet>
-        <title>{`${project.title}, étude de cas de Clémentin Ly`}</title>
+        <title>{pd.etudeDeCas(project.title)}</title>
         <meta name="description" content={`${project.title} : ${project.subtitle}`} />
-        <meta property="og:title" content={`${project.title}, étude de cas de Clémentin Ly`} />
+        <meta property="og:title" content={pd.etudeDeCas(project.title)} />
         <meta property="og:description" content={project.subtitle} />
         <meta property="og:image" content={`https://clementin-portfolio.vercel.app${project.image}`} />
         <meta property="og:type" content="article" />
@@ -133,7 +86,7 @@ const ProjectDetail = () => {
         <Fade className={styles.backRow} delay={0.5} inView={false}>
           <TransitionLink to="/#projets" className={styles.backLink}>
             <ArrowLeft size={16} strokeWidth={1.75} />
-            Retour aux projets
+            {pd.back}
           </TransitionLink>
           <span className={styles.pageIndex}>
             {String(projectIndex + 1).padStart(2, '0')} / {String(projectsData.length).padStart(2, '0')}
@@ -154,30 +107,23 @@ const ProjectDetail = () => {
         <Fade delay={0.85} inView={false}>
           <dl className={styles.meta}>
             <div className={styles.metaCell}>
-              <dt>Année</dt>
+              <dt>{pd.annee}</dt>
               <dd>{project.year}</dd>
             </div>
             <div className={styles.metaCell}>
-              <dt>Rôle</dt>
+              <dt>{pd.role}</dt>
               <dd>{project.role}</dd>
             </div>
             <div className={styles.metaCell}>
-              <dt>Catégorie</dt>
+              <dt>{pd.categorie}</dt>
               <dd>{project.category}</dd>
             </div>
             <div className={styles.metaCell}>
-              <dt>Stack</dt>
+              <dt>{pd.stackLabel}</dt>
               <dd className={styles.metaTechs}>{project.techs.join(', ')}</dd>
             </div>
             <div className={styles.metaCell}>
-              <dt>Lecture</dt>
-              <dd className={styles.metaReading}>
-                <Clock size={13} strokeWidth={2} />
-                {readingMinutes} min
-              </dd>
-            </div>
-            <div className={styles.metaCell}>
-              <dt>Lien</dt>
+              <dt>{pd.lien}</dt>
               <dd>
                 {project.link ? (
                   <a
@@ -186,13 +132,13 @@ const ProjectDetail = () => {
                     rel="noopener noreferrer"
                     className={styles.metaLink}
                   >
-                    {isGithub ? 'Voir le code' : 'Visiter le site'}
+                    {isGithub ? pd.voirLeCode : pd.visiterLeSite}
                     <ArrowUpRight size={14} strokeWidth={2} />
                   </a>
                 ) : (
                   <span className={styles.inProgress}>
                     <span className={styles.pulseDot} />
-                    En cours
+                    {pd.enCours}
                   </span>
                 )}
               </dd>
@@ -202,66 +148,15 @@ const ProjectDetail = () => {
       </div>
 
       <div className={`container ${styles.heroFrame}`} ref={heroRef}>
-        <div className={styles.heroImage}>
-          <motion.img src={project.image} alt={`Aperçu du projet ${project.title}`} style={{ y: parallaxY }} />
-
-          {project.architecture?.length > 0 && (
-            <div className={`${styles.annotations} print-hide`}>
-              {project.architecture.slice(0, 3).map((item, index) => {
-                const isActive = activeAnnotation === index;
-                const position = ANNOTATION_POSITIONS[index];
-                return (
-                  <div
-                    key={item.name}
-                    className={styles.annotation}
-                    style={{ left: position.x, top: position.y }}
-                  >
-                    <button
-                      className={`${styles.annotationDot} ${isActive ? styles.annotationDotActive : ''}`}
-                      onClick={() => setActiveAnnotation(isActive ? null : index)}
-                      aria-expanded={isActive}
-                      aria-label={`${isActive ? 'Masquer' : 'Voir'} le détail : ${item.name}`}
-                    >
-                      <Plus size={12} strokeWidth={2.5} />
-                    </button>
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.div
-                          className={styles.annotationCard}
-                          role="note"
-                          initial={{ opacity: 0, scale: 0.92, y: 6 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          exit={{ opacity: 0, scale: 0.92, y: 6 }}
-                          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                          <p className={styles.annotationTitle}>{item.name}</p>
-                          <p className={styles.annotationText}>{item.details}</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+        <div className={`${styles.heroImage} ${loadedHeroes.has(project.id) ? '' : 'img-skeleton'}`}>
+          <motion.img
+            src={project.image}
+            alt={pd.apercuDe(project.title)}
+            style={{ y: parallaxY }}
+            className={`img-fade ${loadedHeroes.has(project.id) ? 'img-loaded' : ''}`}
+            onLoad={() => setLoadedHeroes((prev) => (prev.has(project.id) ? prev : new Set(prev).add(project.id)))}
+          />
         </div>
-
-        <Fade delay={0.1} className={styles.timeline}>
-          <div className={`${styles.timelineTrack} print-hide`} data-lenis-prevent>
-            {timelineStages.map((stage) => {
-              const Icon = stage.icon;
-              return (
-                <div key={stage.label} className={styles.timelineStage}>
-                  <span className={styles.timelineIcon}>
-                    <Icon size={16} strokeWidth={1.75} />
-                  </span>
-                  <p className={styles.timelineLabel}>{stage.label}</p>
-                  <p className={styles.timelineText}>{stage.text}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Fade>
       </div>
 
       <div className="container">
@@ -269,7 +164,7 @@ const ProjectDetail = () => {
           <Fade id="contexte" className={styles.caseBlock}>
             <h2 className={styles.caseHeading}>
               <span className={styles.caseIndex}>01</span>
-              Contexte
+              {pd.contexte}
             </h2>
             <p className={styles.caseText}>{project.problematique}</p>
           </Fade>
@@ -277,7 +172,7 @@ const ProjectDetail = () => {
           <Fade id="solution" className={styles.caseBlock} delay={0.1}>
             <h2 className={styles.caseHeading}>
               <span className={styles.caseIndex}>02</span>
-              Solution
+              {pd.solution}
             </h2>
             <p className={styles.caseText}>{project.solution}</p>
           </Fade>
@@ -288,7 +183,7 @@ const ProjectDetail = () => {
             <Fade>
               <h2 className={styles.caseHeading}>
                 <span className={styles.caseIndex}>03</span>
-                Architecture technique
+                {pd.architectureTechnique}
               </h2>
             </Fade>
             <ul>
@@ -309,7 +204,7 @@ const ProjectDetail = () => {
             <Fade>
               <h2 className={styles.caseHeading}>
                 <span className={styles.caseIndex}>04</span>
-                Aperçus
+                {pd.apercus}
               </h2>
             </Fade>
             <div className={styles.galleryGrid}>
@@ -321,8 +216,8 @@ const ProjectDetail = () => {
                       setLightboxImage(image);
                       tick();
                     }}
-                    data-cursor-label="Agrandir"
-                    aria-label={`Agrandir l'aperçu ${index + 1} du projet ${project.title}`}
+                    data-cursor-label={pd.agrandir}
+                    aria-label={pd.agrandirAria(index + 1, project.title)}
                   >
                     <img src={image} alt="" loading="lazy" />
                   </button>
@@ -337,16 +232,14 @@ const ProjectDetail = () => {
             <Fade>
               <h2 className={styles.caseHeading}>
                 <span className={styles.caseIndex}>{project.gallery?.length ? '05' : '04'}</span>
-                Performance mesurée
+                {pd.performanceMesuree}
               </h2>
             </Fade>
             <ul className={styles.scores}>
               {Object.entries(project.lighthouse).map(([key, value], index) => (
                 <Fade key={key} delay={index * 0.08}>
                   <li className={styles.scoreRow}>
-                    <span className={styles.scoreLabel}>
-                      {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
-                    </span>
+                    <span className={styles.scoreLabel}>{pd.lighthouseLabels[key] || key}</span>
                     <span className={styles.scoreTrack}>
                       <motion.span
                         className={styles.scoreFill}
@@ -364,8 +257,7 @@ const ProjectDetail = () => {
             <Fade delay={0.2}>
               <p className={styles.ecoNote}>
                 <Leaf size={18} strokeWidth={1.75} />
-                Chaque projet intègre les standards de l'éco-conception : cache avancé, lazy-loading,
-                formats d'images nouvelle génération et infrastructure à faible empreinte carbone.
+                {pd.ecoNote}
               </p>
             </Fade>
           </section>
@@ -378,7 +270,7 @@ const ProjectDetail = () => {
         {activeCaseSection && (
           <motion.nav
             className={`${styles.toc} print-hide`}
-            aria-label="Sommaire de l'étude de cas"
+            aria-label={pd.sommaireAria}
             initial={{ opacity: 0, x: 12 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 12 }}
@@ -402,12 +294,14 @@ const ProjectDetail = () => {
         <TransitionLink
           to={`/projet/${prevProject.id}`}
           className={`${styles.navPanel} ${styles.navPanelPrev}`}
-          data-cursor-label="Voir le projet"
+          data-cursor-label={dict.projects.voirLeProjet}
+          onPointerMove={handleSpotlight}
+          onNavigate={pageTurn}
         >
           <div className={styles.navPanelInner}>
             <span className={styles.navPanelLabel}>
               <ArrowLeft size={14} strokeWidth={2} />
-              Précédent
+              {pd.precedent}
             </span>
             <span className={styles.navPanelTitle}>{prevProject.title}</span>
           </div>
@@ -416,11 +310,13 @@ const ProjectDetail = () => {
         <TransitionLink
           to={`/projet/${nextProject.id}`}
           className={`${styles.navPanel} ${styles.navPanelNext}`}
-          data-cursor-label="Voir le projet"
+          data-cursor-label={dict.projects.voirLeProjet}
+          onPointerMove={handleSpotlight}
+          onNavigate={pageTurn}
         >
           <div className={styles.navPanelInner}>
             <span className={styles.navPanelLabel}>
-              Suivant
+              {pd.suivant}
               <ArrowRight size={14} strokeWidth={2} />
             </span>
             <span className={styles.navPanelTitle}>{nextProject.title}</span>
@@ -435,7 +331,7 @@ const ProjectDetail = () => {
             className={styles.lightbox}
             role="dialog"
             aria-modal="true"
-            aria-label="Aperçu agrandi"
+            aria-label={pd.apercuAgrandi}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -444,7 +340,7 @@ const ProjectDetail = () => {
             <button
               className={styles.lightboxClose}
               onClick={() => setLightboxImage(null)}
-              aria-label="Fermer l'aperçu"
+              aria-label={pd.fermerAria}
             >
               <X size={28} strokeWidth={1.5} />
             </button>

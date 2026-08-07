@@ -1,27 +1,27 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent, useTransform } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+  useAnimation,
+  useScroll,
+  useMotionValueEvent,
+  useTransform,
+} from 'framer-motion';
 import { ArrowUpRight, Command } from 'lucide-react';
 import TransitionLink from '../PageTransition/TransitionLink';
 import ScrambleText from '../ScrambleText/ScrambleText';
 import { useLenis, scrollTo } from '../SmoothScroll/lenisContext';
 import { useCommandPalette } from '../../context/commandPaletteContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import useActiveSection from '../../hooks/useActiveSection';
 import useFocusTrap from '../../hooks/useFocusTrap';
 import { projectsData } from '../../data/projectsData';
+import { localizeList } from '../../i18n/localize';
 import styles from './Header.module.css';
-
-const navLinks = [
-  { name: 'Projets', to: '/#projets' },
-  { name: 'À propos', to: '/#apropos' },
-  { name: 'Parcours', to: '/#parcours' },
-  { name: 'Stack', to: '/#stack' },
-];
 
 /* Sections observées pour surligner le lien actif dans la navigation */
 const sectionIds = ['accueil', 'projets', 'apropos', 'parcours', 'stack', 'contact'];
-
-const recentProjects = [...projectsData].sort((a, b) => b.year.localeCompare(a.year)).slice(0, 3);
 
 const menuVariants = {
   closed: { y: '-100%', transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.15 } },
@@ -42,7 +42,18 @@ const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 const Header = () => {
   const lenis = useLenis();
   const { openPalette } = useCommandPalette();
-  const { tick } = usePreferences();
+  const { tick, reducedMotion } = usePreferences();
+  const { lang, toggleLang, dict } = useLanguage();
+  const navLinks = [
+    { name: dict.nav.projets, to: '/#projets', isProjects: true },
+    { name: dict.nav.apropos, to: '/#apropos' },
+    { name: dict.nav.parcours, to: '/#parcours' },
+    { name: dict.nav.stack, to: '/#stack' },
+  ];
+  const recentProjects = localizeList(
+    [...projectsData].sort((a, b) => b.year.localeCompare(a.year)).slice(0, 3),
+    lang
+  );
   const [time, setTime] = useState('');
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -54,6 +65,7 @@ const Header = () => {
   const burgerRef = useRef(null);
   const megaMenuTimer = useRef(null);
   const ringOffset = useTransform(scrollYProgress, (v) => RING_CIRCUMFERENCE * (1 - v));
+  const logoControls = useAnimation();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -61,9 +73,22 @@ const Header = () => {
     setScrolled(latest > 24);
   });
 
+  /* Le logo se comprime légèrement en écho au rebond élastique de la page */
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+    const onBounce = () => {
+      logoControls.start({
+        scale: [1, 0.88, 1.03, 1],
+        transition: { duration: 0.5, ease: 'easeOut' },
+      });
+    };
+    window.addEventListener('elastic-bounce', onBounce);
+    return () => window.removeEventListener('elastic-bounce', onBounce);
+  }, [logoControls, reducedMotion]);
+
   /* Heure locale de Paris, mise à jour toutes les 30 secondes */
   useEffect(() => {
-    const format = new Intl.DateTimeFormat('fr-FR', {
+    const format = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: 'Europe/Paris',
@@ -72,7 +97,7 @@ const Header = () => {
     update();
     const id = setInterval(update, 30000);
     return () => clearInterval(id);
-  }, []);
+  }, [lang]);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -108,7 +133,7 @@ const Header = () => {
         initial={false}
       >
         <div className={styles.inner}>
-          <div className={styles.logoGroup}>
+          <motion.div className={styles.logoGroup} animate={logoControls}>
             <TransitionLink to="/" className={styles.logo} onNavigate={closeMenu}>
               <ScrambleText text="Clémentin Ly" />
             </TransitionLink>
@@ -123,7 +148,7 @@ const Header = () => {
                 style={{ strokeDashoffset: ringOffset }}
               />
             </svg>
-          </div>
+          </motion.div>
 
           <div className={styles.meta}>
             <AnimatePresence mode="wait">
@@ -139,10 +164,10 @@ const Header = () => {
             </AnimatePresence>
           </div>
 
-          <nav className={styles.nav} aria-label="Navigation principale">
+          <nav className={styles.nav} aria-label={dict.nav.principale}>
             {navLinks.map((link) => {
               const isActive = activeSection === link.to.split('#')[1];
-              const isProjects = link.name === 'Projets';
+              const isProjects = Boolean(link.isProjects);
               return (
                 <div
                   key={link.name}
@@ -152,7 +177,7 @@ const Header = () => {
                 >
                   <TransitionLink
                     to={link.to}
-                    className={`${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}
+                    className={`${styles.navLink} ink-hover ${isActive ? styles.navLinkActive : ''}`}
                     aria-current={isActive ? 'true' : undefined}
                     aria-expanded={isProjects ? megaMenuOpen : undefined}
                   >
@@ -171,7 +196,7 @@ const Header = () => {
                           onMouseEnter={openMegaMenu}
                           onMouseLeave={closeMegaMenuDelayed}
                         >
-                          <p className={styles.megaMenuLabel}>Projets récents</p>
+                          <p className={styles.megaMenuLabel}>{dict.nav.recentProjects}</p>
                           {recentProjects.map((project) => (
                             <TransitionLink
                               key={project.id}
@@ -198,18 +223,25 @@ const Header = () => {
             <a
               href="#contact"
               onClick={handleContact}
-              className={`${styles.navLink} ${activeSection === 'contact' ? styles.navLinkActive : ''}`}
+              className={`${styles.navLink} ink-hover ${activeSection === 'contact' ? styles.navLinkActive : ''}`}
               aria-current={activeSection === 'contact' ? 'true' : undefined}
             >
-              Contact
+              {dict.nav.contact}
             </a>
             <button
               onClick={openPalette}
               className={styles.searchButton}
-              aria-label="Ouvrir la palette de commandes"
+              aria-label={dict.nav.openPalette}
             >
               <Command size={13} strokeWidth={2} />
               K
+            </button>
+            <button
+              onClick={toggleLang}
+              className={styles.langButton}
+              aria-label={lang === 'fr' ? dict.lang.switchTo : dict.lang.switchToFr}
+            >
+              {lang === 'fr' ? 'EN' : 'FR'}
             </button>
             <a
               href="/assets/CV/CV - Clémentin LY.pdf"
@@ -217,7 +249,7 @@ const Header = () => {
               rel="noopener noreferrer"
               className={styles.cvButton}
             >
-              CV
+              {dict.nav.cv}
               <ArrowUpRight size={14} strokeWidth={2} />
             </a>
           </nav>
@@ -228,7 +260,7 @@ const Header = () => {
             onClick={toggleMenu}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
           >
             <span />
             <span />
@@ -244,13 +276,13 @@ const Header = () => {
             className={styles.menu}
             role="dialog"
             aria-modal="true"
-            aria-label="Menu de navigation"
+            aria-label={dict.nav.mobileMenu}
             variants={menuVariants}
             initial="closed"
             animate="open"
             exit="closed"
           >
-            <nav className={styles.menuNav} aria-label="Menu mobile">
+            <nav className={styles.menuNav} aria-label={dict.nav.mobileNav}>
               {navLinks.map((link, index) => (
                 <span className={styles.menuItemMask} key={link.name}>
                   <motion.span custom={index} variants={menuItemVariants} className={styles.menuItemInner}>
@@ -265,7 +297,7 @@ const Header = () => {
                 <motion.span custom={navLinks.length} variants={menuItemVariants} className={styles.menuItemInner}>
                   <a href="#contact" onClick={handleContact} className={styles.menuLink}>
                     <span className={styles.menuIndex}>05</span>
-                    Contact
+                    {dict.nav.contact}
                   </a>
                 </motion.span>
               </span>
@@ -279,7 +311,10 @@ const Header = () => {
             >
               <a href="https://github.com/ClemLy" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="https://linkedin.com/in/clémentin-ly/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="/assets/CV/CV - Clémentin LY.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+              <a href="/assets/CV/CV - Clémentin LY.pdf" target="_blank" rel="noopener noreferrer">{dict.nav.cv}</a>
+              <button type="button" onClick={toggleLang} className={styles.menuLangButton}>
+                {lang === 'fr' ? 'EN' : 'FR'}
+              </button>
             </motion.div>
           </motion.div>
         )}

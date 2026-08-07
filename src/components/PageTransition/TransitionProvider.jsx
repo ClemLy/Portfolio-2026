@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLenis, scrollTo } from '../SmoothScroll/lenisContext';
+import { usePreferences } from '../../context/preferencesContext';
 import { TransitionContext } from './transitionContext';
 import styles from './TransitionProvider.module.css';
 
@@ -19,7 +20,7 @@ const TransitionProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const lenis = useLenis();
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
   const [phase, setPhase] = useState('idle');
   /* Rideau simple pour la navigation entre pages, écran scindé réservé au
      tout premier chargement */

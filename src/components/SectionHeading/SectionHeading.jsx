@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { usePreferences } from '../../context/preferencesContext';
 import styles from './SectionHeading.module.css';
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -17,11 +18,14 @@ const letterVariants = {
    section, avec une typographie cinétique qui se réaligne lettre par lettre
    à l'entrée dans le viewport */
 const SectionHeading = ({ index, label, count }) => {
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
   const letters = label.split('');
 
   return (
     <h2 className={`${styles.heading} section-heading-sticky`}>
+      <span className={styles.watermark} aria-hidden="true">
+        {index}
+      </span>
       <span className={styles.index}>{index}</span>
       <span className={styles.label}>
         {reducedMotion ? (

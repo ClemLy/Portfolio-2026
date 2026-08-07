@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9998;
-  background-color: var(--ink);
+  background-color: var(--ink-fixed);
   pointer-events: none;
   will-change: transform;
 }
@@ -14,7 +14,7 @@
   bottom: 0;
   width: 50%;
   z-index: 9997;
-  background-color: var(--ink);
+  background-color: var(--ink-fixed);
   pointer-events: none;
   will-change: transform;
 }
@@ -37,7 +37,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: var(--paper);
+  color: var(--paper-fixed);
   pointer-events: none;
 }
 
@@ -52,5 +52,5 @@
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: rgba(250, 247, 243, 0.6);
+  color: rgba(var(--paper-fixed-rgb), 0.6);
 }

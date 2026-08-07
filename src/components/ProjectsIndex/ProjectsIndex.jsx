@@ -1,13 +1,14 @@
 import { useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowUpRight, Search, X } from 'lucide-react';
+import { ArrowUpRight, ImageOff, Search, X } from 'lucide-react';
 import TransitionLink from '../PageTransition/TransitionLink';
 import { Fade } from '../Reveal/Reveal';
 import Magnetic from '../Magnetic/Magnetic';
 import SectionHeading from '../SectionHeading/SectionHeading';
-import { useFinePointer } from '../../hooks/useFinePointer';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import { normalize } from '../../lib/normalize';
+import { localizeList } from '../../i18n/localize';
 import { projectsData, projectCategories } from '../../data/projectsData';
 import styles from './ProjectsIndex.module.css';
 
@@ -17,29 +18,48 @@ const ProjectsIndex = () => {
   const [category, setCategory] = useState('Tous');
   const [query, setQuery] = useState('');
   const [activeProject, setActiveProject] = useState(null);
-  const finePointer = useFinePointer();
-  const { tick } = usePreferences();
-  const lastX = useRef(0);
+  const [loadedThumbs, setLoadedThumbs] = useState(() => new Set());
+  const { tick, reducedMotion } = usePreferences();
+  const { lang, dict } = useLanguage();
   const preloaded = useRef(new Set());
+  const filterRefs = useRef([]);
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotate = useMotionValue(0);
-  const previewX = useSpring(x, { stiffness: 160, damping: 20, mass: 0.6 });
-  const previewY = useSpring(y, { stiffness: 160, damping: 20, mass: 0.6 });
-  const previewRotate = useSpring(rotate, { stiffness: 120, damping: 18 });
+  const markThumbLoaded = (id) => {
+    setLoadedThumbs((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
+  };
+
+  /* Léger tilt 3D du panneau de preview, qui suit la position du curseur */
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springTiltX = useSpring(tiltX, { stiffness: 220, damping: 22 });
+  const springTiltY = useSpring(tiltY, { stiffness: 220, damping: 22 });
+
+  const handleTiltMove = (event) => {
+    if (reducedMotion) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width - 0.5;
+    const py = (event.clientY - rect.top) / rect.height - 0.5;
+    tiltY.set(px * 9);
+    tiltX.set(py * -9);
+  };
+
+  const handleTiltLeave = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
 
   const filtered = useMemo(() => {
     const byCategory = category === 'Tous' ? projectsData : projectsData.filter((p) => p.category === category);
+    const localized = localizeList(byCategory, lang);
     const q = normalize(query.trim());
-    if (!q) return byCategory;
-    return byCategory.filter(
+    if (!q) return localized;
+    return localized.filter(
       (p) =>
         normalize(p.title).includes(q) ||
         normalize(p.subtitle).includes(q) ||
         p.techs.some((t) => normalize(t).includes(q))
     );
-  }, [category, query]);
+  }, [category, query, lang]);
 
   const counts = useMemo(() => {
     const map = { Tous: projectsData.length };
@@ -49,18 +69,42 @@ const ProjectsIndex = () => {
     return map;
   }, []);
 
+  /* Technologies les plus fréquentes, proposées comme pistes de recherche
+     quand la requête ne correspond à rien */
+  const topTechs = useMemo(() => {
+    const counts = new Map();
+    projectsData.forEach((p) => p.techs.forEach((t) => counts.set(t, (counts.get(t) || 0) + 1)));
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([t]) => t)
+      .slice(0, 5);
+  }, []);
+
   const resetFilters = () => {
     setCategory('Tous');
     setQuery('');
   };
 
-  /* La preview suit le curseur avec une légère inclinaison selon la vitesse */
-  const handleMouseMove = (event) => {
-    x.set(event.clientX);
-    y.set(event.clientY);
-    const delta = event.clientX - lastX.current;
-    lastX.current = event.clientX;
-    rotate.set(Math.max(-10, Math.min(10, delta * 0.5)));
+  /* Groupe de filtres navigable au clavier comme un vrai groupe de radios :
+     flèches gauche/droite (et haut/bas) déplacent la sélection et le focus */
+  const selectCategory = (cat, index) => {
+    setCategory(cat);
+    tick();
+    filterRefs.current[index]?.focus();
+  };
+
+  const handleFilterKeyDown = (event, index) => {
+    const total = projectCategories.length;
+    let nextIndex = null;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % total;
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + total) % total;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = total - 1;
+
+    if (nextIndex === null) return;
+    event.preventDefault();
+    selectCategory(projectCategories[nextIndex], nextIndex);
   };
 
   /* Réchauffe le cache HTTP dès le survol/focus pour un affichage instantané
@@ -73,22 +117,25 @@ const ProjectsIndex = () => {
   };
 
   return (
-    <section className={`container ${styles.section}`} id="projets" aria-label="Projets sélectionnés">
-      <SectionHeading index="01" label="Projets sélectionnés" count={`(${String(projectsData.length).padStart(2, '0')})`} />
+    <section className={`container ${styles.section}`} id="projets" aria-label={dict.projects.sectionLabel}>
+      <SectionHeading index="01" label={dict.projects.sectionLabel} count={`(${String(projectsData.length).padStart(2, '0')})`} />
 
       <Fade delay={0.1} className={styles.toolbar}>
-        <div className={styles.filters} role="group" aria-label="Filtrer les projets par catégorie">
-          {projectCategories.map((cat) => (
+        <div className={styles.filters} role="radiogroup" aria-label={dict.projects.filterGroupAria}>
+          {projectCategories.map((cat, index) => (
             <Magnetic key={cat} strength={0.3}>
               <button
-                className={`${styles.filter} ${category === cat ? styles.filterActive : ''}`}
-                onClick={() => {
-                  setCategory(cat);
-                  tick();
+                ref={(el) => {
+                  filterRefs.current[index] = el;
                 }}
-                aria-pressed={category === cat}
+                className={`${styles.filter} ${category === cat ? styles.filterActive : ''}`}
+                onClick={() => selectCategory(cat, index)}
+                onKeyDown={(event) => handleFilterKeyDown(event, index)}
+                role="radio"
+                aria-checked={category === cat}
+                tabIndex={category === cat ? 0 : -1}
               >
-                {cat}
+                {dict.projects.categories[cat] || cat}
                 <sup>{counts[cat] || 0}</sup>
               </button>
             </Magnetic>
@@ -101,15 +148,15 @@ const ProjectsIndex = () => {
             type="text"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Rechercher un projet, une techno…"
+            placeholder={dict.projects.searchPlaceholder}
             className={styles.searchInput}
-            aria-label="Rechercher un projet"
+            aria-label={dict.projects.searchAria}
           />
           {query && (
             <button
               onClick={() => setQuery('')}
               className={styles.searchClear}
-              aria-label="Effacer la recherche"
+              aria-label={dict.projects.searchClearAria}
             >
               <X size={14} strokeWidth={2} />
             </button>
@@ -118,107 +165,137 @@ const ProjectsIndex = () => {
       </Fade>
 
       <p className="visually-hidden" role="status" aria-live="polite">
-        {filtered.length} projet{filtered.length > 1 ? 's' : ''} affiché{filtered.length > 1 ? 's' : ''}
+        {dict.projects.resultsStatus(filtered.length)}
       </p>
 
-      <motion.ul
-        className={styles.list}
-        onMouseMove={finePointer ? handleMouseMove : undefined}
-        onMouseLeave={() => setActiveProject(null)}
-        layout
-      >
-        <AnimatePresence initial={false} mode="popLayout">
-          {filtered.map((project, index) => (
-            <motion.li
-              key={project.id}
-              layout
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -18 }}
-              transition={{ duration: 0.45, ease: EASE }}
-            >
-              <TransitionLink
-                to={`/projet/${project.id}`}
-                className={styles.row}
-                data-cursor-label="Voir le projet"
-                onMouseEnter={() => {
-                  setActiveProject(project);
-                  preloadImage(project.image);
-                }}
-                onMouseLeave={() => setActiveProject(null)}
-                onFocus={() => preloadImage(project.image)}
+      <div className={styles.layout}>
+        <motion.ul className={styles.list} onMouseLeave={() => setActiveProject(null)} layout>
+          <AnimatePresence initial={false} mode="popLayout">
+            {filtered.map((project, index) => (
+              <motion.li
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.45, ease: EASE }}
               >
-                <span className={styles.rowIndex}>{String(index + 1).padStart(2, '0')}</span>
+                <TransitionLink
+                  to={`/projet/${project.id}`}
+                  className={`${styles.row} ${activeProject?.id === project.id ? styles.rowActive : ''}`}
+                  data-cursor-label={dict.projects.voirLeProjet}
+                  onMouseEnter={() => {
+                    setActiveProject(project);
+                    preloadImage(project.image);
+                  }}
+                  onFocus={() => {
+                    setActiveProject(project);
+                    preloadImage(project.image);
+                  }}
+                  onBlur={() => setActiveProject(null)}
+                >
+                  <span className={styles.rowIndex}>{String(index + 1).padStart(2, '0')}</span>
 
-                <span className={styles.thumb} aria-hidden="true">
-                  <img src={project.image} alt="" loading="lazy" width="640" height="400" />
-                </span>
+                  <span
+                    className={`${styles.thumb} ${loadedThumbs.has(project.id) ? '' : 'img-skeleton'}`}
+                    aria-hidden="true"
+                  >
+                    <img
+                      src={project.image}
+                      alt=""
+                      loading="lazy"
+                      width="640"
+                      height="400"
+                      className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
+                      onLoad={() => markThumbLoaded(project.id)}
+                    />
+                  </span>
 
-                <span className={styles.rowMain}>
-                  <span className={styles.rowTitle}>{project.title}</span>
-                  <span className={styles.rowSubtitle}>{project.subtitle}</span>
-                </span>
+                  <span className={styles.rowMain}>
+                    <span className={`${styles.rowTitle} ink-hover`}>{project.title}</span>
+                    <span className={styles.rowSubtitle}>{project.subtitle}</span>
+                  </span>
 
-                <span className={styles.rowMeta}>
-                  <span className={styles.rowCategory}>{project.category}</span>
-                  <span className={styles.rowYear}>{project.year}</span>
-                </span>
+                  <span className={styles.rowMeta}>
+                    <span className={styles.rowCategory}>{project.category}</span>
+                    <span className={styles.rowYear}>{project.year}</span>
+                  </span>
 
-                <span className={styles.rowArrow}>
-                  <ArrowUpRight size={28} strokeWidth={1.5} />
-                </span>
-              </TransitionLink>
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </motion.ul>
+                  <span className={styles.rowArrow}>
+                    <ArrowUpRight size={28} strokeWidth={1.5} />
+                  </span>
+                </TransitionLink>
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </motion.ul>
+
+        {/* Panneau de preview fixe : ne suit plus le curseur, se contente de
+            changer d'image selon la ligne survolée */}
+        <div className={`${styles.previewPanel} print-hide`} aria-hidden="true">
+          <motion.div
+            className={styles.previewFrame}
+            style={
+              reducedMotion
+                ? undefined
+                : { rotateX: springTiltX, rotateY: springTiltY, transformPerspective: 800 }
+            }
+            onPointerMove={handleTiltMove}
+            onPointerLeave={handleTiltLeave}
+          >
+            <AnimatePresence mode="wait">
+              {activeProject ? (
+                <motion.img
+                  key={activeProject.id}
+                  src={activeProject.image}
+                  alt=""
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.35, ease: EASE }}
+                />
+              ) : (
+                <motion.div
+                  key="empty"
+                  className={styles.previewEmpty}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ImageOff size={18} strokeWidth={1.5} />
+                  {dict.projects.previewEmpty}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <span className={`${styles.peel} ${activeProject ? styles.peelActive : ''}`} />
+          </motion.div>
+        </div>
+      </div>
 
       {filtered.length === 0 && (
         <Fade className={styles.empty}>
           <p>
-            Aucun projet ne correspond {query.trim() ? <>à « {query.trim()} »</> : 'à ces filtres'}.
+            {query.trim() ? dict.projects.emptyWithQuery(query.trim()) : dict.projects.emptyNoQuery}
           </p>
-          <button onClick={resetFilters} className={styles.emptyReset}>
-            Réinitialiser
-          </button>
-        </Fade>
-      )}
 
-      {/* Preview flottante : uniquement pour les pointeurs précis */}
-      {finePointer && (
-        <motion.div
-          className={`${styles.preview} print-hide`}
-          style={{ x: previewX, y: previewY, rotate: previewRotate }}
-          animate={{
-            scale: activeProject ? 1 : 0.6,
-            opacity: activeProject ? 1 : 0,
-          }}
-          transition={{ duration: 0.35, ease: EASE }}
-          aria-hidden="true"
-        >
-          <AnimatePresence mode="popLayout">
-            {activeProject && (
-              <motion.img
-                key={activeProject.id}
-                src={activeProject.image}
-                alt=""
-                initial={{ y: '100%' }}
-                animate={{ y: '0%' }}
-                exit={{ y: '-100%' }}
-                transition={{ duration: 0.5, ease: EASE }}
-              />
-            )}
-          </AnimatePresence>
-          <motion.span
-            className={styles.peel}
-            initial={{ rotate: -35, opacity: 0 }}
-            animate={{
-              rotate: activeProject ? 0 : -35,
-              opacity: activeProject ? 1 : 0,
-            }}
-            transition={{ duration: 0.45, delay: activeProject ? 0.18 : 0, ease: EASE }}
-          />
-        </motion.div>
+          {query.trim() && (
+            <div className={styles.suggestions}>
+              {dict.projects.trySuggestions}
+              {topTechs.map((t) => (
+                <button key={t} onClick={() => setQuery(t)} className={styles.suggestionChip}>
+                  {t}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div className={styles.emptyActions}>
+            <button onClick={resetFilters} className={styles.emptyReset}>
+              {dict.projects.reset}
+            </button>
+          </div>
+        </Fade>
       )}
     </section>
   );

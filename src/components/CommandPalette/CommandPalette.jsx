@@ -7,6 +7,8 @@ import {
   Github,
   Linkedin,
   Mail,
+  Moon,
+  Sun,
   Waves,
   Volume2,
   CornerDownLeft,
@@ -14,31 +16,27 @@ import {
 import { useCommandPalette } from '../../context/commandPaletteContext';
 import { usePageTransition } from '../PageTransition/transitionContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import useFocusTrap from '../../hooks/useFocusTrap';
 import { normalize } from '../../lib/normalize';
+import { localizeList } from '../../i18n/localize';
 import { projectsData } from '../../data/projectsData';
 import styles from './CommandPalette.module.css';
 
 const EMAIL = 'ly.clementin@gmail.com';
 
-const pages = [
-  { id: 'page-accueil', label: 'Accueil', hint: 'Retour en haut de page', to: '/' },
-  { id: 'page-projets', label: 'Projets', hint: 'Voir tous les projets', to: '/#projets' },
-  { id: 'page-apropos', label: 'À propos', hint: 'Le manifeste', to: '/#apropos' },
-  { id: 'page-parcours', label: 'Parcours', hint: "Le parcours de formation", to: '/#parcours' },
-  { id: 'page-stack', label: 'Stack', hint: 'Outils et technologies', to: '/#stack' },
-  { id: 'page-contact', label: 'Contact', hint: 'Écrire un message', to: '/#contact' },
-];
-
 const CommandPalette = () => {
   const { open, closePalette } = useCommandPalette();
   const { navigateTo } = usePageTransition();
-  const { reducedMotion, toggleReducedMotion, soundEnabled, toggleSound, tick } = usePreferences();
+  const { reducedMotion, toggleReducedMotion, darkMode, toggleDarkMode, soundEnabled, toggleSound, tick } =
+    usePreferences();
+  const { lang, dict } = useLanguage();
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const [feedback, setFeedback] = useState('');
   const panelRef = useRef(null);
   const inputRef = useRef(null);
+  const cp = dict.commandPalette;
 
   useFocusTrap(panelRef, { active: open, onClose: closePalette, initialFocusRef: inputRef });
 
@@ -57,13 +55,13 @@ const CommandPalette = () => {
     () => [
       {
         id: 'action-copy-email',
-        label: "Copier l'adresse email",
+        label: cp.actions.copyEmail.label,
         hint: EMAIL,
         icon: Mail,
         run: async () => {
           try {
             await navigator.clipboard.writeText(EMAIL);
-            setFeedback('Adresse copiée dans le presse-papier');
+            setFeedback(cp.actions.copyEmail.success);
           } catch {
             window.location.href = `mailto:${EMAIL}`;
           }
@@ -72,49 +70,60 @@ const CommandPalette = () => {
       },
       {
         id: 'action-github',
-        label: 'Ouvrir GitHub',
+        label: cp.actions.github.label,
         hint: 'github.com/ClemLy',
         icon: Github,
         run: () => window.open('https://github.com/ClemLy', '_blank', 'noopener,noreferrer'),
       },
       {
         id: 'action-linkedin',
-        label: 'Ouvrir LinkedIn',
+        label: cp.actions.linkedin.label,
         hint: 'linkedin.com/in/clémentin-ly',
         icon: Linkedin,
         run: () => window.open('https://linkedin.com/in/clémentin-ly/', '_blank', 'noopener,noreferrer'),
       },
       {
         id: 'action-cv',
-        label: 'Télécharger le CV',
-        hint: 'PDF',
+        label: cp.actions.cv.label,
+        hint: cp.actions.cv.hint,
         icon: FileText,
         run: () => window.open('/assets/CV/CV - Clémentin LY.pdf', '_blank', 'noopener,noreferrer'),
       },
       {
+        id: 'action-theme',
+        label: darkMode ? cp.actions.theme.toLight : cp.actions.theme.toDark,
+        hint: cp.actions.theme.savedHint,
+        icon: darkMode ? Sun : Moon,
+        run: () => {
+          toggleDarkMode();
+          setFeedback(darkMode ? cp.actions.theme.feedbackLight : cp.actions.theme.feedbackDark);
+        },
+        keepOpen: true,
+      },
+      {
         id: 'action-motion',
-        label: reducedMotion ? 'Rétablir les animations' : 'Réduire les animations',
-        hint: 'Préférence sauvegardée',
+        label: reducedMotion ? cp.actions.motion.restore : cp.actions.motion.reduce,
+        hint: cp.actions.motion.savedHint,
         icon: Waves,
         run: () => {
           toggleReducedMotion();
-          setFeedback(reducedMotion ? 'Animations rétablies' : 'Animations réduites');
+          setFeedback(reducedMotion ? cp.actions.motion.feedbackRestored : cp.actions.motion.feedbackReduced);
         },
         keepOpen: true,
       },
       {
         id: 'action-sound',
-        label: soundEnabled ? "Couper le son de l'interface" : "Activer le son de l'interface",
-        hint: 'Préférence sauvegardée',
+        label: soundEnabled ? cp.actions.sound.disable : cp.actions.sound.enable,
+        hint: cp.actions.sound.savedHint,
         icon: Volume2,
         run: () => {
           toggleSound();
-          setFeedback(soundEnabled ? 'Son coupé' : 'Son activé');
+          setFeedback(soundEnabled ? cp.actions.sound.feedbackOff : cp.actions.sound.feedbackOn);
         },
         keepOpen: true,
       },
     ],
-    [reducedMotion, soundEnabled, toggleReducedMotion, toggleSound]
+    [reducedMotion, toggleReducedMotion, darkMode, toggleDarkMode, soundEnabled, toggleSound, cp]
   );
 
   const results = useMemo(() => {
@@ -125,7 +134,7 @@ const CommandPalette = () => {
         .filter((item) => !q || normalize(item.label).includes(q) || normalize(item.hint || '').includes(q))
         .map((item) => ({ ...item, group }));
 
-    const projectItems = projectsData.map((project) => ({
+    const projectItems = localizeList(projectsData, lang).map((project) => ({
       id: `project-${project.id}`,
       label: project.title,
       hint: project.subtitle,
@@ -133,11 +142,11 @@ const CommandPalette = () => {
     }));
 
     return [
-      ...matchGroup(pages, 'Navigation'),
-      ...matchGroup(projectItems, 'Projets'),
-      ...matchGroup(actions, 'Actions'),
+      ...matchGroup(cp.pages, cp.groups.navigation),
+      ...matchGroup(projectItems, cp.groups.projets),
+      ...matchGroup(actions, cp.groups.actions),
     ];
-  }, [query, actions]);
+  }, [query, actions, cp, lang]);
 
   useEffect(() => {
     const id = setTimeout(() => setActiveIndex(0), 0);
@@ -188,7 +197,7 @@ const CommandPalette = () => {
             className={styles.panel}
             role="dialog"
             aria-modal="true"
-            aria-label="Palette de commandes"
+            aria-label={cp.ariaLabel}
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
@@ -202,7 +211,7 @@ const CommandPalette = () => {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Rechercher une page, un projet, une action…"
+                placeholder={cp.placeholder}
                 className={styles.input}
                 role="combobox"
                 aria-expanded="true"
@@ -211,7 +220,7 @@ const CommandPalette = () => {
                 aria-autocomplete="list"
                 autoComplete="off"
               />
-              <kbd className={styles.kbd}>Échap</kbd>
+              <kbd className={styles.kbd}>{cp.escape}</kbd>
             </div>
 
             {feedback && (
@@ -223,11 +232,11 @@ const CommandPalette = () => {
             <ul
               id="cmdk-listbox"
               role="listbox"
-              aria-label="Résultats"
+              aria-label={cp.resultsAria}
               className={styles.results}
               data-lenis-prevent
             >
-              {results.length === 0 && <li className={styles.empty}>Aucun résultat.</li>}
+              {results.length === 0 && <li className={styles.empty}>{cp.empty}</li>}
 
               {results.map((item, index) => {
                 const showGroup = item.group !== lastGroup;

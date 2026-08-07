@@ -1,17 +1,30 @@
 .heading {
-  position: sticky;
-  top: var(--header-height);
-  z-index: 20;
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: 1rem;
   padding-block: 1.25rem;
   border-top: 1px solid var(--line-strong);
-  background-color: var(--paper);
   font-size: var(--text-sm);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
+}
+
+.watermark {
+  position: absolute;
+  left: 0;
+  top: -0.35em;
+  z-index: -1;
+  font-family: var(--font-sans);
+  font-size: clamp(6rem, 20vw, 16rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  user-select: none;
+  pointer-events: none;
 }
 
 .index {

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { AudioLines, Settings2, Volume2, VolumeX, Waves } from 'lucide-react';
+import { AudioLines, Moon, Settings2, Sun, Volume2, VolumeX, Waves } from 'lucide-react';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import useFocusTrap from '../../hooks/useFocusTrap';
 import styles from './PreferencesMenu.module.css';
 
@@ -26,8 +27,18 @@ const Switch = ({ checked, onChange, label, description, icon: Icon }) => (
 );
 
 const PreferencesMenu = () => {
-  const { reducedMotion, toggleReducedMotion, soundEnabled, toggleSound, ambientEnabled, toggleAmbient } =
-    usePreferences();
+  const {
+    reducedMotion,
+    toggleReducedMotion,
+    darkMode,
+    toggleDarkMode,
+    soundEnabled,
+    toggleSound,
+    ambientEnabled,
+    toggleAmbient,
+  } = usePreferences();
+  const { dict } = useLanguage();
+  const p = dict.preferences;
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
   const triggerRef = useRef(null);
@@ -45,7 +56,7 @@ const PreferencesMenu = () => {
         onClick={() => setOpen((prev) => !prev)}
         aria-haspopup="true"
         aria-expanded={open}
-        aria-label="Préférences d'accessibilité"
+        aria-label={p.trigger}
       >
         <Settings2 size={18} strokeWidth={1.75} />
       </button>
@@ -66,32 +77,39 @@ const PreferencesMenu = () => {
               className={styles.panel}
               role="dialog"
               aria-modal="true"
-              aria-label="Préférences d'accessibilité"
+              aria-label={p.trigger}
               initial={{ opacity: 0, y: 12, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className={styles.panelTitle}>Préférences</p>
+              <p className={styles.panelTitle}>{p.title}</p>
+              <Switch
+                checked={darkMode}
+                onChange={toggleDarkMode}
+                label={p.darkMode.label}
+                description={p.darkMode.desc}
+                icon={darkMode ? Moon : Sun}
+              />
               <Switch
                 checked={reducedMotion}
                 onChange={toggleReducedMotion}
-                label="Réduire les animations"
-                description="Limite les mouvements et transitions à l'essentiel"
+                label={p.reducedMotion.label}
+                description={p.reducedMotion.desc}
                 icon={Waves}
               />
               <Switch
                 checked={soundEnabled}
                 onChange={toggleSound}
-                label="Sons d'interface"
-                description="Un tic discret sur quelques interactions clés"
+                label={p.sound.label}
+                description={p.sound.desc}
                 icon={soundEnabled ? Volume2 : VolumeX}
               />
               <Switch
                 checked={ambientEnabled}
                 onChange={toggleAmbient}
-                label="Son d'ambiance"
-                description="Une nappe très discrète, à réactiver à chaque visite"
+                label={p.ambient.label}
+                description={p.ambient.desc}
                 icon={AudioLines}
               />
             </motion.div>

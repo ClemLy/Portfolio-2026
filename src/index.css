@@ -53,6 +53,7 @@
      (dérivée du D9A299 fourni), nécessaire pour rester lisible en texte sur
      fond clair. --accent-soft réutilise le D9A299 d'origine en aplat léger. */
   --paper: #FAF7F3;
+  --paper-rgb: 250, 247, 243;
   --paper-soft: #F0E4D3;
   --sand: #DCC5B2;
   --ink: #241610;
@@ -61,6 +62,15 @@
   --line-strong: rgba(36, 22, 16, 0.28);
   --accent: #B5615A;
   --accent-soft: rgba(217, 162, 153, 0.24);
+
+  /* Jetons fixes (ne changent jamais avec le thème) pour les blocs à
+     contraste inversé volontaire : footer, puce active, curseur, panneaux
+     de préférences… Toujours sombre + texte clair, dans les deux thèmes,
+     pour rester un bloc d'accent plutôt que de se fondre dans la page. */
+  --ink-fixed: #241610;
+  --paper-fixed: #faf7f3;
+  --ink-fixed-rgb: 36, 22, 16;
+  --paper-fixed-rgb: 250, 247, 243;
 
   /* Typographie */
   --font-sans: 'General Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -85,6 +95,22 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --duration-fast: 0.35s;
   --duration-slow: 0.8s;
+}
+
+/* Thème sombre : même famille chaude (pierre/ardoise + terracotta), activé
+   manuellement via la préférence (persistée), avec un défaut basé sur l'OS
+   au premier chargement. Contrastes vérifiés (ratios WCAG AA minimum). */
+:root[data-theme='dark'] {
+  --paper: #1b1512;
+  --paper-rgb: 27, 21, 18;
+  --paper-soft: #241d19;
+  --sand: #846f5f;
+  --ink: #f3ece4;
+  --ink-soft: #b7a99c;
+  --line: rgba(243, 236, 228, 0.12);
+  --line-strong: rgba(243, 236, 228, 0.26);
+  --accent: #d98f86;
+  --accent-soft: rgba(217, 143, 134, 0.22);
 }
 
 /* ==========================================================================
@@ -258,7 +284,11 @@ h4 {
 }
 
 
-/* Réduction des animations pour les utilisateurs qui le demandent */
+/* Réduction des animations pour les utilisateurs qui le demandent, au niveau
+   système (media query) ou via la préférence manuelle du site (classe posée
+   sur <html> par PreferencesProvider) — les deux coupent tout : animations
+   et transitions CSS pures (marquee, curseur clignotant, pastilles pulsées…)
+   qui échappent au contrôle de Framer Motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -267,6 +297,60 @@ h4 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+html.reduced-motion *,
+html.reduced-motion *::before,
+html.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Skeleton discret pendant le chargement d'une image */
+@keyframes img-shimmer {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 150% 0;
+  }
+}
+
+.img-skeleton {
+  background-color: var(--paper-soft);
+  background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  animation: img-shimmer 1.5s ease-in-out infinite;
+}
+
+.img-fade {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.img-fade.img-loaded {
+  opacity: 1;
+}
+
+/* Effet d'encre qui se diffuse brièvement au survol des liens et titres,
+   comme un trait d'encre absorbé puis refixé sur le papier */
+@keyframes ink-bleed {
+  0% {
+    filter: blur(0);
+  }
+  35% {
+    filter: blur(3px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+.ink-hover:hover {
+  animation: ink-bleed 0.55s var(--ease-out-expo);
 }
 
 /* Contraste renforcé : bordures et texte secondaire plus marqués */
