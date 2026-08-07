@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useReducedMotion } from 'framer-motion';
 import { useFinePointer } from '../../hooks/useFinePointer';
+import { usePreferences } from '../../context/preferencesContext';
 
 const RADIUS = 90;
 const STRENGTH = 18;
@@ -9,7 +9,7 @@ const STRENGTH = 18;
    surface liquide. Manipulation DOM directe (hors du cycle de rendu React)
    pour rester fluide à 60fps sans re-render à chaque frame. */
 const LiquidText = ({ text, className }) => {
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
   const finePointer = useFinePointer();
   const letterRefs = useRef([]);
   const frameRef = useRef(null);

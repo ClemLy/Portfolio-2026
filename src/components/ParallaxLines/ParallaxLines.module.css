@@ -1,0 +1,14 @@
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.line {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--line-strong), transparent);
+  will-change: transform;
+}

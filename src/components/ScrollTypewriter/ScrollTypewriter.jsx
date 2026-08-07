@@ -1,11 +1,12 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { usePreferences } from '../../context/preferencesContext';
 import styles from './ScrollTypewriter.module.css';
 
 /* Révèle le texte caractère par caractère selon la position de défilement
    de la page (et non selon le temps), comme une machine à écrire pilotée
    par le scroll */
 const ScrollTypewriter = ({ text, className, range = [0, 160] }) => {
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
   const { scrollY } = useScroll();
   const charCount = useTransform(scrollY, range, [0, text.length]);
   const roundedCount = useTransform(charCount, (v) => Math.round(v));

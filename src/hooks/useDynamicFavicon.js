@@ -6,10 +6,16 @@ const ACCENT = '#B5615A';
 const DOT = '#FAF7F3';
 
 /* Redessine le favicon sur un canvas à chaque frame pour lui donner un
-   astérisque qui tourne doucement en continu dans l'onglet */
-const useDynamicFavicon = () => {
+   astérisque qui tourne doucement en continu dans l'onglet. Respecte à la
+   fois le réglage système et la préférence manuelle du site. */
+const useDynamicFavicon = (reducedMotion) => {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (reducedMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      /* Retire le favicon dynamique pour laisser réapparaître l'icône
+         statique et immobile */
+      document.getElementById('favicon-dynamic')?.remove();
+      return undefined;
+    }
 
     const canvas = document.createElement('canvas');
     canvas.width = SIZE;
@@ -71,7 +77,7 @@ const useDynamicFavicon = () => {
     draw();
     const id = setInterval(draw, 90);
     return () => clearInterval(id);
-  }, []);
+  }, [reducedMotion]);
 };
 
 export default useDynamicFavicon;

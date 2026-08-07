@@ -9,7 +9,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .code {
@@ -26,7 +26,21 @@
   color: var(--accent);
 }
 
-.backLink {
+.hint {
+  max-width: 30rem;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.backLink,
+.paletteButton {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -38,8 +52,48 @@
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.backLink:hover {
-  background-color: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
+.backLink:hover,
+.paletteButton:hover {
+  background-color: var(--ink-fixed);
+  border-color: var(--ink-fixed);
+  color: var(--paper-fixed);
+}
+
+.kbd {
+  padding: 0.15rem 0.4rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  color: var(--ink-soft);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.paletteButton:hover .kbd {
+  border-color: rgba(var(--paper-fixed-rgb), 0.35);
+  color: var(--paper-fixed);
+}
+
+.shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.shortcutLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: color 0.3s ease;
+}
+
+.shortcutLink:hover {
+  color: var(--accent);
 }

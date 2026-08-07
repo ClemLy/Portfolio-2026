@@ -4,9 +4,12 @@ import { ArrowUpRight, ArrowUp, Copy, Check } from 'lucide-react';
 import Magnetic from '../Magnetic/Magnetic';
 import ScrambleText from '../ScrambleText/ScrambleText';
 import PreferencesMenu from '../PreferencesMenu/PreferencesMenu';
+import ContactForm from '../ContactForm/ContactForm';
 import { Fade, Reveal } from '../Reveal/Reveal';
 import { useLenis, scrollTo } from '../SmoothScroll/lenisContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
+import useSpotlight from '../../hooks/useSpotlight';
 import styles from './ContactFooter.module.css';
 
 const EMAIL = 'ly.clementin@gmail.com';
@@ -20,7 +23,9 @@ const links = [
 const ContactFooter = () => {
   const lenis = useLenis();
   const { tick } = usePreferences();
+  const { dict } = useLanguage();
   const [copied, setCopied] = useState(false);
+  const handleSpotlight = useSpotlight();
 
   const handleCopy = async () => {
     try {
@@ -39,21 +44,21 @@ const ContactFooter = () => {
   };
 
   return (
-    <footer className={styles.footer} id="contact">
+    <footer className={styles.footer} id="contact" onPointerMove={handleSpotlight}>
       <div className={`container ${styles.inner}`}>
         <Fade className={styles.overline}>
-          <span>Une idée, un projet ?</span>
+          <span>{dict.contact.overline}</span>
         </Fade>
 
         <div className={styles.ctaWrapper}>
           <Magnetic strength={0.15}>
-            <a href={`mailto:${EMAIL}`} className={styles.cta} data-cursor-label="Écrire">
+            <a href={`mailto:${EMAIL}`} className={`${styles.cta} ink-hover`} data-cursor-label={dict.contact.writeAria}>
               <Reveal>
-                <span className={styles.ctaLine}>Travaillons</span>
+                <span className={styles.ctaLine}>{dict.contact.ctaLine1}</span>
               </Reveal>
               <Reveal delay={0.08}>
                 <span className={styles.ctaRow}>
-                  <span className={`${styles.ctaSerif} serif`}>ensemble</span>
+                  <span className={`${styles.ctaSerif} serif`}>{dict.contact.ctaLine2}</span>
                   <ArrowUpRight className={styles.ctaArrow} strokeWidth={1.25} />
                 </span>
               </Reveal>
@@ -70,15 +75,19 @@ const ContactFooter = () => {
           </button>
         </Fade>
 
+        <Fade delay={0.1}>
+          <ContactForm fallbackEmail={EMAIL} />
+        </Fade>
+
         <div className={styles.bottom}>
-          <nav className={styles.links} aria-label="Liens externes">
+          <nav className={styles.links} aria-label={dict.contact.externalLinksAria}>
             {links.map((link) => (
               <Magnetic key={link.label} strength={0.25}>
                 <a
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.link}
+                  className={`${styles.link} ink-hover`}
                 >
                   <ScrambleText text={link.label} />
                   <ArrowUpRight size={14} strokeWidth={1.75} />
@@ -91,7 +100,7 @@ const ContactFooter = () => {
             <PreferencesMenu />
 
             <Magnetic strength={0.3}>
-              <button onClick={handleScrollTop} className={styles.topButton} aria-label="Retour en haut de page">
+              <button onClick={handleScrollTop} className={styles.topButton} aria-label={dict.contact.scrollTopAria}>
                 <ArrowUp size={18} strokeWidth={1.75} />
               </button>
             </Magnetic>
@@ -99,8 +108,8 @@ const ContactFooter = () => {
         </div>
 
         <div className={styles.legal}>
-          <span>© {new Date().getFullYear()} Clémentin Ly. Tous droits réservés.</span>
-          <span>Conçu et développé à Paris, avec sobriété.</span>
+          <span>{dict.contact.legal(new Date().getFullYear())}</span>
+          <span>{dict.contact.craft}</span>
         </div>
       </div>
 
@@ -115,7 +124,7 @@ const ContactFooter = () => {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             <Check size={16} strokeWidth={2} />
-            Adresse copiée dans le presse-papier
+            {dict.contact.copiedToast}
           </motion.div>
         )}
       </AnimatePresence>

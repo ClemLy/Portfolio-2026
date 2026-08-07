@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { usePreferences } from '../../context/preferencesContext';
 
 /* Enveloppe magnétique : l'élément glisse doucement vers le curseur */
 const Magnetic = ({ children, strength = 0.35, className }) => {
   const ref = useRef(null);
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);

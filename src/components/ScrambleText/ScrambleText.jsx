@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { usePreferences } from '../../context/preferencesContext';
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -9,7 +9,7 @@ const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const ScrambleText = ({ text, className }) => {
   const [display, setDisplay] = useState(text);
   const intervalRef = useRef(null);
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
 
   useEffect(() => () => clearInterval(intervalRef.current), []);
 

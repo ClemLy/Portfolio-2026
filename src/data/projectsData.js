@@ -21,6 +21,21 @@ export const projectsData = [
       "/assets/projets/athly/athly-2.webp",
       "/assets/projets/athly/athly-3.webp"
     ],
+    t: {
+      en: {
+        title: "Athly",
+        subtitle: "Gamified mobile strength-training app",
+        role: "Design & development",
+        category: "Application",
+        problematique: "Design a motivating fitness-tracking app that works offline while offering personalized programs based on the user's actual equipment.",
+        solution: "Built a hybrid mobile app with React Native and Expo. Microservices backend (Node/Express) for workout management, with a gamification layer driven by daily XP tiers.",
+        architecture: [
+          { name: "Mobile Frontend", details: "React Native with Tab/Stack navigation and dynamic theming" },
+          { name: "Backend & Data", details: "REST API on Node.js with MongoDB (Mongoose) for performance history" },
+          { name: "Experience", details: "Gamification system (XP, levels, badges) and offline mode with sync" }
+        ]
+      }
+    }
   },
   {
     id: "papaie",
@@ -44,6 +59,21 @@ export const projectsData = [
       accessibilité: 82,
       bonnesPratiques: 100,
       seo: 92
+    },
+    t: {
+      en: {
+        title: "Papaïe",
+        subtitle: "Premium e-commerce redesign for a creative jewelry brand",
+        role: "Development & integration",
+        category: "E-commerce",
+        problematique: "Turn an existing catalog into a smooth, secure, high-end shopping experience, while simplifying stock management for handcrafted jewelry.",
+        solution: "Faithful integration of a graphic mockup on WordPress. Improved the purchase journey (cart/checkout flow) and optimized high-resolution images to keep the site fast.",
+        architecture: [
+          { name: "E-commerce", details: "WooCommerce configured for selling unique, high-value items" },
+          { name: "UI/UX", details: "Custom development via Flatsome from an external graphic design" },
+          { name: "Performance", details: "Caching solutions and next-gen image formats implemented" }
+        ]
+      }
     }
   },
   {
@@ -68,6 +98,21 @@ export const projectsData = [
       accessibilité: 84,
       bonnesPratiques: 96,
       seo: 92
+    },
+    t: {
+      en: {
+        title: "Comptoir des Arômes",
+        subtitle: "E-commerce redesign and content strategy for a fine-food grocer",
+        role: "Development & integration",
+        category: "E-commerce",
+        problematique: "Modernize an aging online shop while creating a new space for customer engagement through culinary content.",
+        solution: "Deployed a robust e-commerce solution with a full visual redesign. Built a custom content architecture (CPT) for a self-managed, interactive recipe catalog.",
+        architecture: [
+          { name: "E-commerce", details: "WooCommerce for stock and payment management" },
+          { name: "Custom Logic", details: "'Recipes' Custom Post Type to showcase products" },
+          { name: "Design", details: "UI/UX optimized for the gourmet catalog on WordPress" }
+        ]
+      }
     }
   },
   {
@@ -92,6 +137,21 @@ export const projectsData = [
       accessibilité: 68,
       bonnesPratiques: 96,
       seo: 92
+    },
+    t: {
+      en: {
+        title: "Cosy&Study",
+        subtitle: "Full redesign of a student housing platform in Le Havre",
+        role: "Development & integration",
+        category: "Showcase",
+        problematique: "Modernize the brand image and streamline the user journey on an existing site that had become slow and outdated.",
+        solution: "Built a custom WordPress interface with deep media optimization (video/images) to guarantee smoothness despite rich visual content.",
+        architecture: [
+          { name: "CMS", details: "WordPress for self-managed content" },
+          { name: "Performance", details: "Custom Lazy Loading scripts for ambient videos" },
+          { name: "Visual", details: "Divi builder optimized for responsive layouts" }
+        ]
+      }
     }
   },
   {
@@ -116,6 +176,21 @@ export const projectsData = [
       accessibilité: 83,
       bonnesPratiques: 100,
       seo: 100
+    },
+    t: {
+      en: {
+        title: "Deauville Limousine",
+        subtitle: "Booking platform for high-end tourist circuits in Normandy",
+        role: "Development & integration",
+        category: "Showcase",
+        problematique: "Deliver an elegant, multilingual showcase for an international clientele, while allowing simple management of varied tourist circuits.",
+        solution: "Built a bilingual site optimized for international SEO. Developed a custom 'Circuits' structure (CPT) to dynamically display points of interest, durations and pricing for iconic locations like Mont Saint-Michel.",
+        architecture: [
+          { name: "Internationalization", details: "Multilingual system to reach an international audience" },
+          { name: "Content Management", details: "'Circuits' CPT for simplified offer administration" },
+          { name: "User Experience", details: "Visual showcase of the D-Day beaches and Normandy heritage" }
+        ]
+      }
     }
   },
   {
@@ -140,6 +215,21 @@ export const projectsData = [
       accessibilité: 71,
       bonnesPratiques: 100,
       seo: 100
+    },
+    t: {
+      en: {
+        title: "France Cuisine Concept",
+        subtitle: "Institutional platform for a charitable endowment fund",
+        role: "Development & integration",
+        category: "Showcase",
+        problematique: "Translate a foundation's social and charitable commitment into a sober, professional website, while following a precise art direction supplied by a graphic designer.",
+        solution: "Built an institutional interface with the Divi builder. Focused on information clarity (missions, news, partners) and faithful integration of the brand guidelines to reinforce the foundation's credibility.",
+        architecture: [
+          { name: "Integration", details: "Technical translation of a complex graphic mockup within the Divi ecosystem" },
+          { name: "Communication", details: "Dynamic news module to showcase field actions" },
+          { name: "UX", details: "Simplified navigation for easy access to legal information and contact forms" }
+        ]
+      }
     }
   },
   {
@@ -158,7 +248,22 @@ export const projectsData = [
       { name: "Sécurité", details: "Implémentation stricte des Nonces et gestion fine des Rôles & Capacités WordPress" },
       { name: "Automatisations", details: "Système de notifications transactionnelles par email lors des changements de statuts" }
     ],
-    link: "https://github.com/ClemLy/wp-reservations"
+    link: "https://github.com/ClemLy/wp-reservations",
+    t: {
+      en: {
+        title: "WP-Reservations",
+        subtitle: "Custom fleet management system for works councils & companies",
+        role: "Design & development",
+        category: "Plugin",
+        problematique: "Replace opaque spreadsheet-based management with a centralized tool that eliminates data-entry errors and double bookings, and ensures fair vehicle usage across an organization.",
+        solution: "Built a full plugin with a dynamic calendar for slot visibility, a points-based quota system to prevent abuse, and a robust admin interface for request validation.",
+        architecture: [
+          { name: "Database", details: "Custom relational SQL table modeling via the global $wpdb object" },
+          { name: "Security", details: "Strict Nonce implementation and fine-grained WordPress Roles & Capabilities" },
+          { name: "Automation", details: "Transactional email notifications on status changes" }
+        ]
+      }
+    }
   },
   {
     id: "greenoco-player",
@@ -176,7 +281,22 @@ export const projectsData = [
       { name: "Admin UX", details: "Interface de configuration personnalisée avec prévisualisation des shortcodes en temps réel" },
       { name: "Numérique Responsable", details: "Réduction drastique du poids de la page et des appels serveurs inutiles" }
     ],
-    link: "https://github.com/ClemLy/greenoco-video-player"
+    link: "https://github.com/ClemLy/greenoco-video-player",
+    t: {
+      en: {
+        title: "Greenoco Video Player",
+        subtitle: "Eco-designed video player for performance and carbon-footprint optimization",
+        role: "Design & development",
+        category: "Plugin",
+        problematique: "Reduce the impact of third-party video players (YouTube/Vimeo) that load heavy scripts before any user interaction, hurting PageSpeed scores and increasing energy consumption.",
+        solution: "Designed a plugin built on digital sobriety: replacing iframes with lightweight thumbnails. Third-party scripts are deferred until user click, saving ~1MB of data per page.",
+        architecture: [
+          { name: "Performance", details: "Optimized critical rendering path with full lazy-loading of iframes" },
+          { name: "Admin UX", details: "Custom settings interface with real-time shortcode preview" },
+          { name: "Sustainable IT", details: "Drastic reduction of page weight and unnecessary server calls" }
+        ]
+      }
+    }
   }
 ];
 

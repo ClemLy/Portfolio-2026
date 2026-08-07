@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Asterisk } from 'lucide-react';
 import useKonamiCode from '../../hooks/useKonamiCode';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import { playTick } from '../../lib/sound';
 import styles from './EasterEgg.module.css';
 
@@ -23,8 +24,8 @@ const createBurst = () =>
 const EasterEgg = () => {
   const [visible, setVisible] = useState(false);
   const [burst, setBurst] = useState([]);
-  const reducedMotion = useReducedMotion();
-  const { soundEnabled } = usePreferences();
+  const { reducedMotion, soundEnabled } = usePreferences();
+  const { dict } = useLanguage();
 
   const unlock = () => {
     setBurst(createBurst());
@@ -54,14 +55,9 @@ const EasterEgg = () => {
   }, [visible, soundEnabled]);
 
   useEffect(() => {
-    console.log(
-      '%cToujours curieux, à ce que je vois.',
-      'font-size: 14px; font-weight: 600; color: #B5615A;'
-    );
-    console.log(
-      "Un indice pour la suite : ↑ ↑ ↓ ↓ ← → ← → B A. Et si le code vous intéresse, il est sur github.com/ClemLy."
-    );
-  }, []);
+    console.log(`%c${dict.easterEgg.consoleHint1}`, 'font-size: 14px; font-weight: 600; color: #B5615A;');
+    console.log(dict.easterEgg.consoleHint2);
+  }, [dict]);
 
   return (
     <AnimatePresence>
@@ -101,8 +97,8 @@ const EasterEgg = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
           >
-            <p className={`${styles.title} serif`}>Code secret activé</p>
-            <p className={styles.subtitle}>Merci d'avoir exploré jusqu'ici.</p>
+            <p className={`${styles.title} serif`}>{dict.easterEgg.title}</p>
+            <p className={styles.subtitle}>{dict.easterEgg.subtitle}</p>
           </motion.div>
         </motion.div>
       )}

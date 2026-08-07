@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useFinePointer } from '../../hooks/useFinePointer';
+import { usePreferences } from '../../context/preferencesContext';
 import styles from './Cursor.module.css';
 
 /* Curseur personnalisé : point qui suit la souris, s'étire sur les liens,
@@ -10,7 +11,7 @@ const Cursor = () => {
   const [variant, setVariant] = useState('default');
   const [label, setLabel] = useState('');
   const [visible, setVisible] = useState(false);
-  const reducedMotion = useReducedMotion();
+  const { reducedMotion } = usePreferences();
   const finePointer = useFinePointer();
   const enabled = finePointer && !reducedMotion;
 

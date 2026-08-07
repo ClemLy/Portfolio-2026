@@ -4,10 +4,17 @@ import { Helmet } from 'react-helmet-async';
 import { MotionConfig } from 'framer-motion';
 import PreferencesProvider from './context/PreferencesProvider';
 import { usePreferences } from './context/preferencesContext';
+import LanguageProvider from './context/LanguageProvider';
+import { useLanguage } from './context/languageContext';
 import CommandPaletteProvider from './context/CommandPaletteProvider';
 import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider';
 import { useLenis, scrollTo } from './components/SmoothScroll/lenisContext';
 import TransitionProvider from './components/PageTransition/TransitionProvider';
+import MarbleBackground from './components/MarbleBackground/MarbleBackground';
+import GrainOverlay from './components/GrainOverlay/GrainOverlay';
+import AmbientTint from './components/AmbientTint/AmbientTint';
+import InkRipple from './components/InkRipple/InkRipple';
+import ElasticOverscroll from './components/ElasticOverscroll/ElasticOverscroll';
 import Cursor from './components/Cursor/Cursor';
 import Header from './components/Header/Header';
 import ContactFooter from './components/ContactFooter/ContactFooter';
@@ -45,9 +52,10 @@ const structuredData = {
    réduit (contexte) et la transmettre à Framer Motion globalement */
 const AppShell = () => {
   const { reducedMotion } = usePreferences();
+  const { dict } = useLanguage();
 
-  useReactiveTitle();
-  useDynamicFavicon();
+  useReactiveTitle(dict.awayTitle);
+  useDynamicFavicon(reducedMotion);
 
   return (
     <MotionConfig reducedMotion={reducedMotion ? 'always' : 'user'}>
@@ -55,20 +63,22 @@ const AppShell = () => {
         <TransitionProvider>
           <CommandPaletteProvider>
             <Helmet>
-              <title>Clémentin Ly, Développeur full-stack créatif à Paris</title>
-              <meta
-                name="description"
-                content="Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Node.js et WordPress. Des expériences web rapides, accessibles et éco-conçues."
-              />
+              <title>{dict.meta.title}</title>
+              <meta name="description" content={dict.meta.description} />
               <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
             </Helmet>
 
             <a href="#contenu" className="skip-link">
-              Aller au contenu
+              {dict.skipLink}
             </a>
 
             <ScrollReset />
+            <MarbleBackground />
             <Cursor />
+            <AmbientTint />
+            <InkRipple />
+            <ElasticOverscroll />
+            <GrainOverlay />
             <Header />
             <CommandPalette />
             <EasterEgg />
@@ -91,7 +101,9 @@ function App() {
   return (
     <Router>
       <PreferencesProvider>
-        <AppShell />
+        <LanguageProvider>
+          <AppShell />
+        </LanguageProvider>
       </PreferencesProvider>
     </Router>
   );

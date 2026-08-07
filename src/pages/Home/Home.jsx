@@ -6,11 +6,28 @@ import ProjectsIndex from '../../components/ProjectsIndex/ProjectsIndex';
 import About from '../../components/About/About';
 import Parcours from '../../components/Parcours/Parcours';
 import Stack from '../../components/Stack/Stack';
+import ParallaxLines from '../../components/ParallaxLines/ParallaxLines';
 import { useLenis, scrollTo } from '../../components/SmoothScroll/lenisContext';
+import { usePreferences } from '../../context/preferencesContext';
+import useSoftScrollSnap from '../../hooks/useSoftScrollSnap';
+import useActiveSection from '../../hooks/useActiveSection';
+import { setAmbientSection } from '../../lib/sound';
+
+const SECTION_IDS = ['accueil', 'projets', 'apropos', 'parcours', 'stack'];
 
 const Home = () => {
   const location = useLocation();
   const lenis = useLenis();
+  const { reducedMotion } = usePreferences();
+
+  useSoftScrollSnap(lenis, '#accueil, #projets, #apropos, #parcours, #stack', !reducedMotion);
+
+  /* La nappe d'ambiance (si activée) module légèrement sa hauteur selon la
+     section visitée, sans effet audible si le son d'ambiance est coupé */
+  const activeSection = useActiveSection(SECTION_IDS);
+  useEffect(() => {
+    if (activeSection) setAmbientSection(activeSection);
+  }, [activeSection]);
 
   /* Accès direct avec une ancre dans l'URL : on rejoint la section visée */
   useEffect(() => {
@@ -21,7 +38,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main id="contenu">
+    <main id="contenu" style={{ position: 'relative' }}>
       <Helmet>
         <title>Clémentin Ly, Développeur full-stack créatif à Paris</title>
         <meta
@@ -30,6 +47,7 @@ const Home = () => {
         />
       </Helmet>
 
+      <ParallaxLines />
       <Hero />
       <ProjectsIndex />
       <About />
