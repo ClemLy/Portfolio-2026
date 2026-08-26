@@ -137,7 +137,7 @@ const main = async () => {
 
   for (const sourcePath of files) {
     const relPath = relative(SOURCE_DIR, sourcePath);
-    const projectDir = relPath.split('/')[0];
+    const projectDir = relPath.split(/[\\/]/)[0];
     const baseName = basename(sourcePath, extname(sourcePath));
     const outDir = join(OUT_DIR, projectDir);
 

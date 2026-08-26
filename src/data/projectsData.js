@@ -7,6 +7,7 @@ export const projectsData = [
     year: "2025",
     role: "Conception & développement",
     category: "Application",
+    type: "personal",
     techs: ["React Native", "Expo", "Node.js", "MongoDB", "Express"],
     problematique: "Concevoir une application de suivi sportif motivante capable de fonctionner hors-ligne tout en proposant des programmes personnalisés basés sur l'équipement réel de l'utilisateur.",
     solution: "Développement d'une app mobile hybride avec React Native et Expo. Architecture backend en microservices (Node/Express) pour la gestion des entraînements et une logique de gamification par paliers d'XP quotidiens.",
@@ -38,40 +39,41 @@ export const projectsData = [
     }
   },
   {
-    id: "papaie",
-    title: "Papaïe",
-    subtitle: "Refonte e-commerce premium pour une bijouterie créative",
-    image: "/assets/projets/papaie/papaie.webp",
-    year: "2025",
-    role: "Développement & intégration",
-    category: "E-commerce",
-    techs: ["WordPress", "WooCommerce", "Flatsome", "UX Design"],
-    problematique: "Transformer un catalogue existant en une expérience d'achat haut de gamme, fluide et sécurisée, tout en facilitant la gestion des stocks de bijoux artisanaux.",
-    solution: "Intégration fidèle d'une maquette graphique sous WordPress. Amélioration de l'expérience d'achat (parcours panier/paiement) et optimisation des images haute définition pour ne pas ralentir le site.",
+    id: "apex-motion",
+    title: "Apex // Motion",
+    subtitle: "Configurateur 3D immersif et expérience Porsche en temps réel",
+    image: "/assets/projets/apex-motion/apex-motion.webp",
+    year: "2026",
+    role: "Conception & développement",
+    category: "Expérience",
+    type: "personal",
+    techs: ["Next.js","TypeScript", "React Three Fiber", "GSAP", "Three.js"],
+    problematique: "Créer une expérience 3D immersive et fluide autour d'un modèle Porsche complexe (configurateur temps réel, télémétrie de circuit) sans sacrifier les performances ni l'accessibilité sur le web.",
+    solution: "Développement d'un configurateur temps réel avec React Three Fiber et Three.js, optimisé via compression Draco et rendu conditionnel (IntersectionObserver, résolution adaptative). Animations pilotées par GSAP/Lenis et son procédural via Web Audio API, sans aucun fichier audio.",
     architecture: [
-      { name: "E-commerce", details: "WooCommerce configuré pour la vente d'articles uniques et précieux" },
-      { name: "UI/UX", details: "Développement sur-mesure via Flatsome à partir d'un design graphique externe" },
-      { name: "Performance", details: "Mise en place de solutions de cache et de formats d'image nouvelle génération" }
+      { name: "3D Temps Réel", details: "React Three Fiber, Drei et post-processing (bloom, grain, vignette) pour un rendu cinématique à 60 FPS" },
+      { name: "Performance", details: "Rendu conditionnel (IntersectionObserver, visibilité d'onglet), résolution adaptative et lazy-loading via next/dynamic" },
+      { name: "Expérience", details: "Configurateur 45 teintes, timeline patrimoine sur sept décennies, télémétrie de circuit et audio procédural (Web Audio API)" }
     ],
-    link: "https://papaie.fr",
+    link: "https://apex-motion-studio.vercel.app",
     lighthouse: {
-      performance: 75,
-      accessibilité: 82,
+      performance: 100,
+      accessibilité: 96,
       bonnesPratiques: 100,
-      seo: 92
+      seo: 100
     },
     t: {
       en: {
-        title: "Papaïe",
-        subtitle: "Premium e-commerce redesign for a creative jewelry brand",
-        role: "Development & integration",
-        category: "E-commerce",
-        problematique: "Turn an existing catalog into a smooth, secure, high-end shopping experience, while simplifying stock management for handcrafted jewelry.",
-        solution: "Faithful integration of a graphic mockup on WordPress. Improved the purchase journey (cart/checkout flow) and optimized high-resolution images to keep the site fast.",
+        title: "Apex // Motion",
+        subtitle: "Immersive real-time 3D Porsche configurator experience",
+        role: "Design & development",
+        category: "Experience",
+        problematique: "Build a smooth, immersive 3D experience around a complex Porsche model (real-time configurator, circuit telemetry) without sacrificing web performance or accessibility.",
+        solution: "Built a real-time configurator with React Three Fiber and Three.js, optimized via Draco compression and conditional rendering (IntersectionObserver, adaptive resolution). Animations driven by GSAP/Lenis with procedural audio via the Web Audio API — no audio files.",
         architecture: [
-          { name: "E-commerce", details: "WooCommerce configured for selling unique, high-value items" },
-          { name: "UI/UX", details: "Custom development via Flatsome from an external graphic design" },
-          { name: "Performance", details: "Caching solutions and next-gen image formats implemented" }
+          { name: "Real-Time 3D", details: "React Three Fiber, Drei and post-processing (bloom, grain, vignette) for a cinematic 60 FPS render" },
+          { name: "Performance", details: "Conditional rendering (IntersectionObserver, tab visibility), adaptive resolution and lazy-loading via next/dynamic" },
+          { name: "Experience", details: "45-color configurator, seven-decade heritage timeline, circuit telemetry and procedural audio (Web Audio API)" }
         ]
       }
     }
@@ -84,6 +86,7 @@ export const projectsData = [
     year: "2024",
     role: "Développement & intégration",
     category: "E-commerce",
+    type: "client",
     techs: ["WordPress", "WooCommerce", "Flatsome", "Custom Post Types"],
     problematique: "Moderniser une boutique en ligne vieillissante tout en créant un nouvel espace d'engagement pour la clientèle via du contenu culinaire.",
     solution: "Déploiement d'une solution e-commerce robuste avec une refonte visuelle complète. Mise en place d'une architecture de contenus personnalisés (CPT) pour la gestion autonome d'un catalogue de recettes interactives.",
@@ -123,6 +126,7 @@ export const projectsData = [
     year: "2024",
     role: "Développement & intégration",
     category: "Vitrine",
+    type: "client",
     techs: ["WordPress", "Divi", "Lazy Load Custom", "SEO"],
     problematique: "Moderniser l'image de marque et fluidifier le parcours utilisateur sur un site existant devenu obsolète et lent.",
     solution: "Développement d'une interface sur-mesure sous WordPress, avec une optimisation poussée des médias (vidéos/images) pour garantir une fluidité maximale malgré un contenu visuel riche.",
@@ -162,6 +166,7 @@ export const projectsData = [
     year: "2024",
     role: "Développement & intégration",
     category: "Vitrine",
+    type: "client",
     techs: ["WordPress", "Divi", "Multilingue", "Custom Post Types"],
     problematique: "Proposer une vitrine élégante et multilingue pour une clientèle internationale, tout en permettant une gestion simple de circuits touristiques variés.",
     solution: "Création d'un site bilingue optimisé pour le SEO international. Développement d'une structure de 'Circuits' sur-mesure (CPT) permettant d'afficher dynamiquement les points d'intérêt, les durées et les tarifs pour des lieux iconiques comme le Mont Saint-Michel.",
@@ -194,6 +199,46 @@ export const projectsData = [
     }
   },
   {
+    id: "papaie",
+    title: "Papaïe",
+    subtitle: "Refonte e-commerce premium pour une bijouterie créative",
+    image: "/assets/projets/papaie/papaie.webp",
+    year: "2025",
+    role: "Développement & intégration",
+    category: "E-commerce",
+    type: "client",
+    techs: ["WordPress", "WooCommerce", "Flatsome", "UX Design"],
+    problematique: "Transformer un catalogue existant en une expérience d'achat haut de gamme, fluide et sécurisée, tout en facilitant la gestion des stocks de bijoux artisanaux.",
+    solution: "Intégration fidèle d'une maquette graphique sous WordPress. Amélioration de l'expérience d'achat (parcours panier/paiement) et optimisation des images haute définition pour ne pas ralentir le site.",
+    architecture: [
+      { name: "E-commerce", details: "WooCommerce configuré pour la vente d'articles uniques et précieux" },
+      { name: "UI/UX", details: "Développement sur-mesure via Flatsome à partir d'un design graphique externe" },
+      { name: "Performance", details: "Mise en place de solutions de cache et de formats d'image nouvelle génération" }
+    ],
+    link: "https://papaie.fr",
+    lighthouse: {
+      performance: 75,
+      accessibilité: 82,
+      bonnesPratiques: 100,
+      seo: 92
+    },
+    t: {
+      en: {
+        title: "Papaïe",
+        subtitle: "Premium e-commerce redesign for a creative jewelry brand",
+        role: "Development & integration",
+        category: "E-commerce",
+        problematique: "Turn an existing catalog into a smooth, secure, high-end shopping experience, while simplifying stock management for handcrafted jewelry.",
+        solution: "Faithful integration of a graphic mockup on WordPress. Improved the purchase journey (cart/checkout flow) and optimized high-resolution images to keep the site fast.",
+        architecture: [
+          { name: "E-commerce", details: "WooCommerce configured for selling unique, high-value items" },
+          { name: "UI/UX", details: "Custom development via Flatsome from an external graphic design" },
+          { name: "Performance", details: "Caching solutions and next-gen image formats implemented" }
+        ]
+      }
+    }
+  },
+  {
     id: "france-cuisine-concept",
     title: "France Cuisine Concept",
     subtitle: "Plateforme institutionnelle pour un fonds de dotation solidaire",
@@ -201,6 +246,7 @@ export const projectsData = [
     year: "2025",
     role: "Développement & intégration",
     category: "Vitrine",
+    type: "client",
     techs: ["WordPress", "Divi", "Intégration Maquette", "Design Responsable"],
     problematique: "Traduire l'engagement social et caritatif d'une fondation à travers un site web sobre et professionnel, tout en respectant une direction artistique précise fournie par un graphiste.",
     solution: "Développement d'une interface institutionnelle avec le constructeur Divi. Focus sur la clarté de l'information (missions, actus, partenaires) et intégration fidèle de la charte graphique pour renforcer la crédibilité de la fondation.",
@@ -240,6 +286,7 @@ export const projectsData = [
     year: "2025",
     role: "Conception & développement",
     category: "Plugin",
+    type: "personal",
     techs: ["PHP", "WordPress", "MySQL", "FullCalendar", "JavaScript"],
     problematique: "Remplacer la gestion opaque sur tableurs Excel par un outil centralisé capable d'éliminer les erreurs de saisie, les doubles réservations et de réguler l'utilisation équitable des véhicules au sein d'une structure.",
     solution: "Développement d'un plugin complet intégrant un calendrier dynamique pour la visibilité des créneaux, un système de quotas par 'points' pour limiter les abus, et une interface d'administration robuste pour la validation des demandes.",
@@ -273,6 +320,7 @@ export const projectsData = [
     year: "2024",
     role: "Conception & développement",
     category: "Plugin",
+    type: "personal",
     techs: ["PHP", "JavaScript", "Eco-conception", "Green IT"],
     problematique: "Réduire l'impact des lecteurs vidéo tiers (YouTube/Vimeo) qui chargent des scripts lourds avant même l'interaction de l'utilisateur, dégradant les scores PageSpeed et augmentant la consommation énergétique.",
     solution: "Conception d'un plugin basé sur la sobriété numérique : remplacement des iframes par des miniatures légères. Le chargement des scripts tiers est différé jusqu'au clic utilisateur, économisant ~1Mo de données par page.",
@@ -300,4 +348,5 @@ export const projectsData = [
   }
 ];
 
-export const projectCategories = ["Tous", "E-commerce", "Vitrine", "Application", "Plugin"];
+export const projectCategories = ["Tous", "E-commerce", "Vitrine", "Application", "Plugin", "Expérience"];
+export const projectTypes = ["Tous", "client", "personal"];
