@@ -1,42 +1,49 @@
 {
-  "/assets/projets/athly/athly-1.webp": [
-    400
-  ],
-  "/assets/projets/athly/athly-2.webp": [
-    400
-  ],
-  "/assets/projets/athly/athly-3.webp": [
-    400
+  "/assets/projets/apex-motion/apex-motion.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
   ],
   "/assets/projets/athly/athly.webp": [
     400,
-    800
+    800,
+    1200
   ],
   "/assets/projets/comptoir-aromes/comptoir-aromes.webp": [
     400,
-    800
+    800,
+    1200,
+    1600,
+    2400
   ],
   "/assets/projets/cosy-study/cosy-study.webp": [
-    400
+    400,
+    800,
+    1200,
+    1600,
+    2400
   ],
   "/assets/projets/deauville-limousine/deauville-limousine.webp": [
     400,
-    800
+    800,
+    1200,
+    1600,
+    2400
   ],
   "/assets/projets/fcc/fcc.webp": [
     400,
-    800
-  ],
-  "/assets/projets/gvp/gvp.webp": [
-    400,
-    800
+    800,
+    1200,
+    1600,
+    2400
   ],
   "/assets/projets/papaie/papaie.webp": [
     400,
-    800
-  ],
-  "/assets/projets/wp-reservations/wp-reservations.webp": [
-    400,
-    800
+    800,
+    1200,
+    1600,
+    2400
   ]
 }

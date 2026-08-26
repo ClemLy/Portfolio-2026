@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowUpRight, ImageOff, Search, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, LayoutGrid, LayoutList, Search, X } from 'lucide-react';
 import TransitionLink from '../PageTransition/TransitionLink';
 import { Fade } from '../Reveal/Reveal';
 import Magnetic from '../Magnetic/Magnetic';
@@ -10,48 +10,76 @@ import { usePreferences } from '../../context/preferencesContext';
 import { useLanguage } from '../../context/languageContext';
 import { normalize } from '../../lib/normalize';
 import { localizeList } from '../../i18n/localize';
-import { projectsData, projectCategories } from '../../data/projectsData';
+import { projectsData, projectCategories, projectTypes } from '../../data/projectsData';
 import styles from './ProjectsIndex.module.css';
 
 const EASE = [0.16, 1, 0.3, 1];
+const INITIAL_VISIBLE = 6;
+
+/* Familles de stack pour le filtre par techno (ligne 2 de la toolbar) :
+   des groupes larges plutôt que chaque tag brut (WordPress/Divi/Flatsome/...
+   seraient trop fins pour être utiles en un clic) */
+const JS_ECOSYSTEM = new Set([
+  'JavaScript',
+  'TypeScript',
+  'React Native',
+  'React Three Fiber',
+  'Next.js',
+  'Node.js',
+  'Express',
+  'GSAP',
+  'Three.js',
+  'Expo',
+  'FullCalendar',
+]);
+
+const TECH_GROUPS = [
+  { label: 'WordPress', match: (techs) => techs.includes('WordPress') },
+  { label: 'JavaScript', match: (techs) => techs.some((t) => JS_ECOSYSTEM.has(t)) },
+  { label: 'PHP', match: (techs) => techs.includes('PHP') },
+];
+
+/* Navigation clavier façon groupe de radios (flèches/Home/End), partagée
+   entre le filtre catégorie et le filtre type */
+const getRovingNextIndex = (key, index, total) => {
+  if (key === 'ArrowRight' || key === 'ArrowDown') return (index + 1) % total;
+  if (key === 'ArrowLeft' || key === 'ArrowUp') return (index - 1 + total) % total;
+  if (key === 'Home') return 0;
+  if (key === 'End') return total - 1;
+  return null;
+};
 
 const ProjectsIndex = () => {
   const [category, setCategory] = useState('Tous');
+  const [projectType, setProjectType] = useState('Tous');
+  const [activeTechs, setActiveTechs] = useState(() => new Set());
   const [query, setQuery] = useState('');
+  const [viewMode, setViewMode] = useState('list');
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const [activeProject, setActiveProject] = useState(null);
   const [loadedThumbs, setLoadedThumbs] = useState(() => new Set());
-  const { tick, reducedMotion } = usePreferences();
+  const { tick } = usePreferences();
   const { lang, dict } = useLanguage();
   const preloaded = useRef(new Set());
   const filterRefs = useRef([]);
+  const typeRefs = useRef([]);
 
   const markThumbLoaded = (id) => {
     setLoadedThumbs((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
   };
 
-  /* Léger tilt 3D du panneau de preview, qui suit la position du curseur */
-  const tiltX = useMotionValue(0);
-  const tiltY = useMotionValue(0);
-  const springTiltX = useSpring(tiltX, { stiffness: 220, damping: 22 });
-  const springTiltY = useSpring(tiltY, { stiffness: 220, damping: 22 });
-
-  const handleTiltMove = (event) => {
-    if (reducedMotion) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const px = (event.clientX - rect.left) / rect.width - 0.5;
-    const py = (event.clientY - rect.top) / rect.height - 0.5;
-    tiltY.set(px * 9);
-    tiltX.set(py * -9);
-  };
-
-  const handleTiltLeave = () => {
-    tiltX.set(0);
-    tiltY.set(0);
-  };
-
   const filtered = useMemo(() => {
-    const byCategory = category === 'Tous' ? projectsData : projectsData.filter((p) => p.category === category);
-    const localized = localizeList(byCategory, lang);
+    let list = category === 'Tous' ? projectsData : projectsData.filter((p) => p.category === category);
+    if (projectType !== 'Tous') list = list.filter((p) => p.type === projectType);
+    if (activeTechs.size > 0) {
+      list = list.filter((p) =>
+        Array.from(activeTechs).every((group) => {
+          const groupDef = TECH_GROUPS.find((g) => g.label === group);
+          return groupDef ? groupDef.match(p.techs) : false;
+        })
+      );
+    }
+    const localized = localizeList(list, lang);
     const q = normalize(query.trim());
     if (!q) return localized;
     return localized.filter(
@@ -60,7 +88,21 @@ const ProjectsIndex = () => {
         normalize(p.subtitle).includes(q) ||
         p.techs.some((t) => normalize(t).includes(q))
     );
-  }, [category, query, lang]);
+  }, [category, projectType, activeTechs, query, lang]);
+
+  /* Revient à la page initiale dès qu'une dimension de filtre change.
+     Ajustement d'état pendant le rendu (pattern React recommandé pour
+     réinitialiser un state dérivé de props/inputs qui changent), plutôt
+     qu'un effect qui déclencherait un second rendu en cascade. */
+  const filterSignature = `${category}|${projectType}|${Array.from(activeTechs).sort().join(',')}|${query}`;
+  const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
+  if (filterSignature !== prevFilterSignature) {
+    setPrevFilterSignature(filterSignature);
+    setVisibleCount(INITIAL_VISIBLE);
+  }
+
+  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
+  const hasMore = visibleCount < filtered.length;
 
   const counts = useMemo(() => {
     const map = { Tous: projectsData.length };
@@ -71,7 +113,8 @@ const ProjectsIndex = () => {
   }, []);
 
   /* Technologies les plus fréquentes, proposées comme pistes de recherche
-     quand la requête ne correspond à rien */
+     quand la requête ne correspond à rien (indépendant des chips de
+     famille de stack de la toolbar) */
   const topTechs = useMemo(() => {
     const counts = new Map();
     projectsData.forEach((p) => p.techs.forEach((t) => counts.set(t, (counts.get(t) || 0) + 1)));
@@ -83,11 +126,23 @@ const ProjectsIndex = () => {
 
   const resetFilters = () => {
     setCategory('Tous');
+    setProjectType('Tous');
+    setActiveTechs(new Set());
     setQuery('');
   };
 
-  /* Groupe de filtres navigable au clavier comme un vrai groupe de radios :
-     flèches gauche/droite (et haut/bas) déplacent la sélection et le focus */
+  const toggleTech = (tech) => {
+    setActiveTechs((prev) => {
+      const next = new Set(prev);
+      if (next.has(tech)) next.delete(tech);
+      else next.add(tech);
+      return next;
+    });
+    tick();
+  };
+
+  /* Groupes de filtres navigables au clavier comme de vrais groupes de
+     radios : flèches (et Home/End) déplacent la sélection et le focus */
   const selectCategory = (cat, index) => {
     setCategory(cat);
     tick();
@@ -95,17 +150,23 @@ const ProjectsIndex = () => {
   };
 
   const handleFilterKeyDown = (event, index) => {
-    const total = projectCategories.length;
-    let nextIndex = null;
-
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % total;
-    else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + total) % total;
-    else if (event.key === 'Home') nextIndex = 0;
-    else if (event.key === 'End') nextIndex = total - 1;
-
+    const nextIndex = getRovingNextIndex(event.key, index, projectCategories.length);
     if (nextIndex === null) return;
     event.preventDefault();
     selectCategory(projectCategories[nextIndex], nextIndex);
+  };
+
+  const selectType = (type, index) => {
+    setProjectType(type);
+    tick();
+    typeRefs.current[index]?.focus();
+  };
+
+  const handleTypeKeyDown = (event, index) => {
+    const nextIndex = getRovingNextIndex(event.key, index, projectTypes.length);
+    if (nextIndex === null) return;
+    event.preventDefault();
+    selectType(projectTypes[nextIndex], nextIndex);
   };
 
   /* Réchauffe le cache HTTP dès le survol/focus pour un affichage instantané
@@ -122,46 +183,103 @@ const ProjectsIndex = () => {
       <SectionHeading index="01" label={dict.projects.sectionLabel} count={`(${String(projectsData.length).padStart(2, '0')})`} />
 
       <Fade delay={0.1} className={styles.toolbar}>
-        <div className={styles.filters} role="radiogroup" aria-label={dict.projects.filterGroupAria}>
-          {projectCategories.map((cat, index) => (
-            <Magnetic key={cat} strength={0.3}>
-              <button
-                ref={(el) => {
-                  filterRefs.current[index] = el;
-                }}
-                className={`${styles.filter} ${category === cat ? styles.filterActive : ''}`}
-                onClick={() => selectCategory(cat, index)}
-                onKeyDown={(event) => handleFilterKeyDown(event, index)}
-                role="radio"
-                aria-checked={category === cat}
-                tabIndex={category === cat ? 0 : -1}
-              >
-                {dict.projects.categories[cat] || cat}
-                <sup>{counts[cat] || 0}</sup>
-              </button>
-            </Magnetic>
-          ))}
+        <div className={styles.toolbarPrimary}>
+          <div className={styles.filters} role="radiogroup" aria-label={dict.projects.filterGroupAria}>
+            {projectCategories.map((cat, index) => (
+              <Magnetic key={cat} strength={0.3}>
+                <button
+                  ref={(el) => {
+                    filterRefs.current[index] = el;
+                  }}
+                  className={`${styles.filter} ${category === cat ? styles.filterActive : ''}`}
+                  onClick={() => selectCategory(cat, index)}
+                  onKeyDown={(event) => handleFilterKeyDown(event, index)}
+                  role="radio"
+                  aria-checked={category === cat}
+                  tabIndex={category === cat ? 0 : -1}
+                >
+                  {dict.projects.categories[cat] || cat}
+                  <sup>{counts[cat] || 0}</sup>
+                </button>
+              </Magnetic>
+            ))}
+          </div>
+
+          <div className={styles.toolbarPrimaryRight}>
+            <div className={styles.typeToggle} role="radiogroup" aria-label={dict.projects.typeGroupAria}>
+              {projectTypes.map((type, index) => (
+                <button
+                  key={type}
+                  ref={(el) => {
+                    typeRefs.current[index] = el;
+                  }}
+                  className={`${styles.typeButton} ${projectType === type ? styles.typeActive : ''}`}
+                  onClick={() => selectType(type, index)}
+                  onKeyDown={(event) => handleTypeKeyDown(event, index)}
+                  role="radio"
+                  aria-checked={projectType === type}
+                  tabIndex={projectType === type ? 0 : -1}
+                >
+                  {dict.projects.types[type] || type}
+                </button>
+              ))}
+            </div>
+
+            <div className={styles.search}>
+              <Search size={16} strokeWidth={1.75} className={styles.searchIcon} />
+              <input
+                type="text"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder={dict.projects.searchPlaceholder}
+                className={styles.searchInput}
+                aria-label={dict.projects.searchAria}
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery('')}
+                  className={styles.searchClear}
+                  aria-label={dict.projects.searchClearAria}
+                >
+                  <X size={14} strokeWidth={2} />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
 
-        <div className={styles.search}>
-          <Search size={16} strokeWidth={1.75} className={styles.searchIcon} />
-          <input
-            type="text"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder={dict.projects.searchPlaceholder}
-            className={styles.searchInput}
-            aria-label={dict.projects.searchAria}
-          />
-          {query && (
+        <div className={styles.toolbarSecondary}>
+          <div className={styles.techChips} role="group" aria-label={dict.projects.techFilterAria}>
+            {TECH_GROUPS.map(({ label }) => (
+              <button
+                key={label}
+                className={`${styles.techChip} ${activeTechs.has(label) ? styles.techChipActive : ''}`}
+                aria-pressed={activeTechs.has(label)}
+                onClick={() => toggleTech(label)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.viewToggle} role="group" aria-label={dict.projects.viewToggleAria}>
             <button
-              onClick={() => setQuery('')}
-              className={styles.searchClear}
-              aria-label={dict.projects.searchClearAria}
+              className={viewMode === 'list' ? styles.viewActive : ''}
+              aria-pressed={viewMode === 'list'}
+              aria-label={dict.projects.viewList}
+              onClick={() => setViewMode('list')}
             >
-              <X size={14} strokeWidth={2} />
+              <LayoutList size={16} strokeWidth={1.75} />
             </button>
-          )}
+            <button
+              className={viewMode === 'grid' ? styles.viewActive : ''}
+              aria-pressed={viewMode === 'grid'}
+              aria-label={dict.projects.viewGrid}
+              onClick={() => setViewMode('grid')}
+            >
+              <LayoutGrid size={16} strokeWidth={1.75} />
+            </button>
+          </div>
         </div>
       </Fade>
 
@@ -169,10 +287,10 @@ const ProjectsIndex = () => {
         {dict.projects.resultsStatus(filtered.length)}
       </p>
 
-      <div className={styles.layout}>
-        <motion.ul className={styles.list} onMouseLeave={() => setActiveProject(null)} layout>
+      {viewMode === 'list' ? (
+        <motion.ul className={styles.list} layout>
           <AnimatePresence initial={false} mode="popLayout">
-            {filtered.map((project, index) => (
+            {visible.map((project, index) => (
               <motion.li
                 key={project.id}
                 layout
@@ -189,6 +307,7 @@ const ProjectsIndex = () => {
                     setActiveProject(project);
                     preloadImage(project.image);
                   }}
+                  onMouseLeave={() => setActiveProject(null)}
                   onFocus={() => {
                     setActiveProject(project);
                     preloadImage(project.image);
@@ -207,7 +326,7 @@ const ProjectsIndex = () => {
                       loading="lazy"
                       width="640"
                       height="400"
-                      sizes="82px"
+                      sizes="(min-width: 900px) 160px, 96px"
                       className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
                       onLoad={() => markThumbLoaded(project.id)}
                     />
@@ -231,49 +350,77 @@ const ProjectsIndex = () => {
             ))}
           </AnimatePresence>
         </motion.ul>
+      ) : (
+        <div className={styles.gridLayout}>
+          <motion.ul className={styles.grid} layout>
+            <AnimatePresence initial={false} mode="popLayout">
+              {visible.map((project) => (
+                <motion.li
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -18 }}
+                  transition={{ duration: 0.45, ease: EASE }}
+                >
+                  <TransitionLink
+                    to={`/projet/${project.id}`}
+                    className={styles.gridCard}
+                    data-cursor-label={dict.projects.voirLeProjet}
+                    onMouseEnter={() => preloadImage(project.image)}
+                    onFocus={() => preloadImage(project.image)}
+                  >
+                    <span
+                      className={`${styles.gridImage} ${loadedThumbs.has(project.id) ? '' : 'img-skeleton'}`}
+                      aria-hidden="true"
+                    >
+                      <ResponsiveImage
+                        src={project.image}
+                        alt=""
+                        loading="lazy"
+                        width="640"
+                        height="400"
+                        sizes="(min-width: 900px) 33vw, 100vw"
+                        className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
+                        onLoad={() => markThumbLoaded(project.id)}
+                      />
+                      <span className={styles.gridArrow}>
+                        <ArrowUpRight size={18} strokeWidth={1.5} />
+                      </span>
+                    </span>
 
-        {/* Panneau de preview fixe : ne suit plus le curseur, se contente de
-            changer d'image selon la ligne survolée */}
-        <div className={`${styles.previewPanel} print-hide`} aria-hidden="true">
-          <motion.div
-            className={styles.previewFrame}
-            style={
-              reducedMotion
-                ? undefined
-                : { rotateX: springTiltX, rotateY: springTiltY, transformPerspective: 800 }
-            }
-            onPointerMove={handleTiltMove}
-            onPointerLeave={handleTiltLeave}
-          >
-            <AnimatePresence mode="wait">
-              {activeProject ? (
-                <motion.div
-                  key={activeProject.id}
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.35, ease: EASE }}
-                >
-                  <ResponsiveImage src={activeProject.image} alt="" sizes="22rem" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="empty"
-                  className={styles.previewEmpty}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ImageOff size={18} strokeWidth={1.5} />
-                  {dict.projects.previewEmpty}
-                </motion.div>
-              )}
+                    <span className={styles.gridMeta}>
+                      <span className={`${styles.gridTitle} ink-hover`}>{project.title}</span>
+                      <span className={styles.gridSub}>
+                        <span>{project.category}</span>
+                        <span>{project.year}</span>
+                      </span>
+                    </span>
+                  </TransitionLink>
+                </motion.li>
+              ))}
             </AnimatePresence>
-            <span className={`${styles.peel} ${activeProject ? styles.peelActive : ''}`} />
-          </motion.div>
+          </motion.ul>
         </div>
-      </div>
+      )}
+
+      {hasMore && (
+        <AnimatePresence>
+          <motion.div
+            key="load-more"
+            className={styles.loadMoreWrap}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <button className={styles.loadMore} onClick={() => setVisibleCount((c) => c + INITIAL_VISIBLE)}>
+              {dict.projects.loadMore}
+              <span className={styles.loadMoreCount}>+{filtered.length - visibleCount}</span>
+            </button>
+          </motion.div>
+        </AnimatePresence>
+      )}
 
       {filtered.length === 0 && (
         <Fade className={styles.empty}>
