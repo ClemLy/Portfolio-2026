@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { usePreferences } from '../../context/preferencesContext';
+import { useFinePointer } from '../../hooks/useFinePointer';
 import styles from './InkRipple.module.css';
 
 let uid = 0;
@@ -9,6 +10,7 @@ let uid = 0;
 const InkRipple = () => {
   const [ripples, setRipples] = useState([]);
   const { reducedMotion } = usePreferences();
+  const isFine = useFinePointer();
 
   const spawn = useCallback((event) => {
     if (event.button !== 0) return;
@@ -20,12 +22,12 @@ const InkRipple = () => {
   }, []);
 
   useEffect(() => {
-    if (reducedMotion) return undefined;
+    if (reducedMotion || !isFine) return undefined;
     document.addEventListener('pointerdown', spawn);
     return () => document.removeEventListener('pointerdown', spawn);
-  }, [spawn, reducedMotion]);
+  }, [spawn, reducedMotion, isFine]);
 
-  if (reducedMotion) return null;
+  if (reducedMotion || !isFine) return null;
 
   return (
     <div className={`${styles.layer} print-hide`} aria-hidden="true">

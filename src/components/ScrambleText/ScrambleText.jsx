@@ -42,8 +42,10 @@ const ScrambleText = ({ text, className }) => {
   };
 
   return (
-    <span className={className} onMouseEnter={scramble} onMouseLeave={reset}>
-      {display}
+    <span className={className} aria-label={text}>
+      <span aria-hidden="true" onMouseEnter={scramble} onMouseLeave={reset}>
+        {display}
+      </span>
     </span>
   );
 };

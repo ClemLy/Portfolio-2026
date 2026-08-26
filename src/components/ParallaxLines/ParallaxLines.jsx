@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePreferences } from '../../context/preferencesContext';
+import { useFinePointer } from '../../hooks/useFinePointer';
 import styles from './ParallaxLines.module.css';
 
 /* Filets décoratifs en fond de page, chacun dérivant verticalement à sa
@@ -16,9 +17,10 @@ const LINES = [
 const ParallaxLines = () => {
   const ref = useRef(null);
   const { reducedMotion } = usePreferences();
+  const isFine = useFinePointer();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
 
-  if (reducedMotion) return null;
+  if (reducedMotion || !isFine) return null;
 
   return (
     <div ref={ref} className={`${styles.field} print-hide`} aria-hidden="true">

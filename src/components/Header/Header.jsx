@@ -152,15 +152,16 @@ const Header = () => {
 
           <div className={styles.meta}>
             <AnimatePresence mode="wait">
-              <motion.span
+              <motion.time
                 key={time}
                 className={styles.time}
+                aria-live="off"
                 initial={{ opacity: 0.3, scale: 1.12 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
                 Paris, {time}
-              </motion.span>
+              </motion.time>
             </AnimatePresence>
           </div>
 
@@ -174,12 +175,15 @@ const Header = () => {
                   className={styles.navItem}
                   onMouseEnter={isProjects ? openMegaMenu : undefined}
                   onMouseLeave={isProjects ? closeMegaMenuDelayed : undefined}
+                  onFocus={isProjects ? openMegaMenu : undefined}
+                  onBlur={isProjects ? closeMegaMenuDelayed : undefined}
                 >
                   <TransitionLink
                     to={link.to}
                     className={`${styles.navLink} ink-hover ${isActive ? styles.navLinkActive : ''}`}
                     aria-current={isActive ? 'true' : undefined}
                     aria-expanded={isProjects ? megaMenuOpen : undefined}
+                    aria-haspopup={isProjects ? 'true' : undefined}
                   >
                     {link.name}
                   </TransitionLink>

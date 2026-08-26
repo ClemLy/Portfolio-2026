@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { MotionConfig } from 'framer-motion';
@@ -20,11 +20,12 @@ import Header from './components/Header/Header';
 import ContactFooter from './components/ContactFooter/ContactFooter';
 import CommandPalette from './components/CommandPalette/CommandPalette';
 import EasterEgg from './components/EasterEgg/EasterEgg';
-import Home from './pages/Home/Home';
-import ProjectDetail from './pages/ProjectDetail/ProjectDetail';
-import NotFound from './pages/NotFound/NotFound';
 import useReactiveTitle from './hooks/useReactiveTitle';
 import useDynamicFavicon from './hooks/useDynamicFavicon';
+
+const Home = lazy(() => import('./pages/Home/Home'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail/ProjectDetail'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 
 /* Remonte en haut de page à chaque navigation (y compris précédent/suivant) */
 const ScrollReset = () => {
@@ -83,11 +84,13 @@ const AppShell = () => {
             <CommandPalette />
             <EasterEgg />
 
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/projet/:id" element={<ProjectDetail />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={null}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/projet/:id" element={<ProjectDetail />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
 
             <ContactFooter />
           </CommandPaletteProvider>

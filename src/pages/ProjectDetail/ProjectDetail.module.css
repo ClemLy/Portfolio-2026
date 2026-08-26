@@ -240,11 +240,26 @@
 
 .scoreRow {
   display: grid;
-  grid-template-columns: minmax(8rem, 14rem) 1fr auto;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'label value' 'bar bar';
   align-items: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
+  gap: 0.5rem clamp(1rem, 3vw, 2.5rem);
   padding-block: 1.2rem;
   border-bottom: 1px solid var(--line);
+}
+
+.scoreLabel { grid-area: label; }
+.scoreTrack { grid-area: bar; }
+.scoreValue { grid-area: value; }
+
+@media (min-width: 600px) {
+  .scoreRow {
+    grid-template-columns: minmax(8rem, 14rem) 1fr auto;
+    grid-template-areas: unset;
+    gap: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .scoreLabel, .scoreTrack, .scoreValue { grid-area: unset; }
 }
 
 .scoreLabel {

@@ -4,7 +4,6 @@ import { ArrowUpRight, ArrowUp, Copy, Check } from 'lucide-react';
 import Magnetic from '../Magnetic/Magnetic';
 import ScrambleText from '../ScrambleText/ScrambleText';
 import PreferencesMenu from '../PreferencesMenu/PreferencesMenu';
-import ContactForm from '../ContactForm/ContactForm';
 import { Fade, Reveal } from '../Reveal/Reveal';
 import { useLenis, scrollTo } from '../SmoothScroll/lenisContext';
 import { usePreferences } from '../../context/preferencesContext';
@@ -67,16 +66,16 @@ const ContactFooter = () => {
         </div>
 
         <Fade className={styles.emailRow}>
-          <button onClick={handleCopy} className={styles.emailButton}>
+          <button
+            onClick={handleCopy}
+            className={styles.emailButton}
+            aria-label={copied ? dict.contact.copiedToast : dict.contact.copyAria}
+          >
             {EMAIL}
-            <span className={styles.copyIcon}>
+            <span className={styles.copyIcon} aria-hidden="true">
               {copied ? <Check size={16} strokeWidth={2} /> : <Copy size={16} strokeWidth={1.75} />}
             </span>
           </button>
-        </Fade>
-
-        <Fade delay={0.1}>
-          <ContactForm fallbackEmail={EMAIL} />
         </Fade>
 
         <div className={styles.bottom}>
@@ -113,11 +112,17 @@ const ContactFooter = () => {
         </div>
       </div>
 
+      {/* Région persistante dans le DOM pour que les lecteurs d'écran
+          annoncent la confirmation même quand le toast est inséré dynamiquement */}
+      <span className="visually-hidden" aria-live="polite" aria-atomic="true">
+        {copied ? dict.contact.copiedToast : ''}
+      </span>
+
       <AnimatePresence>
         {copied && (
           <motion.div
             className={styles.toast}
-            role="status"
+            aria-hidden="true"
             initial={{ opacity: 0, y: 20, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: 20, x: '-50%' }}
