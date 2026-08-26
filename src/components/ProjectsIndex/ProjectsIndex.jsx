@@ -5,6 +5,7 @@ import TransitionLink from '../PageTransition/TransitionLink';
 import { Fade } from '../Reveal/Reveal';
 import Magnetic from '../Magnetic/Magnetic';
 import SectionHeading from '../SectionHeading/SectionHeading';
+import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
 import { usePreferences } from '../../context/preferencesContext';
 import { useLanguage } from '../../context/languageContext';
 import { normalize } from '../../lib/normalize';
@@ -200,12 +201,13 @@ const ProjectsIndex = () => {
                     className={`${styles.thumb} ${loadedThumbs.has(project.id) ? '' : 'img-skeleton'}`}
                     aria-hidden="true"
                   >
-                    <img
+                    <ResponsiveImage
                       src={project.image}
                       alt=""
                       loading="lazy"
                       width="640"
                       height="400"
+                      sizes="82px"
                       className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
                       onLoad={() => markThumbLoaded(project.id)}
                     />
@@ -245,15 +247,15 @@ const ProjectsIndex = () => {
           >
             <AnimatePresence mode="wait">
               {activeProject ? (
-                <motion.img
+                <motion.div
                   key={activeProject.id}
-                  src={activeProject.image}
-                  alt=""
                   initial={{ opacity: 0, scale: 1.03 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.35, ease: EASE }}
-                />
+                >
+                  <ResponsiveImage src={activeProject.image} alt="" sizes="22rem" />
+                </motion.div>
               ) : (
                 <motion.div
                   key="empty"

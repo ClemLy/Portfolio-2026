@@ -13,6 +13,7 @@ import useFocusTrap from '../../hooks/useFocusTrap';
 import useSpotlight from '../../hooks/useSpotlight';
 import { projectsData } from '../../data/projectsData';
 import { localize } from '../../i18n/localize';
+import ResponsiveImage from '../../components/ResponsiveImage/ResponsiveImage';
 import NotFound from '../NotFound/NotFound';
 import styles from './ProjectDetail.module.css';
 
@@ -149,13 +150,15 @@ const ProjectDetail = () => {
 
       <div className={`container ${styles.heroFrame}`} ref={heroRef}>
         <div className={`${styles.heroImage} ${loadedHeroes.has(project.id) ? '' : 'img-skeleton'}`}>
-          <motion.img
-            src={project.image}
-            alt={pd.apercuDe(project.title)}
-            style={{ y: parallaxY }}
-            className={`img-fade ${loadedHeroes.has(project.id) ? 'img-loaded' : ''}`}
-            onLoad={() => setLoadedHeroes((prev) => (prev.has(project.id) ? prev : new Set(prev).add(project.id)))}
-          />
+          <motion.div style={{ y: parallaxY }}>
+            <ResponsiveImage
+              src={project.image}
+              alt={pd.apercuDe(project.title)}
+              sizes="(min-width: 1100px) 1100px, 100vw"
+              className={`img-fade ${loadedHeroes.has(project.id) ? 'img-loaded' : ''}`}
+              onLoad={() => setLoadedHeroes((prev) => (prev.has(project.id) ? prev : new Set(prev).add(project.id)))}
+            />
+          </motion.div>
         </div>
       </div>
 
@@ -219,7 +222,7 @@ const ProjectDetail = () => {
                     data-cursor-label={pd.agrandir}
                     aria-label={pd.agrandirAria(index + 1, project.title)}
                   >
-                    <img src={image} alt="" loading="lazy" />
+                    <ResponsiveImage src={image} alt="" loading="lazy" sizes="(min-width: 700px) 33vw, 100vw" />
                   </button>
                 </Fade>
               ))}
@@ -344,16 +347,20 @@ const ProjectDetail = () => {
             >
               <X size={28} strokeWidth={1.5} />
             </button>
-            <motion.img
-              src={lightboxImage}
-              alt=""
-              className={styles.lightboxImage}
+            <motion.div
               initial={{ scale: 0.92, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.92, y: 20 }}
               transition={{ type: 'spring', damping: 26, stiffness: 300 }}
               onClick={(event) => event.stopPropagation()}
-            />
+            >
+              <ResponsiveImage
+                src={lightboxImage}
+                alt=""
+                className={styles.lightboxImage}
+                sizes="(min-width: 900px) 1100px, 90vw"
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
