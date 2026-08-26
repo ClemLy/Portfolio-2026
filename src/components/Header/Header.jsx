@@ -18,6 +18,7 @@ import useActiveSection from '../../hooks/useActiveSection';
 import useFocusTrap from '../../hooks/useFocusTrap';
 import { projectsData } from '../../data/projectsData';
 import { localizeList } from '../../i18n/localize';
+import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
 import styles from './Header.module.css';
 
 /* Sections observées pour surligner le lien actif dans la navigation */
@@ -209,7 +210,7 @@ const Header = () => {
                               onNavigate={() => setMegaMenuOpen(false)}
                             >
                               <span className={styles.megaMenuThumb}>
-                                <img src={project.image} alt="" loading="lazy" />
+                                <ResponsiveImage src={project.image} alt="" loading="lazy" sizes="56px" />
                               </span>
                               <span>
                                 <span className={styles.megaMenuTitle}>{project.title}</span>
