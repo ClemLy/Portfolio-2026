@@ -358,8 +358,13 @@
   transition-delay: 0.15s;
 }
 
-/* Mobile : vignettes visibles, preview inutile */
+/* Mobile : touch targets 44px min, vignettes visibles, preview inutile */
 @media (max-width: 899px) {
+  .filter {
+    min-height: 44px;
+    padding: 0.65rem 1.1rem;
+  }
+
   .row {
     grid-template-columns: auto auto 1fr auto;
     grid-template-areas: 'index thumb main arrow';
