@@ -47,7 +47,7 @@ export const dictionary = {
     ],
     projects: {
       sectionLabel: 'Projets sélectionnés',
-      categories: { Tous: 'Tous', 'E-commerce': 'E-commerce', Vitrine: 'Vitrine', Application: 'Application', Plugin: 'Plugin', 'Expérience': 'Expérience' },
+      categories: { Tous: 'Tous', 'E-commerce': 'E-commerce', Vitrine: 'Vitrine', Application: 'Application', Plugin: 'Plugin', 'Expérience': 'Expérience', Jeu: 'Jeu' },
       searchPlaceholder: 'Rechercher un projet, une techno…',
       searchAria: 'Rechercher un projet',
       searchClearAria: 'Effacer la recherche',
@@ -59,7 +59,10 @@ export const dictionary = {
       emptyNoQuery: 'Aucun projet ne correspond à ces filtres.',
       trySuggestions: 'Essayez plutôt :',
       reset: 'Réinitialiser',
-      loadMore: 'Charger plus',
+      paginationAria: 'Pagination des projets',
+      prevPage: 'Page précédente',
+      nextPage: 'Page suivante',
+      pageAria: (n) => `Aller à la page ${n}`,
       viewToggleAria: "Changer l'affichage",
       viewList: 'Vue liste',
       viewGrid: 'Vue grille',
@@ -81,6 +84,7 @@ export const dictionary = {
     parcours: {
       sectionLabel: 'Parcours',
       skillsAria: 'Compétences clés',
+      today: "aujourd'hui",
     },
     stack: {
       sectionLabel: 'Stack & outils',
@@ -242,7 +246,7 @@ export const dictionary = {
     ],
     projects: {
       sectionLabel: 'Selected projects',
-      categories: { Tous: 'All', 'E-commerce': 'E-commerce', Vitrine: 'Showcase', Application: 'Application', Plugin: 'Plugin', 'Expérience': 'Experience' },
+      categories: { Tous: 'All', 'E-commerce': 'E-commerce', Vitrine: 'Showcase', Application: 'Application', Plugin: 'Plugin', 'Expérience': 'Experience', Jeu: 'Game' },
       searchPlaceholder: 'Search a project, a tech…',
       searchAria: 'Search a project',
       searchClearAria: 'Clear search',
@@ -254,7 +258,10 @@ export const dictionary = {
       emptyNoQuery: 'No project matches these filters.',
       trySuggestions: 'Try instead:',
       reset: 'Reset',
-      loadMore: 'Load more',
+      paginationAria: 'Projects pagination',
+      prevPage: 'Previous page',
+      nextPage: 'Next page',
+      pageAria: (n) => `Go to page ${n}`,
       viewToggleAria: 'Switch view',
       viewList: 'List view',
       viewGrid: 'Grid view',
@@ -276,6 +283,7 @@ export const dictionary = {
     parcours: {
       sectionLabel: 'Journey',
       skillsAria: 'Key skills',
+      today: 'today',
     },
     stack: {
       sectionLabel: 'Stack & tools',

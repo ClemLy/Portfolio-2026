@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, LayoutGrid, LayoutList, Search, X } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, LayoutGrid, LayoutList, Search, X } from 'lucide-react';
 import TransitionLink from '../PageTransition/TransitionLink';
 import { Fade } from '../Reveal/Reveal';
 import Magnetic from '../Magnetic/Magnetic';
@@ -14,7 +14,30 @@ import { projectsData, projectCategories, projectTypes } from '../../data/projec
 import styles from './ProjectsIndex.module.css';
 
 const EASE = [0.16, 1, 0.3, 1];
-const INITIAL_VISIBLE = 6;
+const PAGE_SIZE = 6;
+
+/* Construit la liste de pages à afficher avec des points de suspension
+   (1 … 4 5 6 … 12), plutôt qu'une rangée de boutons qui grossit sans
+   limite à mesure que le nombre de projets augmente */
+const getPageRange = (current, total, delta = 1) => {
+  const pages = [];
+  for (let i = 1; i <= total; i += 1) {
+    if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
+      pages.push(i);
+    }
+  }
+  const withDots = [];
+  let previous = 0;
+  pages.forEach((page) => {
+    if (previous) {
+      if (page - previous === 2) withDots.push(previous + 1);
+      else if (page - previous > 2) withDots.push('…');
+    }
+    withDots.push(page);
+    previous = page;
+  });
+  return withDots;
+};
 
 /* Familles de stack pour le filtre par techno (ligne 2 de la toolbar) :
    des groupes larges plutôt que chaque tag brut (WordPress/Divi/Flatsome/...
@@ -55,14 +78,15 @@ const ProjectsIndex = () => {
   const [activeTechs, setActiveTechs] = useState(() => new Set());
   const [query, setQuery] = useState('');
   const [viewMode, setViewMode] = useState('list');
-  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  const [page, setPage] = useState(1);
   const [activeProject, setActiveProject] = useState(null);
   const [loadedThumbs, setLoadedThumbs] = useState(() => new Set());
-  const { tick } = usePreferences();
+  const { tick, reducedMotion } = usePreferences();
   const { lang, dict } = useLanguage();
   const preloaded = useRef(new Set());
   const filterRefs = useRef([]);
   const typeRefs = useRef([]);
+  const sectionRef = useRef(null);
 
   const markThumbLoaded = (id) => {
     setLoadedThumbs((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
@@ -98,11 +122,23 @@ const ProjectsIndex = () => {
   const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
   if (filterSignature !== prevFilterSignature) {
     setPrevFilterSignature(filterSignature);
-    setVisibleCount(INITIAL_VISIBLE);
+    setPage(1);
   }
 
-  const visible = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
-  const hasMore = visibleCount < filtered.length;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const visible = useMemo(
+    () => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+    [filtered, page]
+  );
+  const pageRange = useMemo(() => getPageRange(page, totalPages), [page, totalPages]);
+
+  const goToPage = (nextPage) => {
+    const clamped = Math.min(Math.max(nextPage, 1), totalPages);
+    if (clamped === page) return;
+    setPage(clamped);
+    tick();
+    sectionRef.current?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+  };
 
   const counts = useMemo(() => {
     const map = { Tous: projectsData.length };
@@ -179,7 +215,12 @@ const ProjectsIndex = () => {
   };
 
   return (
-    <section className={`container ${styles.section}`} id="projets" aria-label={dict.projects.sectionLabel}>
+    <section
+      ref={sectionRef}
+      className={`container ${styles.section}`}
+      id="projets"
+      aria-label={dict.projects.sectionLabel}
+    >
       <SectionHeading index="01" label={dict.projects.sectionLabel} count={`(${String(projectsData.length).padStart(2, '0')})`} />
 
       <Fade delay={0.1} className={styles.toolbar}>
@@ -404,22 +445,53 @@ const ProjectsIndex = () => {
         </div>
       )}
 
-      {hasMore && (
-        <AnimatePresence>
-          <motion.div
-            key="load-more"
-            className={styles.loadMoreWrap}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <button className={styles.loadMore} onClick={() => setVisibleCount((c) => c + INITIAL_VISIBLE)}>
-              {dict.projects.loadMore}
-              <span className={styles.loadMoreCount}>+{filtered.length - visibleCount}</span>
+      {totalPages > 1 && (
+        <nav className={styles.pagination} aria-label={dict.projects.paginationAria}>
+          <Magnetic strength={0.25}>
+            <button
+              className={styles.pageArrow}
+              onClick={() => goToPage(page - 1)}
+              disabled={page === 1}
+              aria-label={dict.projects.prevPage}
+            >
+              <ChevronLeft size={18} strokeWidth={1.75} />
             </button>
-          </motion.div>
-        </AnimatePresence>
+          </Magnetic>
+
+          <ul className={styles.pageNumbers}>
+            {pageRange.map((entry, index) =>
+              entry === '…' ? (
+                <li key={`dots-${index}`} className={styles.pageDots} aria-hidden="true">
+                  {entry}
+                </li>
+              ) : (
+                <li key={entry}>
+                  <Magnetic strength={0.25}>
+                    <button
+                      className={`${styles.pageNumber} ${entry === page ? styles.pageNumberActive : ''}`}
+                      onClick={() => goToPage(entry)}
+                      aria-current={entry === page ? 'page' : undefined}
+                      aria-label={dict.projects.pageAria(entry)}
+                    >
+                      {String(entry).padStart(2, '0')}
+                    </button>
+                  </Magnetic>
+                </li>
+              )
+            )}
+          </ul>
+
+          <Magnetic strength={0.25}>
+            <button
+              className={styles.pageArrow}
+              onClick={() => goToPage(page + 1)}
+              disabled={page === totalPages}
+              aria-label={dict.projects.nextPage}
+            >
+              <ChevronRight size={18} strokeWidth={1.75} />
+            </button>
+          </Magnetic>
+        </nav>
       )}
 
       {filtered.length === 0 && (

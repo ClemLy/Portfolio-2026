@@ -21,6 +21,9 @@
 }
 
 .year {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   font-size: clamp(1.9rem, 5vw, 3.6rem);
   font-weight: 600;
   line-height: 1;
@@ -34,6 +37,22 @@
 .row:hover .year {
   color: var(--accent);
   -webkit-text-stroke-color: var(--accent);
+}
+
+/* Borne de fin (ou "aujourd'hui") d'une étape sur plusieurs années :
+   texte plein, bien plus petit, pour ne pas rivaliser avec le grand
+   chiffre de départ */
+.yearEnd {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-soft);
+  -webkit-text-stroke: 0;
+  transition: color 0.4s ease;
+}
+
+.row:hover .yearEnd {
+  color: var(--accent);
 }
 
 .main {
@@ -54,7 +73,8 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  justify-content: flex-end;
+  gap: 0.45rem;
   justify-self: end;
 }
 
@@ -72,7 +92,7 @@
 
 @media (min-width: 900px) {
   .row {
-    grid-template-columns: 12rem 1fr auto;
+    grid-template-columns: 12rem 1fr minmax(0, 15rem);
     align-items: center;
   }
 }
