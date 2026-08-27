@@ -1,49 +1,234 @@
 {
+  "/assets/projets/apex-motion/apex-motion-aero-flow.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/apex-motion/apex-motion-heritage.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/apex-motion/apex-motion-lap-telemetry.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/apex-motion/apex-motion-particle-reveal.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/apex-motion/apex-motion-studio.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
   "/assets/projets/apex-motion/apex-motion.webp": [
     400,
     800,
     1200,
+    1600
+  ],
+  "/assets/projets/athly/athly-1.webp": [
+    400
+  ],
+  "/assets/projets/athly/athly-2.webp": [
+    400
+  ],
+  "/assets/projets/athly/athly-3.webp": [
+    400
+  ],
+  "/assets/projets/athly/athly.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/brokn/brokn-atelier.webp": [
+    400,
+    800,
+    1200,
     1600,
     2400
   ],
-  "/assets/projets/athly/athly.webp": [
+  "/assets/projets/brokn/brokn-collection.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/brokn/brokn-produit.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/brokn/brokn.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/comptoir-aromes/comptoir-aromes.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/cosy-study/cosy-study.webp": [
+    400
+  ],
+  "/assets/projets/deauville-limousine/deauville-limousine.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/fcc/fcc.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/gvp/gvp.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-jackpot.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-partie.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-regles.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-stats.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-themes.webp": [
+    400,
+    800,
+    1200,
+    1600,
+    2400
+  ],
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie-clair.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-regles.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-victoire.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu.webp": [
+    400,
+    800,
+    1200,
+    1600
+  ],
+  "/assets/projets/papaie/papaie.webp": [
+    400,
+    800
+  ],
+  "/assets/projets/pocket-casino/pocket-casino-banqueroute.webp": [
     400,
     800,
     1200
   ],
-  "/assets/projets/comptoir-aromes/comptoir-aromes.webp": [
+  "/assets/projets/pocket-casino/pocket-casino-blackjack.webp": [
     400,
     800,
-    1200,
-    1600,
-    2400
+    1200
   ],
-  "/assets/projets/cosy-study/cosy-study.webp": [
+  "/assets/projets/pocket-casino/pocket-casino-boutique-de-manche.webp": [
     400,
     800,
-    1200,
-    1600,
-    2400
+    1200
   ],
-  "/assets/projets/deauville-limousine/deauville-limousine.webp": [
+  "/assets/projets/pocket-casino/pocket-casino-carnet-de-regles.webp": [
     400,
     800,
-    1200,
-    1600,
-    2400
+    1200
   ],
-  "/assets/projets/fcc/fcc.webp": [
+  "/assets/projets/pocket-casino/pocket-casino-magasin.webp": [
     400,
     800,
-    1200,
-    1600,
-    2400
+    1200
   ],
-  "/assets/projets/papaie/papaie.webp": [
+  "/assets/projets/pocket-casino/pocket-casino-mobile.webp": [
+    390
+  ],
+  "/assets/projets/pocket-casino/pocket-casino-poker.webp": [
     400,
     800,
-    1200,
-    1600,
-    2400
+    1200
+  ],
+  "/assets/projets/pocket-casino/pocket-casino-quitte-ou-double.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/assets/projets/pocket-casino/pocket-casino-roulette.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/assets/projets/pocket-casino/pocket-casino-trophees.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/assets/projets/pocket-casino/pocket-casino.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/assets/projets/wp-reservations/wp-reservations.webp": [
+    400,
+    800
   ]
 }
