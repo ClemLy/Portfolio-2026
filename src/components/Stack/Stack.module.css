@@ -80,8 +80,18 @@
   border-left: 1px solid var(--line);
 }
 
+/* Grid item réel = ce wrapper (rendu par Fade) : il doit s'étirer sur
+   toute la hauteur de ligne pour que .cert (bordure/fond/zone cliquable)
+   fasse la même taille sur les 3 cartes, quelle que soit la longueur de
+   leur texte */
+.certWrap {
+  height: 100%;
+}
+
 .cert {
+  position: relative;
   display: flex;
+  height: 100%;
   gap: 1rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
   border-right: 1px solid var(--line);
@@ -91,6 +101,29 @@
 
 .cert:hover {
   background-color: var(--paper-soft);
+}
+
+/* Carte cliquable (certification avec un lien externe, ex: Greenoco) :
+   même langage que .cert, juste un curseur et une flèche en plus */
+.certClickable {
+  cursor: pointer;
+}
+
+.certArrow {
+  position: absolute;
+  top: clamp(1.5rem, 3vw, 2.25rem);
+  right: clamp(1.5rem, 3vw, 2.25rem);
+  flex-shrink: 0;
+  color: var(--ink-soft);
+  opacity: 0;
+  transform: translate(-3px, 3px) rotate(0deg);
+  transition: opacity 0.3s ease, transform 0.35s var(--ease-out-expo), color 0.3s ease;
+}
+
+.certClickable:hover .certArrow {
+  opacity: 1;
+  transform: translate(0, 0) rotate(45deg);
+  color: var(--accent);
 }
 
 .certIcon {

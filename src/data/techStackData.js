@@ -9,6 +9,16 @@ export const techGroups = [
         t: { en: { description: 'Dynamic, reusable interfaces built with hooks and context.' } }
       },
       {
+        name: 'Next.js',
+        description: "Applications React full-stack : rendu hybride (SSR/SSG) et API routes.",
+        t: { en: { description: 'Full-stack React applications: hybrid rendering (SSR/SSG) and API routes.' } }
+      },
+      {
+        name: 'TypeScript',
+        description: "Typage statique pour des bases de code plus sûres et maintenables.",
+        t: { en: { description: 'Static typing for safer, more maintainable codebases.' } }
+      },
+      {
         name: 'React Native',
         description: "Applications mobiles iOS et Android performantes, utilisé pour Athly.",
         t: { en: { description: 'High-performance iOS and Android apps, used for Athly.' } }
@@ -48,6 +58,11 @@ export const techGroups = [
         name: 'PHP & WordPress',
         description: "Plugins sur-mesure, CPT et architecture orientée métier.",
         t: { en: { description: 'Custom plugins, CPTs and business-oriented architecture.' } }
+      },
+      {
+        name: 'Headless CMS',
+        description: "Exploration des architectures headless (contenu découplé du rendu) pour des besoins multi-canal, notamment à l'Agence Kurtis.",
+        t: { en: { description: 'Exploring headless architectures (content decoupled from rendering) for multi-channel needs, notably at Agence Kurtis.' } }
       }
     ]
   },
@@ -83,11 +98,11 @@ export const certifications = [
   {
     title: "Numérique Responsable",
     issuer: "Institut Numérique Responsable",
-    description: "Maîtrise des fondamentaux de l'éco-conception web.",
+    description: "Certification attestant la maîtrise des fondamentaux de l'éco-conception web.",
     t: {
       en: {
         title: 'Sustainable Digital',
-        description: 'Mastery of core web eco-design fundamentals.'
+        description: 'Certification attesting mastery of core web eco-design fundamentals.'
       }
     }
   },
@@ -105,6 +120,7 @@ export const certifications = [
     title: "Solution Greenoco",
     issuer: "Audit Carbone",
     description: "Mesure et réduction de l'empreinte carbone des sites web.",
+    link: 'https://greenoco.io/',
     t: {
       en: {
         issuer: 'Carbon Audit',

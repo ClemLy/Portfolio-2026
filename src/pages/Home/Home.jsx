@@ -9,16 +9,20 @@ import Stack from '../../components/Stack/Stack';
 import ParallaxLines from '../../components/ParallaxLines/ParallaxLines';
 import { useLenis, scrollTo } from '../../components/SmoothScroll/lenisContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import useSoftScrollSnap from '../../hooks/useSoftScrollSnap';
 import useActiveSection from '../../hooks/useActiveSection';
 import { setAmbientSection } from '../../lib/sound';
 
 const SECTION_IDS = ['accueil', 'projets', 'apropos', 'parcours', 'stack'];
+const SITE_URL = 'https://clementin-portfolio.vercel.app';
+const OG_IMAGE = `${SITE_URL}/assets/og/og-image.jpg`;
 
 const Home = () => {
   const location = useLocation();
   const lenis = useLenis();
   const { reducedMotion } = usePreferences();
+  const { lang, dict } = useLanguage();
 
   useSoftScrollSnap(lenis, '#accueil, #projets, #apropos, #parcours, #stack', !reducedMotion);
 
@@ -40,11 +44,25 @@ const Home = () => {
   return (
     <main id="contenu" style={{ position: 'relative' }}>
       <Helmet>
-        <title>Clémentin Ly, Développeur full-stack créatif à Paris</title>
-        <meta
-          name="description"
-          content="Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Node.js et WordPress. Des expériences web rapides, accessibles et éco-conçues."
-        />
+        <html lang={lang} />
+        <title>{dict.meta.title}</title>
+        <meta name="description" content={dict.meta.description} />
+        <link rel="canonical" href={SITE_URL + '/'} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={SITE_URL + '/'} />
+        <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+        <meta property="og:site_name" content="Clémentin Ly — Portfolio" />
+        <meta property="og:title" content={dict.meta.title} />
+        <meta property="og:description" content={dict.meta.description} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={dict.meta.title} />
+        <meta name="twitter:description" content={dict.meta.description} />
+        <meta name="twitter:image" content={OG_IMAGE} />
       </Helmet>
 
       <ParallaxLines />
