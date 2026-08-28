@@ -2,56 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://clementin-portfolio.vercel.app/</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/athly</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-  
+  <url>
+    <loc>https://clementin-portfolio.vercel.app/projet/apex-motion</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/comptoir-aromes</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/cosy-study</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://clementin-portfolio.vercel.app/projet/brokn</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/deauville-limousines</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/papaie</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/france-cuisine-concept</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://clementin-portfolio.vercel.app/projet/greenoco-video-player</loc>
-    <lastmod>2026-08-06</lastmod>
+    <loc>https://clementin-portfolio.vercel.app/projet/jackpot-solitaire</loc>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://clementin-portfolio.vercel.app/projet/pocket-casino</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clementin-portfolio.vercel.app/projet/jeu-du-pendu</loc>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://clementin-portfolio.vercel.app/projet/wp-reservations</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clementin-portfolio.vercel.app/projet/greenoco-player</loc>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

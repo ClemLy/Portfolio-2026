@@ -3,7 +3,7 @@ export const dictionary = {
     meta: {
       title: 'Clémentin Ly, Développeur full-stack créatif à Paris',
       description:
-        "Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Node.js et WordPress. Des expériences web rapides, accessibles et éco-conçues.",
+        "Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Next.js et TypeScript, avec une solide expérience Node.js et WordPress. Des expériences web rapides, accessibles et éco-conçues.",
     },
     skipLink: 'Aller au contenu',
     awayTitle: 'On se recroise ?',
@@ -32,15 +32,15 @@ export const dictionary = {
       titleLine2: 'full-stack',
       titleLine3: 'créatif & responsable',
       intro:
-        "De l'e-commerce WordPress aux applications React Native, je conçois des expériences web rapides, accessibles et sobres, pensées pour durer.",
+        "De l'e-commerce WordPress aux applications React Native, en passant par des plateformes Next.js et TypeScript, je conçois des expériences web rapides, accessibles et sobres, pensées pour durer.",
       scroll: 'Défiler',
       scrollAria: 'Défiler vers les projets',
       sectionAria: 'Introduction',
     },
     marquee: [
-      'Disponible pour missions',
       'Développeur full-stack',
-      'React & React Native',
+      'React, Next.js & TypeScript',
+      'React Native',
       'WordPress sur-mesure',
       'Node.js & API REST',
       'Éco-conception',
@@ -73,10 +73,10 @@ export const dictionary = {
     about: {
       sectionLabel: 'À propos',
       manifesto:
-        "Je conçois des sites et des applications où la performance rencontre la sobriété. Formé en agence sur WordPress et PHP, spécialisé React et Node.js, je défends un web rapide, accessible et durable : des interfaces soignées, mesurées plutôt que promises.",
+        "Je conçois des sites et des applications où la performance rencontre la sobriété. Formé en agence sur WordPress et PHP, j'ai depuis approfondi React, Next.js et TypeScript, et j'explore aujourd'hui les architectures headless CMS. Je défends un web rapide, accessible et durable : des interfaces soignées, mesurées plutôt que promises.",
       notes: [
         { value: 4, label: 'années de code' },
-        { value: 8, label: 'projets livrés' },
+        { value: 13, label: 'projets livrés' },
         { value: 100, label: 'de performance Lighthouse sur ce site' },
         { value: 1, label: 'certification Numérique Responsable' },
       ],
@@ -186,6 +186,7 @@ export const dictionary = {
       precedent: 'Précédent',
       suivant: 'Suivant',
       apercuDe: (title) => `Aperçu du projet ${title}`,
+      apercuAlt: (n, title) => `${title} — aperçu ${n}`,
       etudeDeCas: (title) => `${title}, étude de cas de Clémentin Ly`,
       lighthouseLabels: { performance: 'Performance', accessibilité: 'Accessibilité', bonnesPratiques: 'Bonnes pratiques', seo: 'SEO' },
     },
@@ -202,7 +203,7 @@ export const dictionary = {
     meta: {
       title: 'Clémentin Ly, Creative Full-Stack Developer in Paris',
       description:
-        'Portfolio of Clémentin Ly, full-stack developer specialized in React, Node.js and WordPress. Fast, accessible, eco-designed web experiences.',
+        'Portfolio of Clémentin Ly, full-stack developer specialized in React, Next.js and TypeScript, with strong experience in Node.js and WordPress. Fast, accessible, eco-designed web experiences.',
     },
     skipLink: 'Skip to content',
     awayTitle: 'See you soon?',
@@ -231,15 +232,15 @@ export const dictionary = {
       titleLine2: 'developer',
       titleLine3: 'creative & responsible',
       intro:
-        'From WordPress e-commerce to React Native apps, I design fast, accessible, sober web experiences built to last.',
+        'From WordPress e-commerce to React Native apps, and Next.js/TypeScript platforms in between, I design fast, accessible, sober web experiences built to last.',
       scroll: 'Scroll',
       scrollAria: 'Scroll to projects',
       sectionAria: 'Introduction',
     },
     marquee: [
-      'Available for new missions',
       'Full-stack developer',
-      'React & React Native',
+      'React, Next.js & TypeScript',
+      'React Native',
       'Custom WordPress',
       'Node.js & REST API',
       'Eco-design',
@@ -272,10 +273,10 @@ export const dictionary = {
     about: {
       sectionLabel: 'About',
       manifesto:
-        "I design websites and applications where performance meets restraint. Trained in-house on WordPress and PHP, specialized in React and Node.js, I stand for a fast, accessible, sustainable web: interfaces that are crafted and measured, not just promised.",
+        "I design websites and applications where performance meets restraint. Trained in-house on WordPress and PHP, I've since deepened my expertise in React, Next.js and TypeScript, and I'm now exploring headless CMS architectures. I stand for a fast, accessible, sustainable web: interfaces that are crafted and measured, not just promised.",
       notes: [
         { value: 4, label: 'years of code' },
-        { value: 8, label: 'projects delivered' },
+        { value: 13, label: 'projects delivered' },
         { value: 100, label: 'Lighthouse performance on this site' },
         { value: 1, label: 'Sustainable Digital certification' },
       ],
@@ -385,6 +386,7 @@ export const dictionary = {
       precedent: 'Previous',
       suivant: 'Next',
       apercuDe: (title) => `Preview of the ${title} project`,
+      apercuAlt: (n, title) => `${title} — preview ${n}`,
       etudeDeCas: (title) => `${title}, case study by Clémentin Ly`,
       lighthouseLabels: { performance: 'Performance', accessibilité: 'Accessibility', bonnesPratiques: 'Best practices', seo: 'SEO' },
     },

@@ -363,7 +363,7 @@ const ProjectsIndex = () => {
                   >
                     <ResponsiveImage
                       src={project.image}
-                      alt=""
+                      alt={project.title}
                       loading="lazy"
                       width="640"
                       height="400"
@@ -417,7 +417,7 @@ const ProjectsIndex = () => {
                     >
                       <ResponsiveImage
                         src={project.image}
-                        alt=""
+                        alt={project.title}
                         loading="lazy"
                         width="640"
                         height="400"

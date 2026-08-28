@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { BadgeCheck, MoveHorizontal } from 'lucide-react';
+import { ArrowUpRight, BadgeCheck, MoveHorizontal } from 'lucide-react';
 import { Fade } from '../Reveal/Reveal';
 import SectionHeading from '../SectionHeading/SectionHeading';
 import { useLanguage } from '../../context/languageContext';
@@ -24,11 +24,21 @@ const Stack = () => {
     </span>
   );
 
-  const groups = techGroups.map((group) => ({
+  /* Numérotation continue (01, 02…) à travers tous les groupes, calculée
+     ici plutôt que via `groupIndex * tailleFixe` qui suppose (à tort) le
+     même nombre de technos dans chaque groupe */
+  const groupsRaw = techGroups.map((group) => ({
     ...group,
     label: dict.stack.groups[group.id] || group.label,
     technologies: localizeList(group.technologies, lang),
   }));
+  const groups = groupsRaw.map((group, groupIndex) => {
+    const offset = groupsRaw.slice(0, groupIndex).reduce((sum, g) => sum + g.technologies.length, 0);
+    return {
+      ...group,
+      technologies: group.technologies.map((tech, techIndex) => ({ ...tech, stepIndex: offset + techIndex + 1 })),
+    };
+  });
   const certs = localizeList(certifications, lang);
 
   useLayoutEffect(() => {
@@ -55,15 +65,13 @@ const Stack = () => {
           dragElastic={0.08}
           dragTransition={{ power: 0.3, timeConstant: 220 }}
         >
-          {groups.map((group, groupIndex) => (
+          {groups.map((group) => (
             <div key={group.id} className={styles.group}>
               <h3 className={styles.groupLabel}>{group.label}</h3>
               <ul>
-                {group.technologies.map((tech, techIndex) => (
+                {group.technologies.map((tech) => (
                   <li key={tech.name} className={styles.item}>
-                    <span className={styles.itemIndex}>
-                      {String(groupIndex * 4 + techIndex + 1).padStart(2, '0')}
-                    </span>
+                    <span className={styles.itemIndex}>{String(tech.stepIndex).padStart(2, '0')}</span>
                     <div>
                       <p className={styles.itemName}>{tech.name}</p>
                       <p className={styles.itemDescription}>{tech.description}</p>
@@ -77,16 +85,23 @@ const Stack = () => {
       </div>
 
       <div className={styles.certs}>
-        {certs.map((cert, index) => (
-          <Fade key={cert.title} delay={index * 0.08} className={styles.cert}>
-            <BadgeCheck size={22} strokeWidth={1.75} className={styles.certIcon} />
-            <div>
-              <p className={styles.certTitle}>{cert.title}</p>
-              <p className={styles.certIssuer}>{cert.issuer}</p>
-              <p className={styles.certDescription}>{cert.description}</p>
-            </div>
-          </Fade>
-        ))}
+        {certs.map((cert, index) => {
+          const CertTag = cert.link ? 'a' : 'div';
+          const linkProps = cert.link ? { href: cert.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+          return (
+            <Fade key={cert.title} delay={index * 0.08} className={styles.certWrap}>
+              <CertTag className={`${styles.cert} ${cert.link ? styles.certClickable : ''}`} {...linkProps}>
+                <BadgeCheck size={22} strokeWidth={1.75} className={styles.certIcon} />
+                <div>
+                  <p className={styles.certTitle}>{cert.title}</p>
+                  <p className={styles.certIssuer}>{cert.issuer}</p>
+                  <p className={styles.certDescription}>{cert.description}</p>
+                </div>
+                {cert.link && <ArrowUpRight size={16} strokeWidth={1.75} className={styles.certArrow} />}
+              </CertTag>
+            </Fade>
+          );
+        })}
       </div>
     </section>
   );

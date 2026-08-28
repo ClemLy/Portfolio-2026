@@ -39,14 +39,30 @@ const ScrollReset = () => {
   return null;
 };
 
+const SITE_URL = 'https://clementin-portfolio.vercel.app';
+
 const structuredData = {
   '@context': 'https://schema.org/',
-  '@type': 'Person',
-  name: 'Clémentin LY',
-  jobTitle: 'Développeur Full-Stack',
-  description: 'Développeur full-stack spécialisé React, Node.js et WordPress, focalisé sur la performance et l\'éco-conception.',
-  url: 'https://clementin-portfolio.vercel.app',
-  sameAs: ['https://github.com/ClemLy', 'https://linkedin.com/in/clémentin-ly/'],
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Clémentin LY',
+      jobTitle: 'Développeur Full-Stack',
+      description: 'Développeur full-stack spécialisé React, Next.js et TypeScript, avec une solide expérience Node.js et WordPress, focalisé sur la performance et l\'éco-conception.',
+      url: SITE_URL,
+      image: `${SITE_URL}/assets/og/og-image.jpg`,
+      sameAs: ['https://github.com/ClemLy', 'https://linkedin.com/in/clémentin-ly/'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: 'Clémentin Ly — Portfolio',
+      url: SITE_URL,
+      inLanguage: ['fr-FR', 'en-US'],
+      author: { '@id': `${SITE_URL}/#person` },
+    },
+  ],
 };
 
 /* Sépararé du composant App pour pouvoir lire la préférence de mouvement
