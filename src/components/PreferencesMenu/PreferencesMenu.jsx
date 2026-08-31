@@ -26,7 +26,11 @@ const Switch = ({ checked, onChange, label, description, icon: Icon }) => (
   </button>
 );
 
-const PreferencesMenu = () => {
+/* docked=true : rangé à sa place dans le footer. docked=false : détaché,
+   flotte en bas à droite par-dessus la page — le déclencheur gagne alors
+   son propre fond (--ink-fixed), transparent le reste du temps car porté
+   par le fond déjà sombre du footer. */
+const PreferencesMenu = ({ docked = true }) => {
   const {
     reducedMotion,
     toggleReducedMotion,
@@ -48,11 +52,15 @@ const PreferencesMenu = () => {
   useFocusTrap(panelRef, { active: open, onClose: close });
 
   return (
-    <div className={styles.wrapper}>
+    <motion.div
+      layout
+      transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+      className={`${styles.wrapper} ${docked ? '' : styles.floating}`}
+    >
       <button
         ref={triggerRef}
         type="button"
-        className={styles.trigger}
+        className={`${styles.trigger} ${docked ? '' : styles.triggerFloating}`}
         onClick={() => setOpen((prev) => !prev)}
         aria-haspopup="true"
         aria-expanded={open}
@@ -116,7 +124,7 @@ const PreferencesMenu = () => {
           </>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

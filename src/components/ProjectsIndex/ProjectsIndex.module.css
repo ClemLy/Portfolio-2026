@@ -322,10 +322,16 @@
 }
 
 .rowIndex {
+  display: inline-block;
+  overflow: hidden;
   font-size: var(--text-sm);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   color: var(--accent);
+}
+
+.rowIndexRoll {
+  display: inline-block;
 }
 
 /* Vignette toujours visible (desktop et mobile) : plus de panneau de

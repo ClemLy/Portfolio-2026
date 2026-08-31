@@ -24,9 +24,13 @@ const Hero = () => {
   const pathLength = useTransform(scrollYProgress, [0, 0.55], [0, 1]);
 
   /* Chaque bloc dérive à sa propre vitesse pendant la sortie du héros, pour
-     donner une impression de plans superposés plutôt qu'un bloc figé */
+     donner une impression de plans de papier superposés plutôt qu'un bloc
+     figé — jusque dans le titre : la ligne pleine et la ligne en contour
+     se détachent l'une de l'autre, comme deux feuilles qui glissent. */
   const overlineY = useTransform(scrollYProgress, [0, 1], [0, -24]);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -56]);
+  const titleY1 = useTransform(scrollYProgress, [0, 1], [0, -38]);
+  const titleY2 = useTransform(scrollYProgress, [0, 1], [0, -92]);
+  const titleY3 = useTransform(scrollYProgress, [0, 1], [0, -64]);
   const bottomY = useTransform(scrollYProgress, [0, 1], [0, -128]);
 
   /* La typographie du titre se distord légèrement selon la vitesse de
@@ -77,35 +81,38 @@ const Hero = () => {
           </Fade>
         </motion.div>
 
-        <motion.h1
-          className={styles.title}
-          style={reducedMotion ? { skewY: smoothSkew } : { skewY: smoothSkew, y: titleY }}
-        >
-          <Reveal delay={INTRO_DELAY} inView={false}>
-            <span className={styles.line}>
-              <LiquidText text={dict.hero.titleLine1} />
-            </span>
-          </Reveal>
-          <Reveal delay={INTRO_DELAY + 0.09} inView={false}>
-            <span className={`${styles.line} ${styles.outline}`}>
-              <LiquidText text={dict.hero.titleLine2} />
-            </span>
-          </Reveal>
-          <Reveal delay={INTRO_DELAY + 0.18} inView={false}>
-            <span className={`${styles.line} ${styles.serifLine} serif`}>
-              {dict.hero.titleLine3}
-              <svg className={styles.underline} viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
-                <motion.path
-                  d="M3,12 C50,2 90,18 140,10 C190,2 230,18 280,9 C310,3 350,14 397,8"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  style={{ pathLength }}
-                />
-              </svg>
-            </span>
-          </Reveal>
+        <motion.h1 className={styles.title} style={{ skewY: smoothSkew }}>
+          <motion.div style={reducedMotion ? undefined : { y: titleY1 }}>
+            <Reveal delay={INTRO_DELAY} inView={false}>
+              <span className={styles.line}>
+                <LiquidText text={dict.hero.titleLine1} />
+              </span>
+            </Reveal>
+          </motion.div>
+          <motion.div style={reducedMotion ? undefined : { y: titleY2 }}>
+            <Reveal delay={INTRO_DELAY + 0.09} inView={false}>
+              <span className={`${styles.line} ${styles.outline}`}>
+                <LiquidText text={dict.hero.titleLine2} />
+              </span>
+            </Reveal>
+          </motion.div>
+          <motion.div style={reducedMotion ? undefined : { y: titleY3 }}>
+            <Reveal delay={INTRO_DELAY + 0.18} inView={false}>
+              <span className={`${styles.line} ${styles.serifLine} serif`}>
+                {dict.hero.titleLine3}
+                <svg className={styles.underline} viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+                  <motion.path
+                    d="M3,12 C50,2 90,18 140,10 C190,2 230,18 280,9 C310,3 350,14 397,8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    style={{ pathLength }}
+                  />
+                </svg>
+              </span>
+            </Reveal>
+          </motion.div>
         </motion.h1>
 
         <motion.div className={styles.bottom} style={reducedMotion ? undefined : { y: bottomY }}>

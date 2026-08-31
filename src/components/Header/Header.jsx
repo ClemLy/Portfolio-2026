@@ -301,7 +301,7 @@ const Header = () => {
               <span className={styles.menuItemMask}>
                 <motion.span custom={navLinks.length} variants={menuItemVariants} className={styles.menuItemInner}>
                   <a href="#contact" onClick={handleContact} className={styles.menuLink}>
-                    <span className={styles.menuIndex}>05</span>
+                    <span className={styles.menuIndex}>0{navLinks.length + 1}</span>
                     {dict.nav.contact}
                   </a>
                 </motion.span>

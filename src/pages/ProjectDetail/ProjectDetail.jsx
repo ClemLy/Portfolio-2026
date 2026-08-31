@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, X, Leaf } from 'lucide-react';
 import TransitionLink from '../../components/PageTransition/TransitionLink';
-import { Reveal, Fade } from '../../components/Reveal/Reveal';
+import { Reveal, Fade, InkText } from '../../components/Reveal/Reveal';
 import { useLenis, scrollTo } from '../../components/SmoothScroll/lenisContext';
 import { usePreferences } from '../../context/preferencesContext';
 import { useLanguage } from '../../context/languageContext';
@@ -67,7 +67,7 @@ const ProjectDetail = () => {
   const goToSection = (sectionId) => scrollTo(lenis, `#${sectionId}`, { offset: -96 });
 
   return (
-    <main className={styles.page} id="contenu">
+    <main className={styles.page} id="contenu" tabIndex={-1}>
       <motion.div
         className={`${styles.progressBar} print-hide`}
         style={{ scaleX: readingProgress }}
@@ -206,7 +206,7 @@ const ProjectDetail = () => {
               <span className={styles.caseIndex}>01</span>
               {pd.contexte}
             </h2>
-            <p className={styles.caseText}>{project.problematique}</p>
+            <InkText as="p" className={styles.caseText} text={project.problematique} />
           </Fade>
 
           <Fade id="solution" className={styles.caseBlock} delay={0.1}>
@@ -214,7 +214,7 @@ const ProjectDetail = () => {
               <span className={styles.caseIndex}>02</span>
               {pd.solution}
             </h2>
-            <p className={styles.caseText}>{project.solution}</p>
+            <InkText as="p" className={styles.caseText} text={project.solution} />
           </Fade>
         </section>
 
@@ -228,11 +228,9 @@ const ProjectDetail = () => {
             </Fade>
             <ul>
               {project.architecture.map((item, index) => (
-                <Fade key={item.name} delay={index * 0.08}>
-                  <li className={styles.archRow}>
-                    <span className={styles.archName}>{item.name}</span>
-                    <span className={styles.archDetails}>{item.details}</span>
-                  </li>
+                <Fade key={item.name} as="li" className={styles.archRow} delay={index * 0.08}>
+                  <span className={styles.archName}>{item.name}</span>
+                  <span className={styles.archDetails}>{item.details}</span>
                 </Fade>
               ))}
             </ul>
@@ -282,20 +280,18 @@ const ProjectDetail = () => {
             </Fade>
             <ul className={styles.scores}>
               {Object.entries(project.lighthouse).map(([key, value], index) => (
-                <Fade key={key} delay={index * 0.08}>
-                  <li className={styles.scoreRow}>
-                    <span className={styles.scoreLabel}>{pd.lighthouseLabels[key] || key}</span>
-                    <span className={styles.scoreTrack}>
-                      <motion.span
-                        className={styles.scoreFill}
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: value / 100 }}
-                        viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-                        transition={{ duration: 1.1, delay: 0.2 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                      />
-                    </span>
-                    <span className={styles.scoreValue}>{value}</span>
-                  </li>
+                <Fade key={key} as="li" className={styles.scoreRow} delay={index * 0.08}>
+                  <span className={styles.scoreLabel}>{pd.lighthouseLabels[key] || key}</span>
+                  <span className={styles.scoreTrack}>
+                    <motion.span
+                      className={styles.scoreFill}
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: value / 100 }}
+                      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+                      transition={{ duration: 1.1, delay: 0.2 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </span>
+                  <span className={styles.scoreValue}>{value}</span>
                 </Fade>
               ))}
             </ul>

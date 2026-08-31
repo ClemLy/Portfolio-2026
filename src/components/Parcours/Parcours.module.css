@@ -2,6 +2,31 @@
   margin-top: var(--section-gap);
 }
 
+.timelineWrap {
+  position: relative;
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* Repère "scroll" dans la marge, aligné sur la première année — reprend
+   le cercle bordé + flèche qui rebondit du hero, plutôt qu'un filet censé
+   suivre la chronologie mais qui restait visuellement détaché des dates. */
+.scrollCue {
+  position: absolute;
+  top: 0.35rem;
+  left: 0;
+  color: var(--ink-soft);
+}
+
+.scrollCueIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+}
+
 .list {
   counter-reset: step;
 }

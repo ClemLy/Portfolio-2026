@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { ArrowUpRight, ArrowUp, Copy, Check } from 'lucide-react';
 import Magnetic from '../Magnetic/Magnetic';
 import ScrambleText from '../ScrambleText/ScrambleText';
@@ -25,6 +25,11 @@ const ContactFooter = () => {
   const { dict } = useLanguage();
   const [copied, setCopied] = useState(false);
   const handleSpotlight = useSpotlight();
+  const actionsRef = useRef(null);
+  /* Le bouton préférences flotte en bas à droite tant que sa place d'origine
+     dans le footer n'est pas visible, puis vient s'y ranger — sinon il reste
+     coincé tout en bas, inaccessible tant qu'on n'a pas fini de scroller. */
+  const actionsInView = useInView(actionsRef, { margin: '0px 0px -10% 0px' });
 
   const handleCopy = async () => {
     try {
@@ -57,8 +62,23 @@ const ContactFooter = () => {
               </Reveal>
               <Reveal delay={0.08}>
                 <span className={styles.ctaRow}>
-                  <span className={`${styles.ctaSerif} serif`}>{dict.contact.ctaLine2}</span>
-                  <ArrowUpRight className={styles.ctaArrow} strokeWidth={1.25} />
+                  <span className={styles.ctaSerifWrap}>
+                    <span className={`${styles.ctaSerif} serif`}>{dict.contact.ctaLine2}</span>
+                    <svg className={styles.ctaUnderline} viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+                      <motion.path
+                        d="M3,12 C50,2 90,18 140,10 C190,2 230,18 280,9 C310,3 350,14 397,8"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true, margin: '0px 0px -15% 0px' }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                      />
+                    </svg>
+                  </span>
+                  <ArrowUpRight className={styles.ctaArrow} strokeWidth={1.5} />
                 </span>
               </Reveal>
             </a>
@@ -95,8 +115,8 @@ const ContactFooter = () => {
             ))}
           </nav>
 
-          <div className={styles.actions}>
-            <PreferencesMenu />
+          <div className={styles.actions} ref={actionsRef}>
+            <PreferencesMenu docked={actionsInView} />
 
             <Magnetic strength={0.3}>
               <button onClick={handleScrollTop} className={styles.topButton} aria-label={dict.contact.scrollTopAria}>

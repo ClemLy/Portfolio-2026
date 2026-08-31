@@ -77,7 +77,6 @@ export const dictionary = {
       notes: [
         { value: 4, label: 'années de code' },
         { value: 13, label: 'projets livrés' },
-        { value: 100, label: 'de performance Lighthouse sur ce site' },
         { value: 1, label: 'certification Numérique Responsable' },
       ],
     },
@@ -88,7 +87,8 @@ export const dictionary = {
     },
     stack: {
       sectionLabel: 'Stack & outils',
-      dragHint: 'Glisser pour explorer',
+      dragHint: 'Glisser ou flèches ← →',
+      railAria: 'Liste des technologies, défilement horizontal : flèches gauche/droite, Origine et Fin pour les extrémités',
       groups: {
         frontend: 'Frontend',
         backend: 'Backend',
@@ -277,7 +277,6 @@ export const dictionary = {
       notes: [
         { value: 4, label: 'years of code' },
         { value: 13, label: 'projects delivered' },
-        { value: 100, label: 'Lighthouse performance on this site' },
         { value: 1, label: 'Sustainable Digital certification' },
       ],
     },
@@ -288,7 +287,8 @@ export const dictionary = {
     },
     stack: {
       sectionLabel: 'Stack & tools',
-      dragHint: 'Drag to explore',
+      dragHint: 'Drag or arrow keys ← →',
+      railAria: 'List of technologies, horizontal scroll: left/right arrows, Home and End for the ends',
       groups: {
         frontend: 'Frontend',
         backend: 'Backend',
