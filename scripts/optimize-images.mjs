@@ -62,6 +62,7 @@ const processImage = async (sourcePath, outDir, baseName) => {
 
   const widths = WIDTHS.filter((w) => w <= originalWidth);
   if (widths.length === 0) widths.push(originalWidth);
+  const ratio = metadata.height && metadata.width ? Math.round((metadata.height / metadata.width) * 10000) / 10000 : null;
 
   let bytesWritten = 0;
   let filesWritten = 0;
@@ -100,7 +101,7 @@ const processImage = async (sourcePath, outDir, baseName) => {
     filesWritten += 1;
   }
 
-  return { originalBytes: sourceStat.size, bytesWritten, filesWritten, widths, originalWidth };
+  return { originalBytes: sourceStat.size, bytesWritten, filesWritten, widths, originalWidth, ratio };
 };
 
 const walk = (dir) => {
@@ -146,8 +147,11 @@ const main = async () => {
     totalWritten += result.bytesWritten;
     totalFiles += result.filesWritten;
     /* Clé de manifeste = chemin public exact tel que référencé dans
-       data/projectsData.js (ex: /assets/projets/papaie/papaie.webp) */
-    manifest[`/assets/projets/${projectDir}/${baseName}.webp`] = result.widths;
+       data/projectsData.js (ex: /assets/projets/papaie/papaie.webp). Le
+       ratio (hauteur/largeur de l'original) permet à ResponsiveImage de
+       réserver la bonne hauteur avant même que l'image ne charge, pour
+       éviter un saut de mise en page (CLS) au chargement. */
+    manifest[`/assets/projets/${projectDir}/${baseName}.webp`] = { widths: result.widths, ratio: result.ratio };
 
     if (result.filesWritten === 0) {
       skipped += 1;

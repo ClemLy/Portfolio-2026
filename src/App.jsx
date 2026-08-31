@@ -14,7 +14,6 @@ import MarbleBackground from './components/MarbleBackground/MarbleBackground';
 import GrainOverlay from './components/GrainOverlay/GrainOverlay';
 import AmbientTint from './components/AmbientTint/AmbientTint';
 import InkRipple from './components/InkRipple/InkRipple';
-import ElasticOverscroll from './components/ElasticOverscroll/ElasticOverscroll';
 import Cursor from './components/Cursor/Cursor';
 import Header from './components/Header/Header';
 import ContactFooter from './components/ContactFooter/ContactFooter';
@@ -22,8 +21,14 @@ import CommandPalette from './components/CommandPalette/CommandPalette';
 import EasterEgg from './components/EasterEgg/EasterEgg';
 import useReactiveTitle from './hooks/useReactiveTitle';
 import useDynamicFavicon from './hooks/useDynamicFavicon';
+import Home from './pages/Home/Home';
 
-const Home = lazy(() => import('./pages/Home/Home'));
+/* Home est importée statiquement (pas de code-splitting) : c'est la page
+   que la quasi-totalité des visiteurs atteint en premier, et un Suspense
+   fallback={null} en attendant son chunk faisait s'effondrer toute la
+   hauteur de page pendant le chargement puis apparaître d'un coup — un
+   CLS proche du maximum à chaque première visite. Les routes secondaires
+   restent scindées, leur coût de chargement n'est payé qu'à la navigation. */
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail/ProjectDetail'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 
@@ -94,13 +99,16 @@ const AppShell = () => {
             <Cursor />
             <AmbientTint />
             <InkRipple />
-            <ElasticOverscroll />
             <GrainOverlay />
             <Header />
             <CommandPalette />
             <EasterEgg />
 
-            <Suspense fallback={null}>
+            {/* Réserve la hauteur d'un écran pendant le chargement du chunk d'une
+                route scindée (ProjectDetail, NotFound) : un fallback vide
+                laissait la page s'effondrer à la hauteur du header+footer puis
+                bondir d'un coup au contenu réel, un CLS proche du maximum. */}
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/projet/:id" element={<ProjectDetail />} />

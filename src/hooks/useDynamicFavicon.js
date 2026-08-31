@@ -5,8 +5,15 @@ const BG = '#241610';
 const ACCENT = '#B5615A';
 const DOT = '#FAF7F3';
 
-/* Redessine le favicon sur un canvas à chaque frame pour lui donner un
-   astérisque qui tourne doucement en continu dans l'onglet. Respecte à la
+/* Durée totale de la rotation avant de se figer sur l'icône statique —
+   tourner indéfiniment retenait le favicon comme "requête" active en
+   continu aux yeux de Chrome (link.href réassigné toutes les 90ms), ce qui
+   empêchait toute mesure de performance (Lighthouse, Core Web Vitals) de
+   jamais détecter une période de réseau inactif. */
+const SPIN_DURATION_MS = 4000;
+
+/* Redessine le favicon sur un canvas pour lui donner un astérisque qui
+   tourne doucement à l'arrivée sur le site, puis se fige. Respecte à la
    fois le réglage système et la préférence manuelle du site. */
 const useDynamicFavicon = (reducedMotion) => {
   useEffect(() => {
@@ -33,6 +40,7 @@ const useDynamicFavicon = (reducedMotion) => {
     }
 
     let angle = 0;
+    const start = performance.now();
 
     const draw = () => {
       ctx.clearRect(0, 0, SIZE, SIZE);
@@ -72,6 +80,10 @@ const useDynamicFavicon = (reducedMotion) => {
 
       link.href = canvas.toDataURL('image/png');
       angle += 0.045;
+
+      if (performance.now() - start >= SPIN_DURATION_MS) {
+        clearInterval(id);
+      }
     };
 
     draw();
