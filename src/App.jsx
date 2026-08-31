@@ -20,7 +20,6 @@ import ContactFooter from './components/ContactFooter/ContactFooter';
 import CommandPalette from './components/CommandPalette/CommandPalette';
 import EasterEgg from './components/EasterEgg/EasterEgg';
 import useReactiveTitle from './hooks/useReactiveTitle';
-import useDynamicFavicon from './hooks/useDynamicFavicon';
 import Home from './pages/Home/Home';
 
 /* Home est importée statiquement (pas de code-splitting) : c'est la page
@@ -77,7 +76,6 @@ const AppShell = () => {
   const { dict } = useLanguage();
 
   useReactiveTitle(dict.awayTitle);
-  useDynamicFavicon(reducedMotion);
 
   return (
     <MotionConfig reducedMotion={reducedMotion ? 'always' : 'user'}>
