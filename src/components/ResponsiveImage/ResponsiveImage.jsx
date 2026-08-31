@@ -13,7 +13,13 @@ import imageManifest from '../../data/imageManifest.json';
    (et le rendu redevient flou) — ce n'est pas un bug, c'est le calcul de
    densité standard des images responsives. */
 const ResponsiveImage = ({ src, alt, sizes = '100vw', className, loading = 'lazy', width, height, onLoad, ...rest }) => {
-  const widths = imageManifest[src];
+  const entry = imageManifest[src];
+  const widths = entry?.widths;
+  /* Réserve la hauteur avant chargement via aspect-ratio (déduit du ratio
+     original stocké au manifeste) quand l'appelant n'a pas déjà fourni de
+     width/height explicites — sinon l'image collabore à 0px de haut le
+     temps du chargement, puis le contenu qui suit saute d'un coup (CLS). */
+  const style = !width && !height && entry?.ratio ? { aspectRatio: `1 / ${entry.ratio}` } : undefined;
 
   if (!widths || widths.length === 0) {
     return (
@@ -24,6 +30,7 @@ const ResponsiveImage = ({ src, alt, sizes = '100vw', className, loading = 'lazy
         loading={loading}
         width={width}
         height={height}
+        style={style}
         onLoad={onLoad}
         {...rest}
       />
@@ -46,6 +53,7 @@ const ResponsiveImage = ({ src, alt, sizes = '100vw', className, loading = 'lazy
         loading={loading}
         width={width}
         height={height}
+        style={style}
         onLoad={onLoad}
         {...rest}
       />

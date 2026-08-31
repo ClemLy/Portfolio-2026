@@ -31,9 +31,17 @@
   counter-reset: step;
 }
 
+/* Une seule colonne jusqu'à 900px : avec un grid à 2 colonnes ("auto 1fr")
+   pour 3 enfants (année, contenu, tags), les tags — repoussés en 2e ligne —
+   retombent dans la colonne "auto" de l'année et forcent sa largeur à
+   celle de leur plus long badge (ex. "WORDPRESS ELEMENTOR"), écrasant la
+   colonne de contenu jusqu'à 0px et débordant la page. Le passage à un
+   vrai grid à 3 colonnes (chacune son propre enfant, cf. plus bas) est ce
+   qui règle le problème à la racine — pas la peine de tenter un
+   entre-deux à 2 colonnes. */
 .row {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
   gap: clamp(1rem, 4vw, 4rem);
   align-items: start;
   padding-block: clamp(1.75rem, 4vw, 2.75rem);
@@ -82,6 +90,10 @@
 
 .main {
   max-width: 44rem;
+  /* Les items de grid ont un min-width auto implicite : sans ça, un mot
+     un peu long peut forcer la colonne à s'élargir et faire déborder la
+     page plutôt que de simplement passer à la ligne. */
+  min-width: 0;
 }
 
 .title {

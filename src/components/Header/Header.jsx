@@ -43,7 +43,7 @@ const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 const Header = () => {
   const lenis = useLenis();
   const { openPalette } = useCommandPalette();
-  const { tick, reducedMotion } = usePreferences();
+  const { tick } = usePreferences();
   const { lang, toggleLang, dict } = useLanguage();
   const navLinks = [
     { name: dict.nav.projets, to: '/#projets', isProjects: true },
@@ -73,19 +73,6 @@ const Header = () => {
     setHidden(latest > previous && latest > 160 && !menuOpen);
     setScrolled(latest > 24);
   });
-
-  /* Le logo se comprime légèrement en écho au rebond élastique de la page */
-  useEffect(() => {
-    if (reducedMotion) return undefined;
-    const onBounce = () => {
-      logoControls.start({
-        scale: [1, 0.88, 1.03, 1],
-        transition: { duration: 0.5, ease: 'easeOut' },
-      });
-    };
-    window.addEventListener('elastic-bounce', onBounce);
-    return () => window.removeEventListener('elastic-bounce', onBounce);
-  }, [logoControls, reducedMotion]);
 
   /* Heure locale de Paris, mise à jour toutes les 30 secondes */
   useEffect(() => {
