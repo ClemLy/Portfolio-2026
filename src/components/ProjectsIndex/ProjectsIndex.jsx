@@ -1,5 +1,5 @@
-import { useMemo, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { animate, motion, useMotionValue, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight, LayoutGrid, LayoutList, Search, X } from 'lucide-react';
 import TransitionLink from '../PageTransition/TransitionLink';
 import { Fade } from '../Reveal/Reveal';
@@ -15,6 +15,11 @@ import styles from './ProjectsIndex.module.css';
 
 const EASE = [0.16, 1, 0.3, 1];
 const PAGE_SIZE = 6;
+
+/* Chargée à la demande : embarque three.js (~140 Ko gzip), jamais dans le
+   bundle initial. Suspense retombe sur ResponsiveImage pendant le
+   téléchargement, donc rien ne casse ni ne saute visuellement en attendant. */
+const DistortedImage = lazy(() => import('../DistortedImage/DistortedImage'));
 
 /* Construit la liste de pages à afficher avec des points de suspension
    (1 … 4 5 6 … 12), plutôt qu'une rangée de boutons qui grossit sans
@@ -124,6 +129,24 @@ const ProjectsIndex = () => {
     setPrevFilterSignature(filterSignature);
     setPage(1);
   }
+
+  /* Petit "tampon" (léger pulse d'échelle) sur les résultats à chaque
+     changement de filtre, comme un coup de tampon sur une nouvelle page
+     plutôt qu'un simple fondu. Ignoré au montage initial. Piloté via une
+     motion value (pas un animate() impératif sur le nœud DOM) : .list et
+     .grid portent déjà un `layout` qui anime leurs propres transformations
+     lors du reflow — un animate() direct sur le même nœud entrait en
+     conflit avec ce système et produisait des transforms incohérents. */
+  const stampScale = useMotionValue(1);
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
+    if (reducedMotion) return;
+    animate(stampScale, [0.985, 1], { duration: 0.32, ease: EASE });
+  }, [filterSignature, reducedMotion, stampScale]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const visible = useMemo(
@@ -329,7 +352,7 @@ const ProjectsIndex = () => {
       </p>
 
       {viewMode === 'list' ? (
-        <motion.ul className={styles.list} layout>
+        <motion.ul className={styles.list} style={{ scale: stampScale }} layout>
           <AnimatePresence initial={false} mode="popLayout">
             {visible.map((project, index) => (
               <motion.li
@@ -355,7 +378,16 @@ const ProjectsIndex = () => {
                   }}
                   onBlur={() => setActiveProject(null)}
                 >
-                  <span className={styles.rowIndex}>{String(index + 1).padStart(2, '0')}</span>
+                  <span className={styles.rowIndex}>
+                    <motion.span
+                      className={styles.rowIndexRoll}
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.35, ease: EASE }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </motion.span>
+                  </span>
 
                   <span
                     className={`${styles.thumb} ${loadedThumbs.has(project.id) ? '' : 'img-skeleton'}`}
@@ -374,7 +406,9 @@ const ProjectsIndex = () => {
                   </span>
 
                   <span className={styles.rowMain}>
-                    <span className={`${styles.rowTitle} ink-hover`}>{project.title}</span>
+                    <Fade as="span" y={0} blur={4} duration={0.6} className={`${styles.rowTitle} ink-hover`}>
+                      {project.title}
+                    </Fade>
                     <span className={styles.rowSubtitle}>{project.subtitle}</span>
                   </span>
 
@@ -393,7 +427,7 @@ const ProjectsIndex = () => {
         </motion.ul>
       ) : (
         <div className={styles.gridLayout}>
-          <motion.ul className={styles.grid} layout>
+          <motion.ul className={styles.grid} style={{ scale: stampScale }} layout>
             <AnimatePresence initial={false} mode="popLayout">
               {visible.map((project) => (
                 <motion.li
@@ -415,23 +449,53 @@ const ProjectsIndex = () => {
                       className={`${styles.gridImage} ${loadedThumbs.has(project.id) ? '' : 'img-skeleton'}`}
                       aria-hidden="true"
                     >
-                      <ResponsiveImage
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        width="640"
-                        height="400"
-                        sizes="(min-width: 900px) 33vw, 100vw"
-                        className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
-                        onLoad={() => markThumbLoaded(project.id)}
-                      />
+                      {reducedMotion ? (
+                        <ResponsiveImage
+                          src={project.image}
+                          alt={project.title}
+                          loading="lazy"
+                          width="640"
+                          height="400"
+                          sizes="(min-width: 900px) 33vw, 100vw"
+                          className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
+                          onLoad={() => markThumbLoaded(project.id)}
+                        />
+                      ) : (
+                        <Suspense
+                          fallback={
+                            <ResponsiveImage
+                              src={project.image}
+                              alt={project.title}
+                              loading="lazy"
+                              width="640"
+                              height="400"
+                              sizes="(min-width: 900px) 33vw, 100vw"
+                              className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
+                              onLoad={() => markThumbLoaded(project.id)}
+                            />
+                          }
+                        >
+                          <DistortedImage
+                            src={project.image}
+                            alt={project.title}
+                            loading="lazy"
+                            width="640"
+                            height="400"
+                            sizes="(min-width: 900px) 33vw, 100vw"
+                            className={`img-fade ${loadedThumbs.has(project.id) ? 'img-loaded' : ''}`}
+                            onLoad={() => markThumbLoaded(project.id)}
+                          />
+                        </Suspense>
+                      )}
                       <span className={styles.gridArrow}>
                         <ArrowUpRight size={18} strokeWidth={1.5} />
                       </span>
                     </span>
 
                     <span className={styles.gridMeta}>
-                      <span className={`${styles.gridTitle} ink-hover`}>{project.title}</span>
+                      <Fade as="span" y={0} blur={4} duration={0.6} className={`${styles.gridTitle} ink-hover`}>
+                        {project.title}
+                      </Fade>
                       <span className={styles.gridSub}>
                         <span>{project.category}</span>
                         <span>{project.year}</span>

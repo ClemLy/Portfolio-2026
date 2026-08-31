@@ -68,11 +68,33 @@
   gap: clamp(1rem, 3vw, 2.5rem);
 }
 
+.ctaSerifWrap {
+  position: relative;
+  display: inline-block;
+}
+
 .ctaSerif {
+  position: relative;
   font-size: var(--display-lg);
   line-height: 0.98;
   color: var(--accent);
   transition: color 0.4s ease;
+}
+
+/* Trait de pinceau qui se trace sous "ensemble" à l'entrée dans le
+   viewport, dans la continuité du soulignement du hero. */
+.ctaUnderline {
+  position: absolute;
+  left: 0;
+  bottom: -0.08em;
+  width: 100%;
+  height: 0.2em;
+  color: var(--accent);
+  overflow: visible;
+}
+
+.cta:hover .ctaUnderline {
+  color: var(--paper-fixed);
 }
 
 .cta:hover .ctaSerif {

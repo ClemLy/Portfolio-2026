@@ -23,6 +23,14 @@ const SectionHeading = ({ index, label, count }) => {
 
   return (
     <h2 className={`${styles.heading} section-heading-sticky`}>
+      <motion.span
+        className={styles.rule}
+        aria-hidden="true"
+        initial={reducedMotion ? false : { scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+        transition={{ duration: 0.9, ease: EASE }}
+      />
       <span className={styles.watermark} aria-hidden="true">
         {index}
       </span>

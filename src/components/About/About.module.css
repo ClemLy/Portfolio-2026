@@ -2,11 +2,49 @@
   margin-top: var(--section-gap);
 }
 
+/* Piste de défilement : bien plus haute que l'écran pour laisser le temps
+   au texte fixé (.pinWrap) de s'encrer mot à mot pendant qu'on scrolle. */
+.scrollStage {
+  position: relative;
+  height: 280vh;
+}
+
+/* Mouvement réduit : plus de piste étendue, .pinWrap redevient un bloc
+   normal (voir plus bas) — la section retrouve sa hauteur naturelle. */
+.scrollStageStatic {
+  height: auto;
+}
+
+/* Le titre "02 À propos" garde sa propre place fixe en haut du bloc fixé
+   (flex-shrink: 0) : s'il centrait avec le reste, un manifeste un peu long
+   pousserait le titre au-dessus de l'écran dès que le tout dépasse 100vh —
+   exactement ce qui "envolait" le titre avant ce correctif. Seul .layout
+   (texte + marge) se centre dans l'espace qu'il reste sous le titre. */
+.pinWrap {
+  position: sticky;
+  top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-height));
+}
+
+.scrollStageStatic .pinWrap {
+  position: static;
+  min-height: 0;
+}
+
+.headingSlot {
+  flex-shrink: 0;
+}
+
 .layout {
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr;
+  align-content: center;
   gap: clamp(2rem, 5vw, 3rem);
   margin-block: clamp(2rem, 6vw, 4rem);
+  width: 100%;
 }
 
 .manifesto {
@@ -63,8 +101,8 @@
   }
 
   .margin {
-    position: sticky;
-    top: calc(var(--header-height) + 1.5rem);
+    /* Plus de position: sticky ici : .pinWrap fixe déjà toute la mise en
+       page (texte + marge) ensemble pendant la course de .scrollStage. */
     padding-left: clamp(1.5rem, 3vw, 2.5rem);
     border-left: 1px solid var(--line);
   }

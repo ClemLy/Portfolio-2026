@@ -279,11 +279,26 @@
 }
 
 .scoreFill {
+  position: relative;
   display: block;
   height: 100%;
   background-color: var(--accent);
   transform-origin: left;
   border-radius: 99px;
+}
+
+/* Légère bavure d'encre à la pointe de la barre, plutôt qu'un bord net. */
+.scoreFill::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  filter: blur(3px);
+  transform: translate(50%, -50%);
 }
 
 .scoreValue {

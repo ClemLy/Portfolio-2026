@@ -236,7 +236,11 @@ const CommandPalette = () => {
               className={styles.results}
               data-lenis-prevent
             >
-              {results.length === 0 && <li className={styles.empty}>{cp.empty}</li>}
+              {results.length === 0 && (
+                <li role="presentation" className={styles.empty}>
+                  {cp.empty}
+                </li>
+              )}
 
               {results.map((item, index) => {
                 const showGroup = item.group !== lastGroup;
@@ -244,7 +248,11 @@ const CommandPalette = () => {
                 const Icon = item.icon || ArrowRight;
 
                 return (
-                  <li key={item.id}>
+                  /* role="presentation" : le <li> ne sert qu'à la mise en page,
+                     l'option ARIA réelle est le <button role="option"> qu'il
+                     contient — sans ça, role="listbox" refuse un <li> comme
+                     enfant direct (RGAA 7 / WCAG 4.1.2, aria-required-children) */
+                  <li key={item.id} role="presentation">
                     {showGroup && <p className={styles.groupLabel}>{item.group}</p>}
                     <button
                       id={`cmdk-option-${item.id}`}

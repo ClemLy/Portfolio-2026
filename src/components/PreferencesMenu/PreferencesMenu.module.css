@@ -2,6 +2,18 @@
   position: relative;
 }
 
+/* Détaché du footer : flotte en bas à droite de la fenêtre, par-dessus la
+   page courante plutôt que rangé dans le flux du footer. Reste un bloc
+   d'accent toujours sombre (--ink-fixed/--paper-fixed, cf. leur définition
+   dans index.css) comme le reste du footer, plutôt que de se fondre dans
+   le thème courant de la page — sinon il perd sa lisibilité garantie. */
+.floating {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.5rem);
+  bottom: clamp(1rem, 3vw, 1.5rem);
+  z-index: 200;
+}
+
 .trigger {
   display: inline-flex;
   align-items: center;
@@ -10,13 +22,29 @@
   height: 48px;
   border: 1px solid rgba(var(--paper-fixed-rgb), 0.25);
   border-radius: 50%;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .trigger:hover,
 .trigger[aria-expanded='true'] {
   background-color: var(--accent);
   border-color: var(--accent);
+}
+
+/* Sur la page plutôt que sur le fond sombre du footer, le déclencheur perd
+   son arrière-plan (jusqu'ici transparent, porté par le footer) : il lui
+   faut son propre fond plein + une ombre pour rester lisible par-dessus
+   n'importe quel contenu. */
+.triggerFloating {
+  background-color: var(--ink-fixed);
+  color: var(--paper-fixed);
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(var(--ink-fixed-rgb), 0.35);
+}
+
+.triggerFloating:hover {
+  background-color: var(--accent);
 }
 
 .overlay {

@@ -11,7 +11,7 @@ const NotFound = () => {
   const { dict } = useLanguage();
 
   return (
-    <main className={styles.page} id="contenu">
+    <main className={styles.page} id="contenu" tabIndex={-1}>
       <Helmet>
         <title>{dict.notFound.title}</title>
         <meta name="robots" content="noindex" />

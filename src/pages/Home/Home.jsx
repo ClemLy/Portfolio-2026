@@ -42,7 +42,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main id="contenu" style={{ position: 'relative' }}>
+    <main id="contenu" tabIndex={-1} style={{ position: 'relative' }}>
       <Helmet>
         <html lang={lang} />
         <title>{dict.meta.title}</title>

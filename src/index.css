@@ -51,7 +51,11 @@
      sand) reprennent la palette fournie telle quelle pour les surfaces et
      bordures ; --accent est une nuance plus soutenue de la même teinte
      (dérivée du D9A299 fourni), nécessaire pour rester lisible en texte sur
-     fond clair. --accent-soft réutilise le D9A299 d'origine en aplat léger. */
+     fond clair. --accent-soft réutilise le D9A299 d'origine en aplat léger.
+     --accent est calibré à 5:1 sur --paper et 4.6:1 sur --paper-soft (AA
+     texte normal, RGAA 3.2) : une première teinte (#B5615A) ne passait que
+     4.08:1, insuffisant dès qu'elle sert de couleur de texte (labels,
+     liens, index de section…) plutôt que de simple accent décoratif. */
   --paper: #FAF7F3;
   --paper-rgb: 250, 247, 243;
   --paper-soft: #F0E4D3;
@@ -60,7 +64,7 @@
   --ink-soft: #6B5B4F;
   --line: rgba(36, 22, 16, 0.12);
   --line-strong: rgba(36, 22, 16, 0.28);
-  --accent: #B5615A;
+  --accent: #9E4E47;
   --accent-soft: rgba(217, 162, 153, 0.24);
 
   /* Jetons fixes (ne changent jamais avec le thème) pour les blocs à
@@ -203,6 +207,15 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+  transition: scale 0.15s ease;
+}
+
+button:active {
+  scale: 0.96;
+}
+
+html.reduced-motion button:active {
+  scale: 1;
 }
 
 ul,
