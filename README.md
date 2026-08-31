@@ -1,32 +1,49 @@
-# Clémentin LY, Portfolio 2026
+# Clémentin Ly - Portfolio
 
 [![CI](https://github.com/ClemLy/Portfolio-2026/actions/workflows/ci.yml/badge.svg)](https://github.com/ClemLy/Portfolio-2026/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?logo=vercel&logoColor=white)](https://vercel.com/)
+[![License: All rights reserved](https://img.shields.io/badge/License-All_rights_reserved-lightgrey.svg)](LICENSE)
 
-Portfolio interactif inspiré des sites primés sur Awwwards : design éditorial clair, typographie massive, micro-interactions soignées et sobriété numérique. Sans 3D, sans surcharge : tout repose sur le layout, le mouvement et la matière typographique.
+Portfolio personnel de **Clémentin Ly**, développeur full-stack basé à Paris. Il présente mon parcours, mes projets et ma stack technique à travers une expérience éditoriale animée au scroll : typographie massive, matière papier/encre, et micro-interactions pensées pour rester sobres et accessibles plutôt que démonstratives.
 
-## Direction artistique
+**Site en ligne : [clementin-portfolio.vercel.app](https://clementin-portfolio.vercel.app)**
 
-* **Light mode éditorial** : fond papier chaud, encre profonde, accent orange brûlé.
-* **Typographie** : General Sans (grotesque) pour la structure, Instrument Serif italique pour les accents. Polices auto-hébergées en WOFF2 (moins de 100 Ko au total).
-* **Layout magazine** : filets fins, index numérotés, whitespace généreux, grilles asymétriques.
+## Aperçu
 
-## Interactions
+| Accueil | Liste de projets |
+| :---: | :---: |
+| ![Section hero](screenshots/01-hero.png) | ![Liste des projets](screenshots/02-projets.png) |
 
-* **Smooth scroll** avec Lenis, désactivé si `prefers-reduced-motion`.
-* **Curseur personnalisé** : point réactif qui devient une pastille "Voir le projet" sur les zones interactives (pointeurs précis uniquement).
-* **Liste de projets typographique** : preview d'image flottante qui suit le curseur avec inclinaison selon la vitesse, filtres par catégorie avec animations de layout.
-* **Transitions de page** en rideau d'encre, avec écran d'introduction au premier chargement.
-* **Boutons magnétiques**, marquee de compétences, manifesto révélé mot à mot au scroll.
+| À propos | Parcours |
+| :---: | :---: |
+| ![Section à propos](screenshots/03-about.png) | ![Section parcours](screenshots/04-parcours.png) |
+
+| Stack technique | Contact |
+| :---: | :---: |
+| ![Section stack](screenshots/05-stack.png) | ![Section contact](screenshots/06-contact.png) |
+
+| Thème sombre | Étude de cas projet |
+| :---: | :---: |
+| ![Thème sombre](screenshots/07-hero-dark.png) | ![Page projet](screenshots/08-projet-detail.png) |
+
+## Points clés
+
+* **Design éditorial** : fond papier, encre profonde, accent terracotta, typographie General Sans / Instrument Serif. Thème clair et sombre, persistés et accessibles.
+* **Motion au service du contenu** : reveals mot à mot, moment de scroll épinglé dans "À propos", distorsion WebGL au survol des projets, transitions de page en rideau d'encre — chaque interaction reste désactivable via `prefers-reduced-motion` ou le panneau de préférences.
+* **Fiche projet détaillée** : contexte, problématique, solution et résultats pour chaque réalisation, avec navigation clavier entre les projets.
+* **i18n** : contenu bilingue français / anglais.
+* **Accessibilité (RGAA / WCAG AA)** : navigation clavier complète, focus visibles, contrastes vérifiés, respect du mouvement réduit, structure sémantique.
+* **Éco-conception** : images responsives (AVIF/WebP multi-résolutions), polices auto-hébergées, code-splitting des expériences 3D, budget de performance suivi via Lighthouse.
 
 ## Stack technique
 
 * **Frontend** : React 19, React Router 7, Vite 7.
-* **Style** : CSS Modules + tokens CSS custom properties.
-* **Animations** : Framer Motion (springs, layout animations, scroll-linked) + Lenis.
-* **Icônes** : Lucide React. **SEO** : React Helmet Async, sitemap, JSON-LD.
+* **Style** : CSS Modules + design tokens (custom properties CSS).
+* **Animations** : Framer Motion (springs, layout animations, scroll-linked), Lenis pour le smooth scroll.
+* **3D** : Three.js (chargé à la demande, uniquement sur les visuels qui en ont besoin).
+* **Icônes** : Lucide React. **SEO** : React Helmet Async, sitemap généré automatiquement, JSON-LD.
 
 ## Installation
 
@@ -61,17 +78,18 @@ Le dépôt suit un flow simple à deux niveaux :
 
 Les deux jobs tournent en parallèle et les runs obsolètes sont annulés automatiquement à chaque nouveau commit. Le déploiement reste géré par l'intégration Vercel (previews sur PR, production sur `main`).
 
-## Performance & éco-conception
+## Performance & accessibilité
 
 * Scores Lighthouse visés : 100 / 95+ / 100 / 100.
 * Polices WOFF2 auto-hébergées et préchargées, cache immutable (`vercel.json`).
-* Images WebP, lazy-loading, animations GPU (transform/opacity uniquement).
-* Respect de `prefers-reduced-motion` sur l'ensemble des interactions.
+* Images AVIF/WebP multi-résolutions générées automatiquement, lazy-loading, animations GPU (transform/opacity uniquement).
+* Respect systématique de `prefers-reduced-motion`, navigation clavier complète et focus visibles sur l'ensemble du site.
 
 ## Licence
 
-Projet sous licence MIT. Inspirez-vous librement, mais ajoutez-y votre propre touche.
+Tous droits réservés. Ce dépôt est public à titre de démonstration (code, portfolio, revue technique) - voir [LICENSE](LICENSE) pour le détail.
 
 ---
 
-Développé par **Clémentin LY**
+**Clémentin Ly** - Développeur full-stack
+[GitHub](https://github.com/ClemLy) · [LinkedIn](https://linkedin.com/in/clémentin-ly/)
