@@ -1,0 +1,135 @@
+.section {
+  margin-top: var(--section-gap);
+}
+
+.timelineWrap {
+  position: relative;
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* Repère "scroll" dans la marge, aligné sur la première année — reprend
+   le cercle bordé + flèche qui rebondit du hero, plutôt qu'un filet censé
+   suivre la chronologie mais qui restait visuellement détaché des dates. */
+.scrollCue {
+  position: absolute;
+  top: 0.35rem;
+  left: 0;
+  color: var(--ink-soft);
+}
+
+.scrollCueIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+}
+
+.list {
+  counter-reset: step;
+}
+
+/* Une seule colonne jusqu'à 900px : avec un grid à 2 colonnes ("auto 1fr")
+   pour 3 enfants (année, contenu, tags), les tags — repoussés en 2e ligne —
+   retombent dans la colonne "auto" de l'année et forcent sa largeur à
+   celle de leur plus long badge (ex. "WORDPRESS ELEMENTOR"), écrasant la
+   colonne de contenu jusqu'à 0px et débordant la page. Le passage à un
+   vrai grid à 3 colonnes (chacune son propre enfant, cf. plus bas) est ce
+   qui règle le problème à la racine — pas la peine de tenter un
+   entre-deux à 2 colonnes. */
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 4vw, 4rem);
+  align-items: start;
+  padding-block: clamp(1.75rem, 4vw, 2.75rem);
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.4s ease;
+}
+
+.row:hover {
+  background-color: var(--paper-soft);
+}
+
+.year {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: clamp(1.9rem, 5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--ink);
+  transition: color 0.4s ease;
+}
+
+.row:hover .year {
+  color: var(--accent);
+  -webkit-text-stroke-color: var(--accent);
+}
+
+/* Borne de fin (ou "aujourd'hui") d'une étape sur plusieurs années :
+   texte plein, bien plus petit, pour ne pas rivaliser avec le grand
+   chiffre de départ */
+.yearEnd {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-soft);
+  -webkit-text-stroke: 0;
+  transition: color 0.4s ease;
+}
+
+.row:hover .yearEnd {
+  color: var(--accent);
+}
+
+.main {
+  max-width: 44rem;
+  /* Les items de grid ont un min-width auto implicite : sans ça, un mot
+     un peu long peut forcer la colonne à s'élargir et faire déborder la
+     page plutôt que de simplement passer à la ligne. */
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  justify-self: end;
+}
+
+.tag {
+  padding: 0.3rem 0.8rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--sand);
+  border-radius: 99px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .row {
+    grid-template-columns: 12rem 1fr minmax(0, 15rem);
+    align-items: center;
+  }
+}

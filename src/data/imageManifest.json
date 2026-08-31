@@ -1,0 +1,366 @@
+{
+  "/assets/projets/apex-motion/apex-motion-aero-flow.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.595
+  },
+  "/assets/projets/apex-motion/apex-motion-heritage.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.595
+  },
+  "/assets/projets/apex-motion/apex-motion-lap-telemetry.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.595
+  },
+  "/assets/projets/apex-motion/apex-motion-particle-reveal.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.595
+  },
+  "/assets/projets/apex-motion/apex-motion-studio.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.595
+  },
+  "/assets/projets/apex-motion/apex-motion.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.595
+  },
+  "/assets/projets/athly/athly-1.webp": {
+    "widths": [
+      400
+    ],
+    "ratio": 1.6925
+  },
+  "/assets/projets/athly/athly-2.webp": {
+    "widths": [
+      400
+    ],
+    "ratio": 1.6724
+  },
+  "/assets/projets/athly/athly-3.webp": {
+    "widths": [
+      400
+    ],
+    "ratio": 1.6938
+  },
+  "/assets/projets/athly/athly.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.6667
+  },
+  "/assets/projets/brokn/brokn-atelier.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.5625
+  },
+  "/assets/projets/brokn/brokn-collection.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.5625
+  },
+  "/assets/projets/brokn/brokn-produit.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.5625
+  },
+  "/assets/projets/brokn/brokn.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.5625
+  },
+  "/assets/projets/comptoir-aromes/comptoir-aromes.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.505
+  },
+  "/assets/projets/cosy-study/cosy-study.webp": {
+    "widths": [
+      400
+    ],
+    "ratio": 0.5042
+  },
+  "/assets/projets/deauville-limousine/deauville-limousine.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.5017
+  },
+  "/assets/projets/fcc/fcc.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.5033
+  },
+  "/assets/projets/gvp/gvp.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.8818
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-jackpot.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 2.1641
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-partie.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-regles.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-stats.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-themes.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.5017
+  },
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie-clair.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 1.3108
+  },
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 1.3108
+  },
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-regles.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 1.3108
+  },
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu-victoire.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 1.3108
+  },
+  "/assets/projets/jeu-du-pendu/jeu-du-pendu.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 1.3108
+  },
+  "/assets/projets/papaie/papaie.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.5033
+  },
+  "/assets/projets/pocket-casino/pocket-casino-banqueroute.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-blackjack.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-boutique-de-manche.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-carnet-de-regles.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-magasin.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-mobile.webp": {
+    "widths": [
+      390
+    ],
+    "ratio": 2.1641
+  },
+  "/assets/projets/pocket-casino/pocket-casino-poker.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-quitte-ou-double.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-roulette.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino-trophees.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/pocket-casino/pocket-casino.webp": {
+    "widths": [
+      400,
+      800,
+      1200
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/wp-reservations/wp-reservations.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  }
+}

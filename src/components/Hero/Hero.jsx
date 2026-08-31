@@ -1,118 +1,143 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
+import { ArrowDown, MapPin } from 'lucide-react';
+import { Reveal, Fade } from '../Reveal/Reveal';
+import Marquee from '../Marquee/Marquee';
+import LiquidText from '../LiquidText/LiquidText';
+import ScrollTypewriter from '../ScrollTypewriter/ScrollTypewriter';
+import { useLenis, scrollTo } from '../SmoothScroll/lenisContext';
+import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
 import styles from './Hero.module.css';
 
+/* Délai d'apparition : laisse le rideau d'introduction se lever d'abord */
+const INTRO_DELAY = 1.15;
+
 const Hero = () => {
+  const lenis = useLenis();
+  const heroRef = useRef(null);
+  const { reducedMotion } = usePreferences();
+  const { dict } = useLanguage();
+
+  /* Le trait sous "créatif & responsable" se trace au fil du défilement */
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const pathLength = useTransform(scrollYProgress, [0, 0.55], [0, 1]);
+
+  /* Chaque bloc dérive à sa propre vitesse pendant la sortie du héros, pour
+     donner une impression de plans de papier superposés plutôt qu'un bloc
+     figé — jusque dans le titre : la ligne pleine et la ligne en contour
+     se détachent l'une de l'autre, comme deux feuilles qui glissent. */
+  const overlineY = useTransform(scrollYProgress, [0, 1], [0, -24]);
+  const titleY1 = useTransform(scrollYProgress, [0, 1], [0, -38]);
+  const titleY2 = useTransform(scrollYProgress, [0, 1], [0, -92]);
+  const titleY3 = useTransform(scrollYProgress, [0, 1], [0, -64]);
+  const bottomY = useTransform(scrollYProgress, [0, 1], [0, -128]);
+
+  /* La typographie du titre se distord légèrement selon la vitesse de
+     défilement, et se redresse dès que le scroll ralentit */
+  const skew = useMotionValue(0);
+  const smoothSkew = useSpring(skew, { stiffness: 320, damping: 28 });
+
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+
+    let cancelled = false;
+    let unsubscribe;
+
+    const subscribe = (attempts = 0) => {
+      if (cancelled) return;
+      const instance = lenis?.current;
+      if (!instance) {
+        if (attempts < 30) setTimeout(() => subscribe(attempts + 1), 100);
+        return;
+      }
+      const handleScroll = ({ velocity }) => {
+        const clamped = Math.max(-1, Math.min(1, velocity / 35));
+        skew.set(clamped * -6);
+      };
+      instance.on('scroll', handleScroll);
+      unsubscribe = () => instance.off('scroll', handleScroll);
+    };
+
+    subscribe();
+
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
+  }, [lenis, skew, reducedMotion]);
+
+  const handleScrollDown = () => scrollTo(lenis, '#projets', { offset: -24 });
+
   return (
-    <section className={styles.hero} id="accueil">
-      <div className={styles.container}>
-        {/* Contenu textuel */}
-        <div className={styles.content}>
-          <div className={styles.badge}>
-            <Sparkles className={styles.sparkle} size={16} />
-            Développeur Full-Stack
-          </div>
+    <section className={styles.hero} id="accueil" ref={heroRef} aria-label={dict.hero.sectionAria}>
+      <div className={`container ${styles.inner}`}>
+        <motion.div style={reducedMotion ? undefined : { y: overlineY }}>
+          <Fade className={styles.overline} delay={INTRO_DELAY} inView={false}>
+            <span className={styles.location}>
+              <MapPin size={13} strokeWidth={2} />
+              {dict.hero.location}
+            </span>
+          </Fade>
+        </motion.div>
 
-          <motion.h1 
-            className={styles.title}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Concevoir des expériences web <span className={styles.gradientText}>performantes</span> et responsables
-          </motion.h1>
-
-          <p className={styles.description}>
-            Passionné par le développement web moderne, je transforme des concepts en solutions Full-Stack élégantes. 
-            Fort d'une expertise WordPress/PHP et d'une transition vers l'écosystème React/Node.js, j'allie performance technique et éco-conception.
-          </p>
-
-          <motion.div 
-            className={styles.actions}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            <motion.a 
-              href="#projets" 
-              className={styles.primaryBtn}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Voir mes projets
-              <ArrowRight size={16} />
-            </motion.a>
-            
-            <motion.a 
-              href="#contact" 
-              className={styles.secondaryBtn}
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Me contacter
-            </motion.a>
+        <motion.h1 className={styles.title} style={{ skewY: smoothSkew }}>
+          <motion.div style={reducedMotion ? undefined : { y: titleY1 }}>
+            <Reveal delay={INTRO_DELAY} inView={false}>
+              <span className={styles.line}>
+                <LiquidText text={dict.hero.titleLine1} />
+              </span>
+            </Reveal>
           </motion.div>
+          <motion.div style={reducedMotion ? undefined : { y: titleY2 }}>
+            <Reveal delay={INTRO_DELAY + 0.09} inView={false}>
+              <span className={`${styles.line} ${styles.outline}`}>
+                <LiquidText text={dict.hero.titleLine2} />
+              </span>
+            </Reveal>
+          </motion.div>
+          <motion.div style={reducedMotion ? undefined : { y: titleY3 }}>
+            <Reveal delay={INTRO_DELAY + 0.18} inView={false}>
+              <span className={`${styles.line} ${styles.serifLine} serif`}>
+                {dict.hero.titleLine3}
+                <svg className={styles.underline} viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+                  <motion.path
+                    d="M3,12 C50,2 90,18 140,10 C190,2 230,18 280,9 C310,3 350,14 397,8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    style={{ pathLength }}
+                  />
+                </svg>
+              </span>
+            </Reveal>
+          </motion.div>
+        </motion.h1>
 
-          <div className={styles.techStack}>
-            {['React', 'Node.js', 'PHP', 'WordPress'].map((tech) => (
-              <span key={tech} className={styles.techBadge}>{tech}</span>
-            ))}
-          </div>
-        </div>
+        <motion.div className={styles.bottom} style={reducedMotion ? undefined : { y: bottomY }}>
+          <Fade delay={INTRO_DELAY + 0.45} inView={false} className={styles.scrollHint}>
+            <button onClick={handleScrollDown} className={styles.scrollButton} aria-label={dict.hero.scrollAria}>
+              <motion.span
+                className={styles.scrollIcon}
+                animate={{ y: [0, 7, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ArrowDown size={16} strokeWidth={1.75} />
+              </motion.span>
+              {dict.hero.scroll}
+            </button>
+          </Fade>
 
-        {/* Illustration SVG */}
-        <div className={styles.visual}>
-          <svg viewBox="0 0 500 500" className={styles.svgIllustration} xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#22D3EE" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="grad2" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#22D3EE" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.6" />
-              </linearGradient>
-            </defs>
-
-            {/* Cercle central avec animation de respiration */}
-            <circle cx="250" cy="250" r="120" fill="url(#grad1)" opacity="0.15">
-              <animate attributeName="r" values="120;140;120" dur="6s" repeatCount="indefinite" />
-            </circle>
-
-            {/* Courbes fluides */}
-            <path d="M 100 150 Q 250 50 400 150 T 450 300" stroke="url(#grad1)" strokeWidth="2" fill="none" opacity="0.4">
-              <animate attributeName="d" values="M 100 150 Q 250 50 400 150 T 450 300; M 100 150 Q 250 100 400 150 T 450 300; M 100 150 Q 250 50 400 150 T 450 300" dur="8s" repeatCount="indefinite" />
-            </path>
-            
-            <path d="M 50 350 Q 150 250 300 350 T 450 400" stroke="url(#grad2)" strokeWidth="2" fill="none" opacity="0.3" />
-
-            {/* Lignes de connexion entre les noeuds */}
-            <g opacity="0.3" stroke="white" strokeWidth="1">
-              <line x1="150" y1="150" x2="250" y2="250" />
-              <line x1="350" y1="150" x2="250" y2="250" />
-              <line x1="150" y1="350" x2="250" y2="250" />
-              <line x1="350" y1="350" x2="250" y2="250" />
-            </g>
-
-            {/* Noeuds technologiques */}
-            <circle cx="150" cy="150" r="14" fill="#3B82F6" />
-            <circle cx="350" cy="150" r="14" fill="#22D3EE" />
-            <circle cx="250" cy="250" r="18" fill="#3B82F6" />
-            <circle cx="150" cy="350" r="14" fill="#22D3EE" />
-            <circle cx="350" cy="350" r="14" fill="#3B82F6" />
-
-            {/* Particules flottantes */}
-            <circle cx="100" cy="100" r="3" fill="#22D3EE">
-              <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="400" cy="200" r="3" fill="#3B82F6">
-              <animate attributeName="opacity" values="1;0.2;1" dur="4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="200" cy="400" r="4" fill="#22D3EE" opacity="0.6" />
-          </svg>
-        </div>
+          <Fade delay={INTRO_DELAY + 0.4} inView={false} className={styles.intro}>
+            <ScrollTypewriter text={dict.hero.intro} range={[0, 180]} />
+          </Fade>
+        </motion.div>
       </div>
+
+      <Fade delay={INTRO_DELAY + 0.55} inView={false}>
+        <Marquee items={dict.marquee} />
+      </Fade>
     </section>
   );
 };

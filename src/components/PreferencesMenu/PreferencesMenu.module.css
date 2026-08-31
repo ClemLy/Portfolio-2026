@@ -1,0 +1,138 @@
+.wrapper {
+  position: relative;
+}
+
+/* Détaché du footer : flotte en bas à droite de la fenêtre, par-dessus la
+   page courante plutôt que rangé dans le flux du footer. Reste un bloc
+   d'accent toujours sombre (--ink-fixed/--paper-fixed, cf. leur définition
+   dans index.css) comme le reste du footer, plutôt que de se fondre dans
+   le thème courant de la page — sinon il perd sa lisibilité garantie. */
+.floating {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.5rem);
+  bottom: clamp(1rem, 3vw, 1.5rem);
+  z-index: 200;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.25);
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trigger:hover,
+.trigger[aria-expanded='true'] {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Sur la page plutôt que sur le fond sombre du footer, le déclencheur perd
+   son arrière-plan (jusqu'ici transparent, porté par le footer) : il lui
+   faut son propre fond plein + une ombre pour rester lisible par-dessus
+   n'importe quel contenu. */
+.triggerFloating {
+  background-color: var(--ink-fixed);
+  color: var(--paper-fixed);
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(var(--ink-fixed-rgb), 0.35);
+}
+
+.triggerFloating:hover {
+  background-color: var(--accent);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 310;
+  background-color: rgba(var(--ink-fixed-rgb), 0.4);
+}
+
+.panel {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  right: 0;
+  z-index: 320;
+  width: min(20rem, 84vw);
+  padding: 1.25rem;
+  background-color: var(--ink-fixed);
+  border: 1px solid rgba(var(--paper-fixed-rgb), 0.18);
+  border-radius: 12px;
+  box-shadow: 0 20px 48px rgba(var(--ink-fixed-rgb), 0.35);
+}
+
+.panelTitle {
+  margin-bottom: 0.75rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(var(--paper-fixed-rgb), 0.55);
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding-block: 0.75rem;
+  border-top: 1px solid rgba(var(--paper-fixed-rgb), 0.12);
+  text-align: left;
+  color: var(--paper-fixed);
+}
+
+.switchIcon {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.switchText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.switchLabel {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.switchDescription {
+  font-size: 0.75rem;
+  color: rgba(var(--paper-fixed-rgb), 0.55);
+}
+
+.switchTrack {
+  flex-shrink: 0;
+  width: 38px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 99px;
+  background-color: rgba(var(--paper-fixed-rgb), 0.2);
+  transition: background-color 0.25s ease;
+}
+
+.switchTrackOn {
+  background-color: var(--accent);
+}
+
+.switchThumb {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--paper-fixed);
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+.switchTrackOn .switchThumb {
+  transform: translateX(16px);
+}

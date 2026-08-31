@@ -1,0 +1,42 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--ink-fixed-rgb), 0.85);
+  cursor: pointer;
+}
+
+.burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.asterisk {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  color: var(--accent);
+  translate: -50% -50%;
+}
+
+.message {
+  position: relative;
+  text-align: center;
+  color: var(--paper-fixed);
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--accent);
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  font-size: var(--text-sm);
+  color: rgba(var(--paper-fixed-rgb), 0.7);
+}

@@ -2,10 +2,63 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FAF7F3" />
+
+    <!--
+      Les balises ci-dessous (jusqu'à /twitter:image) sont le filet de
+      sécurité statique pour les robots qui n'exécutent pas JavaScript
+      (aperçus de partage, certains crawlers). Elles portent data-rh="true"
+      pour que react-helmet-async les reconnaisse comme siennes au montage
+      et les remplace proprement par les valeurs de chaque page, au lieu
+      de les dupliquer (sans cet attribut, Helmet ignore tout ce qui existait
+      déjà dans le HTML et se contente d'ajouter ses propres balises à côté).
+    -->
+    <title>Clémentin Ly, Développeur full-stack créatif à Paris</title>
+    <meta
+      data-rh="true"
+      name="description"
+      content="Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Next.js et TypeScript, avec une solide expérience Node.js et WordPress. Des expériences web rapides, accessibles et éco-conçues."
+    />
+    <link data-rh="true" rel="canonical" href="https://clementin-portfolio.vercel.app/" />
+
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:site_name" content="Clémentin Ly — Portfolio" />
+    <meta data-rh="true" property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta data-rh="true" property="og:url" content="https://clementin-portfolio.vercel.app/" />
+    <meta data-rh="true" property="og:title" content="Clémentin Ly, Développeur full-stack créatif à Paris" />
+    <meta
+      data-rh="true"
+      property="og:description"
+      content="Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Next.js et TypeScript, avec une solide expérience Node.js et WordPress."
+    />
+    <meta data-rh="true" property="og:image" content="https://clementin-portfolio.vercel.app/assets/og/og-image.jpg" />
+    <meta data-rh="true" property="og:image:width" content="1200" />
+    <meta data-rh="true" property="og:image:height" content="630" />
+    <meta data-rh="true" property="og:image:alt" content="Clémentin Ly, développeur full-stack créatif & responsable" />
+
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:title" content="Clémentin Ly, Développeur full-stack créatif à Paris" />
+    <meta
+      data-rh="true"
+      name="twitter:description"
+      content="Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Next.js et TypeScript."
+    />
+    <meta data-rh="true" name="twitter:image" content="https://clementin-portfolio.vercel.app/assets/og/og-image.jpg" />
+
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Script externe (plutôt qu'inline) pour rester compatible avec une
+         Content-Security-Policy script-src 'self' sans liste d'exceptions
+         par hash à maintenir à chaque modification. -->
+    <script src="/theme-init.js"></script>
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/assets/icon/favicon-32x32.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/fonts/general-sans-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/general-sans-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <div id="root"></div>
