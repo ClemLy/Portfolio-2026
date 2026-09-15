@@ -565,7 +565,10 @@
 
 @media (min-width: 1100px) {
   .meta {
-    grid-template-columns: repeat(5, 1fr);
+    /* auto-fit plutôt qu'un nombre de colonnes figé : la plupart des
+       projets ont 5 champs (année/rôle/catégorie/stack/lien), certains en
+       ont 6 quand un dépôt de code s'ajoute au lien du site */
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   }
 
   .caseGrid {
