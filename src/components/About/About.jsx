@@ -11,6 +11,7 @@ import {
 import SectionHeading from '../SectionHeading/SectionHeading';
 import { useLanguage } from '../../context/languageContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { projectsData } from '../../data/projectsData';
 import styles from './About.module.css';
 
 /* Chaque mot s'encre au fil du défilement : il part légèrement flou (encre
@@ -83,6 +84,11 @@ const About = () => {
   });
 
   const words = dict.about.manifesto.split(' ');
+  /* "projets livrés" dérivé du nombre réel de projets plutôt que codé en
+     dur, pour ne plus jamais se désynchroniser quand un projet est ajouté */
+  const notes = dict.about.notes.map((note) =>
+    note.dynamic === 'projectCount' ? { ...note, value: projectsData.length } : note
+  );
 
   return (
     <section className={`container ${styles.section}`} id="apropos" aria-label={dict.about.sectionLabel}>
@@ -110,12 +116,12 @@ const About = () => {
             </p>
 
             <dl className={styles.margin}>
-              {dict.about.notes.map((note, index) => (
+              {notes.map((note, index) => (
                 <MarginNote
                   key={note.label}
                   note={note}
                   progress={scrollYProgress}
-                  range={[(index / dict.about.notes.length) * 0.85, (index / dict.about.notes.length) * 0.85 + 0.22]}
+                  range={[(index / notes.length) * 0.85, (index / notes.length) * 0.85 + 0.22]}
                   reducedMotion={reducedMotion}
                 />
               ))}

@@ -39,6 +39,52 @@ export const projectsData = [
     }
   },
   {
+    id: "apple-motion",
+    title: "Apple Motion",
+    subtitle: "Vitrine cinématique pour cinq produits Apple, rejoués en séquences d'images au fil du scroll",
+    image: "/assets/projets/apple-motion/apple-motion.webp",
+    year: "2026",
+    role: "Conception & développement",
+    category: "Expérience",
+    type: "personal",
+    techs: ["Next.js", "TypeScript", "GSAP", "Three.js", "Playwright"],
+    problematique: "Concevoir une vitrine produit où le scroll devient littéralement la main qui fait tourner l'objet entre les doigts du visiteur, sans les inconvénients d'un moteur 3D temps réel : contextes WebGL perdus, bugs de pilote graphique, qualité plafonnée par ce qu'un appareil bas de gamme peut tenir à 60 images par seconde.",
+    solution: "Chaque produit est joué comme une pellicule de 180 photographies pré-rendues sur un canvas 2D, plutôt qu'un modèle 3D chargé en direct dans le navigateur. GSAP ScrollTrigger pilote la lecture en écrivant la position de défilement dans une simple référence, jamais dans le state React, pour tenir 120 images par seconde sans re-render. Un pipeline interne (route /render jamais exposée au visiteur) automatise la capture de chaque frame via Playwright depuis un modèle glTF compressé, avec un recadrage calculé sur l'union de tous les contours transparents pour que le produit ne \"respire\" pas d'une image à l'autre.",
+    architecture: [
+      { name: "Pipeline de rendu", details: "Route Next.js interne /render pilotée par un vrai navigateur via Playwright : 180 captures par produit depuis un modèle glTF compressé, recadrage automatique et encodage WebP" },
+      { name: "Lecteur & mémoire", details: "GSAP ScrollTrigger écrit la position de scroll dans une ref pour ne jamais re-render React ; frames stockées en ImageBitmap, seules la section active et ses voisines restent décodées, chargement progressif par vagues" },
+      { name: "Qualité & accessibilité", details: "Site bilingue FR/EN dimensionné sur la version française, scans axe-core à huit profondeurs de scroll, tests dédiés sous Safari, budget réseau vérifié en CI à chaque build" }
+    ],
+    link: "https://apple-motion.vercel.app/",
+    lighthouse: {
+      performance: 96,
+      accessibilité: 100,
+      bonnesPratiques: 100,
+      seo: 100
+    },
+    gallery: [
+      "/assets/projets/apple-motion/apple-motion-iphone.webp",
+      "/assets/projets/apple-motion/apple-motion-macbook-pro.webp",
+      "/assets/projets/apple-motion/apple-motion-macbook-neo.webp",
+      "/assets/projets/apple-motion/apple-motion-airpods-pro.webp"
+    ],
+    t: {
+      en: {
+        title: "Apple Motion",
+        subtitle: "A cinematic showcase for five Apple products, replayed in image sequences as you scroll",
+        role: "Design & development",
+        category: "Experience",
+        problematique: "Design a product showcase where scroll literally becomes the hand turning the object between the visitor's fingers, without the drawbacks of a real-time 3D engine: lost WebGL contexts, graphics-driver bugs, quality capped by whatever a low-end device can hold at 60 frames per second.",
+        solution: "Each product plays back as a reel of 180 pre-rendered photographs on a 2D canvas, rather than a 3D model loaded live in the browser. GSAP ScrollTrigger drives playback by writing the scroll position into a plain ref, never into React state, to hold 120 frames per second with no re-renders. An internal pipeline (a /render route never exposed to visitors) automates capturing every frame via Playwright from a compressed glTF model, with a crop computed from the union of every frame's transparent bounds so the product never \"breathes\" between frames.",
+        architecture: [
+          { name: "Render Pipeline", details: "Internal Next.js /render route driven by a real browser via Playwright: 180 captures per product from a compressed glTF model, automatic cropping and WebP encoding" },
+          { name: "Player & Memory", details: "GSAP ScrollTrigger writes scroll position into a ref to avoid ever re-rendering React; frames stored as ImageBitmap, with only the active section and its neighbors kept decoded, progressive wave-based loading" },
+          { name: "Quality & Accessibility", details: "Bilingual EN/FR site sized against the longer French copy, axe-core scans at eight scroll depths, dedicated Safari testing, network weight budget checked in CI on every build" }
+        ]
+      }
+    }
+  },
+  {
     id: "apex-motion",
     title: "Apex // Motion",
     subtitle: "Configurateur 3D immersif et expérience Porsche en temps réel",

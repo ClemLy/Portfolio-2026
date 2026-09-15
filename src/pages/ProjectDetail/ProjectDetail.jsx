@@ -181,6 +181,22 @@ const ProjectDetail = () => {
                 )}
               </dd>
             </div>
+            {project.repo && (
+              <div className={styles.metaCell}>
+                <dt>{pd.codeSource}</dt>
+                <dd>
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.metaLink}
+                  >
+                    {pd.voirLeCode}
+                    <ArrowUpRight size={14} strokeWidth={2} />
+                  </a>
+                </dd>
+              </div>
+            )}
           </dl>
         </Fade>
       </div>

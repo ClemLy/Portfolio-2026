@@ -6,7 +6,7 @@
       1200,
       1600
     ],
-    "ratio": 0.595
+    "ratio": 0.5952
   },
   "/assets/projets/apex-motion/apex-motion-heritage.webp": {
     "widths": [
@@ -15,7 +15,7 @@
       1200,
       1600
     ],
-    "ratio": 0.595
+    "ratio": 0.5952
   },
   "/assets/projets/apex-motion/apex-motion-lap-telemetry.webp": {
     "widths": [
@@ -24,7 +24,7 @@
       1200,
       1600
     ],
-    "ratio": 0.595
+    "ratio": 0.5952
   },
   "/assets/projets/apex-motion/apex-motion-particle-reveal.webp": {
     "widths": [
@@ -33,7 +33,7 @@
       1200,
       1600
     ],
-    "ratio": 0.595
+    "ratio": 0.5952
   },
   "/assets/projets/apex-motion/apex-motion-studio.webp": {
     "widths": [
@@ -42,7 +42,7 @@
       1200,
       1600
     ],
-    "ratio": 0.595
+    "ratio": 0.5952
   },
   "/assets/projets/apex-motion/apex-motion.webp": {
     "widths": [
@@ -51,7 +51,52 @@
       1200,
       1600
     ],
-    "ratio": 0.595
+    "ratio": 0.5952
+  },
+  "/assets/projets/apple-motion/apple-motion-airpods-pro.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/apple-motion/apple-motion-iphone.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/apple-motion/apple-motion-macbook-neo.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/apple-motion/apple-motion-macbook-pro.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/apple-motion/apple-motion.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600
+    ],
+    "ratio": 0.625
   },
   "/assets/projets/athly/athly-1.webp": {
     "widths": [
@@ -76,7 +121,7 @@
       400,
       800
     ],
-    "ratio": 0.6667
+    "ratio": 0.6664
   },
   "/assets/projets/brokn/brokn-atelier.webp": {
     "widths": [
@@ -123,27 +168,27 @@
       400,
       800
     ],
-    "ratio": 0.505
+    "ratio": 0.4391
   },
   "/assets/projets/cosy-study/cosy-study.webp": {
     "widths": [
       400
     ],
-    "ratio": 0.5042
+    "ratio": 0.9234
   },
   "/assets/projets/deauville-limousine/deauville-limousine.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.5017
+    "ratio": 0.4964
   },
   "/assets/projets/fcc/fcc.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.5033
+    "ratio": 0.4964
   },
   "/assets/projets/gvp/gvp.webp": {
     "widths": [
@@ -209,15 +254,6 @@
     ],
     "ratio": 0.625
   },
-  "/assets/projets/jackpot-solitaire/jackpot-solitaire.webp": {
-    "widths": [
-      400,
-      800,
-      1200,
-      1600
-    ],
-    "ratio": 0.5017
-  },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie-clair.webp": {
     "widths": [
       400,
@@ -225,7 +261,7 @@
       1200,
       1600
     ],
-    "ratio": 1.3108
+    "ratio": 1.3111
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie.webp": {
     "widths": [
@@ -234,7 +270,7 @@
       1200,
       1600
     ],
-    "ratio": 1.3108
+    "ratio": 1.3111
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-regles.webp": {
     "widths": [
@@ -243,7 +279,7 @@
       1200,
       1600
     ],
-    "ratio": 1.3108
+    "ratio": 1.3111
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-victoire.webp": {
     "widths": [
@@ -252,7 +288,7 @@
       1200,
       1600
     ],
-    "ratio": 1.3108
+    "ratio": 1.3111
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu.webp": {
     "widths": [
@@ -261,14 +297,14 @@
       1200,
       1600
     ],
-    "ratio": 1.3108
+    "ratio": 1.3111
   },
   "/assets/projets/papaie/papaie.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.5033
+    "ratio": 0.4955
   },
   "/assets/projets/pocket-casino/pocket-casino-banqueroute.webp": {
     "widths": [

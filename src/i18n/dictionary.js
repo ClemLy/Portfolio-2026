@@ -76,7 +76,7 @@ export const dictionary = {
         "Je conçois des sites et des applications où la performance rencontre la sobriété. Formé en agence sur WordPress et PHP, j'ai depuis approfondi React, Next.js et TypeScript, et j'explore aujourd'hui les architectures headless CMS. Je défends un web rapide, accessible et durable : des interfaces soignées, mesurées plutôt que promises.",
       notes: [
         { value: 4, label: 'années de code' },
-        { value: 13, label: 'projets livrés' },
+        { value: 13, label: 'projets livrés', dynamic: 'projectCount' },
         { value: 1, label: 'certification Numérique Responsable' },
       ],
     },
@@ -168,6 +168,7 @@ export const dictionary = {
       categorie: 'Catégorie',
       stackLabel: 'Stack',
       lien: 'Lien',
+      codeSource: 'Code source',
       voirLeCode: 'Voir le code',
       visiterLeSite: 'Visiter le site',
       enCours: 'En cours',
@@ -276,7 +277,7 @@ export const dictionary = {
         "I design websites and applications where performance meets restraint. Trained in-house on WordPress and PHP, I've since deepened my expertise in React, Next.js and TypeScript, and I'm now exploring headless CMS architectures. I stand for a fast, accessible, sustainable web: interfaces that are crafted and measured, not just promised.",
       notes: [
         { value: 4, label: 'years of code' },
-        { value: 13, label: 'projects delivered' },
+        { value: 13, label: 'projects delivered', dynamic: 'projectCount' },
         { value: 1, label: 'Sustainable Digital certification' },
       ],
     },
@@ -368,6 +369,7 @@ export const dictionary = {
       categorie: 'Category',
       stackLabel: 'Stack',
       lien: 'Link',
+      codeSource: 'Source code',
       voirLeCode: 'View code',
       visiterLeSite: 'Visit site',
       enCours: 'In progress',
