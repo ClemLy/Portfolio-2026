@@ -28,7 +28,7 @@ export const Reveal = ({ children, delay = 0, duration = 1, inView = true, class
 
 /* Fondu simple avec léger décalage vertical. `as` permet de rendre l'élément
    animé directement dans le bon tag sémantique (ex: "li") plutôt que
-   d'insérer un <div> intermédiaire — indispensable dans un <ul>/<ol>, où un
+   d'insérer un <div> intermédiaire, indispensable dans un <ul>/<ol>, où un
    <li> non-direct-enfant casse la structure de liste pour les lecteurs
    d'écran (RGAA 9.3.1 / WCAG 1.3.1). */
 export const Fade = ({
@@ -75,12 +75,12 @@ const inkWordVariants = {
   }),
 };
 
-/* Paragraphe qui s'encre mot par mot à l'entrée dans le viewport — même
+/* Paragraphe qui s'encre mot par mot à l'entrée dans le viewport, même
    principe que le manifeste À propos (flou → net, opacité → 1), mais en
    simple stagger déclenché une fois plutôt qu'un pin scroll-jacké : pour
    des paragraphes plus courts (études de cas) où ce moment plus long ne
    se justifie pas. 0.55 est le même minimum calibré ≥ 3:1 sur --paper
-   pour du texte large (voir About.jsx) — jamais illisible en cours de
+   pour du texte large (voir About.jsx), jamais illisible en cours de
    révélation, pas seulement à l'état initial. */
 export const InkText = ({ text, className, as = 'p' }) => {
   const MotionTag = motion[as];

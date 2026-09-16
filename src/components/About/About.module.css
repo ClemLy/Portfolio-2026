@@ -10,14 +10,14 @@
 }
 
 /* Mouvement réduit : plus de piste étendue, .pinWrap redevient un bloc
-   normal (voir plus bas) — la section retrouve sa hauteur naturelle. */
+   normal (voir plus bas), la section retrouve sa hauteur naturelle. */
 .scrollStageStatic {
   height: auto;
 }
 
 /* Le titre "02 À propos" garde sa propre place fixe en haut du bloc fixé
    (flex-shrink: 0) : s'il centrait avec le reste, un manifeste un peu long
-   pousserait le titre au-dessus de l'écran dès que le tout dépasse 100vh —
+   pousserait le titre au-dessus de l'écran dès que le tout dépasse 100vh,
    exactement ce qui "envolait" le titre avant ce correctif. Seul .layout
    (texte + marge) se centre dans l'espace qu'il reste sous le titre. */
 .pinWrap {

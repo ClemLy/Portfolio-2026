@@ -25,7 +25,7 @@ const Hero = () => {
 
   /* Chaque bloc dérive à sa propre vitesse pendant la sortie du héros, pour
      donner une impression de plans de papier superposés plutôt qu'un bloc
-     figé — jusque dans le titre : la ligne pleine et la ligne en contour
+     figé, jusque dans le titre : la ligne pleine et la ligne en contour
      se détachent l'une de l'autre, comme deux feuilles qui glissent. */
   const overlineY = useTransform(scrollYProgress, [0, 1], [0, -24]);
   const titleY1 = useTransform(scrollYProgress, [0, 1], [0, -38]);
@@ -82,6 +82,11 @@ const Hero = () => {
         </motion.div>
 
         <motion.h1 className={styles.title} style={{ skewY: smoothSkew }}>
+          {/* Le nom n'apparaît nulle part dans ce titre décoratif (juste
+              "Full-Stack Developer creative & responsible") : sans lui, le
+              H1 de la page, le signal le plus fort pour les moteurs de
+              recherche, ne contient jamais la requête "Clémentin Ly". */}
+          <span className="visually-hidden">{dict.hero.name}, </span>
           <motion.div style={reducedMotion ? undefined : { y: titleY1 }}>
             <Reveal delay={INTRO_DELAY} inView={false}>
               <span className={styles.line}>

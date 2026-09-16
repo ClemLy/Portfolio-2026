@@ -122,7 +122,7 @@ export const projectsData = [
         role: "Design & development",
         category: "Experience",
         problematique: "Build a smooth, immersive 3D experience around a complex Porsche model (real-time configurator, circuit telemetry) without sacrificing web performance or accessibility.",
-        solution: "Built a real-time configurator with React Three Fiber and Three.js, optimized via Draco compression and conditional rendering (IntersectionObserver, adaptive resolution). Animations driven by GSAP/Lenis with procedural audio via the Web Audio API — no audio files.",
+        solution: "Built a real-time configurator with React Three Fiber and Three.js, optimized via Draco compression and conditional rendering (IntersectionObserver, adaptive resolution). Animations driven by GSAP/Lenis with procedural audio via the Web Audio API, with no audio files.",
         architecture: [
           { name: "Real-Time 3D", details: "React Three Fiber, Drei and post-processing (bloom, grain, vignette) for a cinematic 60 FPS render" },
           { name: "Performance", details: "Conditional rendering (IntersectionObserver, tab visibility), adaptive resolution and lazy-loading via next/dynamic" },

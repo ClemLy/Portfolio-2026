@@ -26,7 +26,7 @@ const Stack = () => {
   const x = useMotionValue(0);
 
   /* Léger tilt proportionnel à la vitesse du glisser-déposer, comme des
-     fiches cartonnées qu'on feuillette — se redresse dès le relâchement.
+     fiches cartonnées qu'on feuillette, se redresse dès le relâchement.
      Même principe que le skew du titre du hero à la vitesse de scroll. */
   const tilt = useMotionValue(0);
   const smoothTilt = useSpring(tilt, { stiffness: 300, damping: 28 });

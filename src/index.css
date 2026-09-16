@@ -287,7 +287,7 @@ h4 {
 
 /* Réduction des animations pour les utilisateurs qui le demandent, au niveau
    système (media query) ou via la préférence manuelle du site (classe posée
-   sur <html> par PreferencesProvider) — les deux coupent tout : animations
+   sur <html> par PreferencesProvider) : les deux coupent tout, animations
    et transitions CSS pures (marquee, curseur clignotant, pastilles pulsées…)
    qui échappent au contrôle de Framer Motion. */
 @media (prefers-reduced-motion: reduce) {

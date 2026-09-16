@@ -27,7 +27,7 @@ const Switch = ({ checked, onChange, label, description, icon: Icon }) => (
 );
 
 /* docked=true : rangé à sa place dans le footer. docked=false : détaché,
-   flotte en bas à droite par-dessus la page — le déclencheur gagne alors
+   flotte en bas à droite par-dessus la page : le déclencheur gagne alors
    son propre fond (--ink-fixed), transparent le reste du temps car porté
    par le fond déjà sombre du footer. */
 const PreferencesMenu = ({ docked = true }) => {

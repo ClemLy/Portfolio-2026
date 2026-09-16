@@ -52,7 +52,7 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={SITE_URL + '/'} />
         <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-        <meta property="og:site_name" content="Clémentin Ly — Portfolio" />
+        <meta property="og:site_name" content="Clémentin Ly | Portfolio" />
         <meta property="og:title" content={dict.meta.title} />
         <meta property="og:description" content={dict.meta.description} />
         <meta property="og:image" content={OG_IMAGE} />
