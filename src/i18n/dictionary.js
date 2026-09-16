@@ -27,6 +27,7 @@ export const dictionary = {
       switchToFr: 'Switch site to French',
     },
     hero: {
+      name: 'Clémentin Ly',
       location: 'Basé à Paris, France',
       titleLine1: 'Développeur',
       titleLine2: 'full-stack',
@@ -187,7 +188,7 @@ export const dictionary = {
       precedent: 'Précédent',
       suivant: 'Suivant',
       apercuDe: (title) => `Aperçu du projet ${title}`,
-      apercuAlt: (n, title) => `${title} — aperçu ${n}`,
+      apercuAlt: (n, title) => `${title}, aperçu ${n}`,
       etudeDeCas: (title) => `${title}, étude de cas de Clémentin Ly`,
       lighthouseLabels: { performance: 'Performance', accessibilité: 'Accessibilité', bonnesPratiques: 'Bonnes pratiques', seo: 'SEO' },
     },
@@ -228,6 +229,7 @@ export const dictionary = {
       switchToFr: 'Passer le site en français',
     },
     hero: {
+      name: 'Clémentin Ly',
       location: 'Based in Paris, France',
       titleLine1: 'Full-stack',
       titleLine2: 'developer',
@@ -388,7 +390,7 @@ export const dictionary = {
       precedent: 'Previous',
       suivant: 'Next',
       apercuDe: (title) => `Preview of the ${title} project`,
-      apercuAlt: (n, title) => `${title} — preview ${n}`,
+      apercuAlt: (n, title) => `${title}, preview ${n}`,
       etudeDeCas: (title) => `${title}, case study by Clémentin Ly`,
       lighthouseLabels: { performance: 'Performance', accessibilité: 'Accessibility', bonnesPratiques: 'Best practices', seo: 'SEO' },
     },

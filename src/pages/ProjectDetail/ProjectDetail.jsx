@@ -83,7 +83,7 @@ const ProjectDetail = () => {
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://clementin-portfolio.vercel.app/projet/${project.id}`} />
         <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-        <meta property="og:site_name" content="Clémentin Ly — Portfolio" />
+        <meta property="og:site_name" content="Clémentin Ly | Portfolio" />
         <meta property="og:title" content={pd.etudeDeCas(project.title)} />
         <meta property="og:description" content={project.subtitle} />
         <meta property="og:image" content={`https://clementin-portfolio.vercel.app${project.image}`} />

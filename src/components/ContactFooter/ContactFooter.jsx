@@ -27,7 +27,7 @@ const ContactFooter = () => {
   const handleSpotlight = useSpotlight();
   const actionsRef = useRef(null);
   /* Le bouton préférences flotte en bas à droite tant que sa place d'origine
-     dans le footer n'est pas visible, puis vient s'y ranger — sinon il reste
+     dans le footer n'est pas visible, puis vient s'y ranger, sinon il reste
      coincé tout en bas, inaccessible tant qu'on n'a pas fini de scroller. */
   const actionsInView = useInView(actionsRef, { margin: '0px 0px -10% 0px' });
 

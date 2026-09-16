@@ -27,7 +27,7 @@ const VERTEX = /* glsl */ `
 /* Au repos : image légèrement désaturée et assombrie. Au survol : elle
    reprend sa couleur pleine et se déforme en ondulation qui suit le
    curseur, avec une pointe d'aberration chromatique sur la crête de
-   l'onde — un aller-retour "endormie / vivante" plutôt qu'une simple
+   l'onde, un aller-retour "endormie / vivante" plutôt qu'une simple
    distorsion continue. */
 const FRAGMENT = /* glsl */ `
   uniform sampler2D uTexture;

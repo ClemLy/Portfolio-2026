@@ -31,7 +31,7 @@ Portfolio personnel de **Clémentin Ly**, développeur full-stack basé à Paris
 ## Points clés
 
 * **Design éditorial** : fond papier, encre profonde, accent terracotta, typographie General Sans / Instrument Serif. Thème clair et sombre, persistés et accessibles.
-* **Motion au service du contenu** : reveals mot à mot, moment de scroll épinglé dans "À propos", distorsion WebGL au survol des projets, transitions de page en rideau d'encre — chaque interaction reste désactivable via `prefers-reduced-motion` ou le panneau de préférences.
+* **Motion au service du contenu** : reveals mot à mot, moment de scroll épinglé dans "À propos", distorsion WebGL au survol des projets, transitions de page en rideau d'encre. Chaque interaction reste désactivable via `prefers-reduced-motion` ou le panneau de préférences.
 * **Fiche projet détaillée** : contexte, problématique, solution et résultats pour chaque réalisation, avec navigation clavier entre les projets.
 * **i18n** : contenu bilingue français / anglais.
 * **Accessibilité (RGAA / WCAG AA)** : navigation clavier complète, focus visibles, contrastes vérifiés, respect du mouvement réduit, structure sémantique.

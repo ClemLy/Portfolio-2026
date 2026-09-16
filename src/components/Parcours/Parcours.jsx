@@ -15,9 +15,9 @@ import styles from './Parcours.module.css';
 const getRangeLabel = (todayLabel) => {
   const startYear = Math.min(...parcoursData.map((step) => Number(step.year)));
   const hasOngoing = parcoursData.some((step) => step.ongoing);
-  if (hasOngoing) return `${startYear} — ${todayLabel}`;
+  if (hasOngoing) return `${startYear} → ${todayLabel}`;
   const endYear = Math.max(...parcoursData.map((step) => Number(step.yearEnd || step.year)));
-  return `${startYear} — ${endYear}`;
+  return `${startYear} → ${endYear}`;
 };
 
 const Parcours = () => {

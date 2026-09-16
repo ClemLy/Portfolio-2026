@@ -3,7 +3,7 @@ import { usePreferences } from '../../context/preferencesContext';
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-/* Décodage progressif du texte au survol souris — purement décoratif et
+/* Décodage progressif du texte au survol souris, purement décoratif et
    déclenché uniquement à la souris : le focus clavier ne l'active jamais,
    pour que les lecteurs d'écran ne lisent que le texte final, stable. */
 const ScrambleText = ({ text, className }) => {

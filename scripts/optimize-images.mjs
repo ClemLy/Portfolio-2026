@@ -158,7 +158,7 @@ const main = async () => {
       console.log(`  = ${relPath} (déjà à jour, ignoré)`);
     } else {
       console.log(
-        `  ✓ ${relPath} — ${fmtBytes(result.originalBytes)} → ${result.widths.length} largeur${result.widths.length > 1 ? 's' : ''} ` +
+        `  ✓ ${relPath} : ${fmtBytes(result.originalBytes)} → ${result.widths.length} largeur${result.widths.length > 1 ? 's' : ''} ` +
           `(jusqu'à ${result.widths[result.widths.length - 1]}px) × AVIF/WebP, ${result.filesWritten} fichier${result.filesWritten > 1 ? 's' : ''} écrit${result.filesWritten > 1 ? 's' : ''}`
       );
     }

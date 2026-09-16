@@ -25,7 +25,7 @@ import Home from './pages/Home/Home';
 /* Home est importée statiquement (pas de code-splitting) : c'est la page
    que la quasi-totalité des visiteurs atteint en premier, et un Suspense
    fallback={null} en attendant son chunk faisait s'effondrer toute la
-   hauteur de page pendant le chargement puis apparaître d'un coup — un
+   hauteur de page pendant le chargement puis apparaître d'un coup, un
    CLS proche du maximum à chaque première visite. Les routes secondaires
    restent scindées, leur coût de chargement n'est payé qu'à la navigation. */
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail/ProjectDetail'));
@@ -61,7 +61,7 @@ const structuredData = {
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
-      name: 'Clémentin Ly — Portfolio',
+      name: 'Clémentin Ly | Portfolio',
       url: SITE_URL,
       inLanguage: ['fr-FR', 'en-US'],
       author: { '@id': `${SITE_URL}/#person` },

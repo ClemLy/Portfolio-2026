@@ -5,7 +5,7 @@ const getParisHour = () => {
   return parseInt(fmt.format(new Date()), 10);
 };
 
-/* Heure courante à Paris (0-23), rafraîchie chaque minute — sert à teinter
+/* Heure courante à Paris (0-23), rafraîchie chaque minute, sert à teinter
    discrètement l'ambiance de la page selon le moment de la journée */
 const useParisTimeOfDay = () => {
   const [hour, setHour] = useState(getParisHour);

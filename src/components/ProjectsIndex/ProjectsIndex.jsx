@@ -135,7 +135,7 @@ const ProjectsIndex = () => {
      plutôt qu'un simple fondu. Ignoré au montage initial. Piloté via une
      motion value (pas un animate() impératif sur le nœud DOM) : .list et
      .grid portent déjà un `layout` qui anime leurs propres transformations
-     lors du reflow — un animate() direct sur le même nœud entrait en
+     lors du reflow : un animate() direct sur le même nœud entrait en
      conflit avec ce système et produisait des transforms incohérents. */
   const stampScale = useMotionValue(1);
   const didMount = useRef(false);

@@ -6,7 +6,7 @@
    page courante plutôt que rangé dans le flux du footer. Reste un bloc
    d'accent toujours sombre (--ink-fixed/--paper-fixed, cf. leur définition
    dans index.css) comme le reste du footer, plutôt que de se fondre dans
-   le thème courant de la page — sinon il perd sa lisibilité garantie. */
+   le thème courant de la page, sinon il perd sa lisibilité garantie. */
 .floating {
   position: fixed;
   right: clamp(1rem, 3vw, 1.5rem);

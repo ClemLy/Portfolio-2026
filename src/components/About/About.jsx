@@ -18,7 +18,7 @@ import styles from './About.module.css';
    pas encore sèche) et se stabilise net en même temps qu'il gagne son
    opacité pleine. Le point de départ de l'opacité (0.55) n'est pas
    arbitraire : c'est le minimum qui garantit encore un contraste ≥ 3:1
-   (texte large) sur --paper — en dessous, les mots en cours de lecture
+   (texte large) sur --paper, en dessous, les mots en cours de lecture
    deviennent illisibles pendant le défilement normal, pas seulement à
    l'état initial. Avec le mouvement réduit, l'animation est désactivée :
    le texte est directement net et à pleine opacité (WCAG 2.3.3 / RGAA 13.3). */
@@ -72,7 +72,7 @@ const About = () => {
   const { reducedMotion } = usePreferences();
 
   /* Le texte reste fixé à l'écran (position: sticky sur .pinWrap) pendant
-     que .scrollStage — bien plus haute que l'écran — défile derrière lui.
+     que .scrollStage (bien plus haute que l'écran) défile derrière lui.
      scrollYProgress avance donc sur toute cette course, pas seulement sur
      la hauteur naturelle du paragraphe : la lecture prend le temps du
      scroll plutôt qu'un simple fondu croisé qu'on peut rater. Avec le
