@@ -43,7 +43,7 @@ const ScrollReset = () => {
   return null;
 };
 
-const SITE_URL = 'https://clementin-portfolio.vercel.app';
+const SITE_URL = 'https://clementinly.fr';
 
 const structuredData = {
   '@context': 'https://schema.org/',
