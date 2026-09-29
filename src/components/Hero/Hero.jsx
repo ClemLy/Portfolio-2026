@@ -93,14 +93,14 @@ const Hero = () => {
                 <LiquidText text={dict.hero.titleLine1} />
               </span>
             </Reveal>
-          </motion.div>
+          </motion.div>{' '}
           <motion.div style={reducedMotion ? undefined : { y: titleY2 }}>
             <Reveal delay={INTRO_DELAY + 0.09} inView={false}>
               <span className={`${styles.line} ${styles.outline}`}>
                 <LiquidText text={dict.hero.titleLine2} />
               </span>
             </Reveal>
-          </motion.div>
+          </motion.div>{' '}
           <motion.div style={reducedMotion ? undefined : { y: titleY3 }}>
             <Reveal delay={INTRO_DELAY + 0.18} inView={false}>
               <span className={`${styles.line} ${styles.serifLine} serif`}>

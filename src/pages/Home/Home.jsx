@@ -13,16 +13,44 @@ import { useLanguage } from '../../context/languageContext';
 import useSoftScrollSnap from '../../hooks/useSoftScrollSnap';
 import useActiveSection from '../../hooks/useActiveSection';
 import { setAmbientSection } from '../../lib/sound';
+import { SITE_URL, SITE_NAME, OG_IMAGE, PERSON_ID, WEBSITE_ID } from '../../lib/site';
+import { projectsData } from '../../data/projectsData';
 
 const SECTION_IDS = ['accueil', 'projets', 'apropos', 'parcours', 'stack'];
-const SITE_URL = 'https://clementinly.fr';
-const OG_IMAGE = `${SITE_URL}/assets/og/og-image.jpg`;
 
 const Home = () => {
   const location = useLocation();
   const lenis = useLenis();
   const { reducedMotion } = usePreferences();
   const { lang, dict } = useLanguage();
+
+  const structuredData = {
+    '@context': 'https://schema.org/',
+    '@graph': [
+      {
+        '@type': 'ProfilePage',
+        '@id': `${SITE_URL}/#profilepage`,
+        url: `${SITE_URL}/`,
+        name: dict.meta.title,
+        description: dict.meta.description,
+        inLanguage: lang === 'fr' ? 'fr-FR' : 'en-US',
+        isPartOf: { '@id': WEBSITE_ID },
+        mainEntity: { '@id': PERSON_ID },
+        about: { '@id': PERSON_ID },
+      },
+      {
+        '@type': 'ItemList',
+        name: dict.projects.sectionLabel,
+        numberOfItems: projectsData.length,
+        itemListElement: projectsData.map((project, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: project.title,
+          url: `${SITE_URL}/projet/${project.id}`,
+        })),
+      },
+    ],
+  };
 
   useSoftScrollSnap(lenis, '#accueil, #projets, #apropos, #parcours, #stack', !reducedMotion);
 
@@ -52,17 +80,20 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={SITE_URL + '/'} />
         <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-        <meta property="og:site_name" content="Clémentin Ly | Portfolio" />
+        <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:title" content={dict.meta.title} />
         <meta property="og:description" content={dict.meta.description} />
         <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={dict.meta.title} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={dict.meta.title} />
         <meta name="twitter:description" content={dict.meta.description} />
         <meta name="twitter:image" content={OG_IMAGE} />
+
+        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       </Helmet>
 
       <ParallaxLines />

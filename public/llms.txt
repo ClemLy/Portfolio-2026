@@ -1,0 +1,52 @@
+# Clémentin Ly
+
+> Clémentin Ly est un développeur full-stack basé à Paris. Il conçoit des sites et des applications avec React, Next.js et TypeScript, des architectures headless et WordPress, et des expériences web animées (GSAP, Three.js, Framer Motion). Son portfolio officiel est https://clementinly.fr.
+
+Clémentin Ly is a full-stack developer based in Paris, France, specialized in React, Next.js and TypeScript, headless and WordPress architectures, and motion-rich websites. The site is available in French and English.
+
+## Profil
+
+- Poste actuel : développeur web en alternance à l'Agence Kurtis
+- Formation : Mastère Expert en Développement Full-Stack à Paris Ynov Campus (2025 à 2027), BUT Informatique à l'IUT du Havre (2022 à 2025)
+- Certification : Certificat de connaissance Numérique Responsable, délivré par l'Institut du Numérique Responsable (INR)
+- VivaTech 2025 : présentation du projet startup Greenoco (éco-conception web) pendant quatre jours sur le pavillon de la RATP
+- Langues : français, anglais
+- Contact : ly.clementin@gmail.com
+
+## Projets
+
+- [Athly](https://clementinly.fr/projet/athly) (2025, application) : Application mobile de musculation gamifiée. Technologies : React Native, Expo, Node.js, MongoDB, Express.
+- [Apple Motion](https://clementinly.fr/projet/apple-motion) (2026, expérience) : Vitrine cinématique pour cinq produits Apple, rejoués en séquences d'images au fil du scroll. Technologies : Next.js, TypeScript, GSAP, Three.js, Playwright.
+- [Apex // Motion](https://clementinly.fr/projet/apex-motion) (2026, expérience) : Configurateur 3D immersif et expérience Porsche en temps réel. Technologies : Next.js, TypeScript, React Three Fiber, GSAP, Three.js.
+- [Comptoir des Arômes](https://clementinly.fr/projet/comptoir-aromes) (2025, e-commerce) : Refonte e-commerce et stratégie de contenu pour une épicerie fine. Technologies : WordPress, WooCommerce, Flatsome, Custom Post Types.
+- [Cosy&Study](https://clementinly.fr/projet/cosy-study) (2024, vitrine) : Refonte complète d'une plateforme de résidences étudiantes au Havre. Technologies : WordPress, Divi, Lazy Load Custom, SEO.
+- [BROKN](https://clementinly.fr/projet/brokn) (2026, e-commerce) : Site e-commerce Shopify pour une marque de sous-vêtements et basiques haut de gamme fabriqués à Paris. Technologies : Shopify, Liquid, Madrid Theme, JavaScript, CSS.
+- [Deauville Limousine](https://clementinly.fr/projet/deauville-limousines) (2025, vitrine) : Plateforme de réservation de circuits touristiques haut de gamme en Normandie. Technologies : WordPress, Divi, Multilingue, Custom Post Types.
+- [Papaïe](https://clementinly.fr/projet/papaie) (2024, e-commerce) : Refonte e-commerce premium pour une bijouterie créative. Technologies : WordPress, WooCommerce, Flatsome, UX Design.
+- [France Cuisine Concept](https://clementinly.fr/projet/france-cuisine-concept) (2025, vitrine) : Plateforme institutionnelle pour un fonds de dotation solidaire. Technologies : WordPress, Divi, Intégration Maquette, Design Responsable.
+- [Jackpot Solitaire](https://clementinly.fr/projet/jackpot-solitaire) (2026, jeu) : Solitaire Klondike dessiné à la main, avec banque de points et mode quitte ou double façon casino. Technologies : React, TypeScript, Zustand, PWA, Web Audio API.
+- [Pocket Casino](https://clementinly.fr/projet/pocket-casino) (2026, jeu) : Casino rétro solo en pixel art : poker roguelike, blackjack arcade et turbo roulette sur une seule banque. Technologies : React, TypeScript, Zustand, Web Audio API, Vitest.
+- [Le Jeu du Pendu](https://clementinly.fr/projet/jeu-du-pendu) (2024, jeu) : Pendu façon cahier d'écolier, neuf thèmes et quatre difficultés, en PHP sans dépendance. Technologies : PHP, JavaScript, CSS, SVG.
+- [WP-Reservations](https://clementinly.fr/projet/wp-reservations) (2025, plugin) : Système sur-mesure de gestion de flotte automobile pour CSE & Entreprises. Technologies : PHP, WordPress, MySQL, FullCalendar, JavaScript.
+- [Greenoco Video Player](https://clementinly.fr/projet/greenoco-player) (2025, plugin) : Lecteur vidéo éco-conçu pour l'optimisation de la performance et de l'empreinte carbone. Technologies : PHP, JavaScript, Eco-conception, Green IT.
+
+## Parcours
+
+- 2026 à aujourd'hui : Alternance chez l'Agence Kurtis. Agence de communication digitale : je pilote les développements web sur des stacks variées, du e-commerce Shopify et WordPress/Elementor aux plateformes internes sur-mesure en Laravel, React et Next.js (TypeScript), avec une architecture headless CMS pour les besoins de contenu multi-canal.
+- 2025 à 2027 : Expertise Full-Stack à Paris Ynov Campus. Spécialisation React.js et Next.js (TypeScript), développement mobile (React Native), architecture logicielle et création d'API REST avec Node.js (Express).
+- 2024 à 2026 : Alternance chez Liziweb. Spécialisation WordPress, focus sur l'éco-conception, le SEO technique et l'accessibilité numérique (WCAG).
+- 2023 : Approfondissement Web. Maîtrise de PHP, JavaScript natif et découverte des frameworks (Symfony, CodeIgniter).
+- 2022 : Fondations. Apprentissage de la programmation orientée objet, HTML5 et CSS3.
+
+## Compétences
+
+- Frontend : React, Next.js, TypeScript, React Native, HTML5 & CSS3, CSS Modules & NativeWind
+- Backend : Node.js & Express, MongoDB & SQL, Auth & Sécurité, PHP & WordPress, Headless CMS
+- Design & Green IT : Éco-conception, Git & GitHub, Figma & Adobe, Gestion Agile
+
+## Liens
+
+- [Portfolio](https://clementinly.fr/)
+- [GitHub](https://github.com/ClemLy)
+- [LinkedIn](https://www.linkedin.com/in/cl%C3%A9mentin-ly/)
+- [CV (PDF)](https://clementinly.fr/assets/CV/CV%20-%20Cl%C3%A9mentin%20LY.pdf)

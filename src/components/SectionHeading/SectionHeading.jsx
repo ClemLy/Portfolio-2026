@@ -16,13 +16,15 @@ const letterVariants = {
 
 /* Titre de section collant : reste visible en haut pendant la lecture de la
    section, avec une typographie cinétique qui se réaligne lettre par lettre
-   à l'entrée dans le viewport */
+   à l'entrée dans le viewport. Seul le libellé est le vrai <h2> : le numéro
+   et le compteur sont du décor, ils ne doivent pas polluer le titre lu par
+   les moteurs de recherche et les lecteurs d'écran. */
 const SectionHeading = ({ index, label, count }) => {
   const { reducedMotion } = usePreferences();
   const letters = label.split('');
 
   return (
-    <h2 className={`${styles.heading} section-heading-sticky`}>
+    <div className={`${styles.heading} section-heading-sticky`}>
       <motion.span
         className={styles.rule}
         aria-hidden="true"
@@ -34,8 +36,10 @@ const SectionHeading = ({ index, label, count }) => {
       <span className={styles.watermark} aria-hidden="true">
         {index}
       </span>
-      <span className={styles.index}>{index}</span>
-      <span className={styles.label}>
+      <span className={styles.index} aria-hidden="true">
+        {index}
+      </span>
+      <h2 className={styles.label}>
         {reducedMotion ? (
           label
         ) : (
@@ -57,9 +61,9 @@ const SectionHeading = ({ index, label, count }) => {
             ))}
           </motion.span>
         )}
-      </span>
+      </h2>
       {count && <span className={styles.count}>{count}</span>}
-    </h2>
+    </div>
   );
 };
 

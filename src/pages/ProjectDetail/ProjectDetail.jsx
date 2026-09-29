@@ -15,6 +15,7 @@ import { projectsData } from '../../data/projectsData';
 import { localize } from '../../i18n/localize';
 import ResponsiveImage from '../../components/ResponsiveImage/ResponsiveImage';
 import NotFound from '../NotFound/NotFound';
+import { SITE_URL, SITE_NAME, PERSON_ID, WEBSITE_ID } from '../../lib/site';
 import styles from './ProjectDetail.module.css';
 
 const ProjectDetail = () => {
@@ -63,6 +64,8 @@ const ProjectDetail = () => {
   if (!rawProject) return <NotFound />;
 
   const isGithub = project.link?.includes('github.com');
+  const projectUrl = `${SITE_URL}/projet/${project.id}`;
+  const projectImage = `${SITE_URL}${project.image}`;
 
   const goToSection = (sectionId) => scrollTo(lenis, `#${sectionId}`, { offset: -96 });
 
@@ -77,22 +80,22 @@ const ProjectDetail = () => {
       <Helmet>
         <html lang={lang} />
         <title>{pd.etudeDeCas(project.title)}</title>
-        <meta name="description" content={`${project.title} : ${project.subtitle}`} />
-        <link rel="canonical" href={`https://clementinly.fr/projet/${project.id}`} />
+        <meta name="description" content={pd.metaDescription(project)} />
+        <link rel="canonical" href={projectUrl} />
 
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://clementinly.fr/projet/${project.id}`} />
+        <meta property="og:url" content={projectUrl} />
         <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-        <meta property="og:site_name" content="Clémentin Ly | Portfolio" />
+        <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:title" content={pd.etudeDeCas(project.title)} />
-        <meta property="og:description" content={project.subtitle} />
-        <meta property="og:image" content={`https://clementinly.fr${project.image}`} />
+        <meta property="og:description" content={pd.metaDescription(project)} />
+        <meta property="og:image" content={projectImage} />
         <meta property="og:image:alt" content={project.title} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pd.etudeDeCas(project.title)} />
-        <meta name="twitter:description" content={project.subtitle} />
-        <meta name="twitter:image" content={`https://clementinly.fr${project.image}`} />
+        <meta name="twitter:description" content={pd.metaDescription(project)} />
+        <meta name="twitter:image" content={projectImage} />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -100,19 +103,27 @@ const ProjectDetail = () => {
             '@graph': [
               {
                 '@type': 'CreativeWork',
+                '@id': `${projectUrl}#projet`,
                 name: project.title,
+                headline: pd.etudeDeCas(project.title),
                 description: project.subtitle,
-                url: `https://clementinly.fr/projet/${project.id}`,
-                image: `https://clementinly.fr${project.image}`,
+                abstract: project.problematique,
+                url: projectUrl,
+                image: projectImage,
+                dateCreated: project.year,
+                genre: project.category,
+                inLanguage: lang === 'fr' ? 'fr-FR' : 'en-US',
                 keywords: project.techs.join(', '),
-                author: { '@id': 'https://clementinly.fr/#person' },
+                author: { '@id': PERSON_ID },
+                creator: { '@id': PERSON_ID },
+                isPartOf: { '@id': WEBSITE_ID },
                 ...(project.link ? { sameAs: [project.link] } : {}),
               },
               {
                 '@type': 'BreadcrumbList',
                 itemListElement: [
-                  { '@type': 'ListItem', position: 1, name: dict.nav.projets, item: 'https://clementinly.fr/' },
-                  { '@type': 'ListItem', position: 2, name: project.title, item: `https://clementinly.fr/projet/${project.id}` },
+                  { '@type': 'ListItem', position: 1, name: dict.nav.projets, item: `${SITE_URL}/` },
+                  { '@type': 'ListItem', position: 2, name: project.title, item: projectUrl },
                 ],
               },
             ],
@@ -219,7 +230,7 @@ const ProjectDetail = () => {
         <section className={styles.caseGrid}>
           <Fade id="contexte" className={styles.caseBlock}>
             <h2 className={styles.caseHeading}>
-              <span className={styles.caseIndex}>01</span>
+              <span className={styles.caseIndex} aria-hidden="true">01</span>{' '}
               {pd.contexte}
             </h2>
             <InkText as="p" className={styles.caseText} text={project.problematique} />
@@ -227,7 +238,7 @@ const ProjectDetail = () => {
 
           <Fade id="solution" className={styles.caseBlock} delay={0.1}>
             <h2 className={styles.caseHeading}>
-              <span className={styles.caseIndex}>02</span>
+              <span className={styles.caseIndex} aria-hidden="true">02</span>{' '}
               {pd.solution}
             </h2>
             <InkText as="p" className={styles.caseText} text={project.solution} />
@@ -238,7 +249,7 @@ const ProjectDetail = () => {
           <section id="architecture" className={styles.architecture}>
             <Fade>
               <h2 className={styles.caseHeading}>
-                <span className={styles.caseIndex}>03</span>
+                <span className={styles.caseIndex} aria-hidden="true">03</span>{' '}
                 {pd.architectureTechnique}
               </h2>
             </Fade>
@@ -257,7 +268,7 @@ const ProjectDetail = () => {
           <section id="galerie" className={styles.gallery}>
             <Fade>
               <h2 className={styles.caseHeading}>
-                <span className={styles.caseIndex}>04</span>
+                <span className={styles.caseIndex} aria-hidden="true">04</span>{' '}
                 {pd.apercus}
               </h2>
             </Fade>
@@ -290,7 +301,7 @@ const ProjectDetail = () => {
           <section id="performance" className={styles.lighthouse}>
             <Fade>
               <h2 className={styles.caseHeading}>
-                <span className={styles.caseIndex}>{project.gallery?.length ? '05' : '04'}</span>
+                <span className={styles.caseIndex} aria-hidden="true">{project.gallery?.length ? '05' : '04'}</span>{' '}
                 {pd.performanceMesuree}
               </h2>
             </Fade>

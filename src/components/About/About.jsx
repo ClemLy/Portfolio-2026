@@ -46,7 +46,14 @@ const Counter = ({ to }) => {
     return controls.stop;
   }, [inView, to, count]);
 
-  return <motion.span ref={ref}>{display}</motion.span>;
+  return (
+    <>
+      <motion.span ref={ref} aria-hidden="true">
+        {display}
+      </motion.span>
+      <span className="visually-hidden">{to}</span>
+    </>
+  );
 };
 
 /* Note en marge : apparaît au fil du défilement, comme une annotation
