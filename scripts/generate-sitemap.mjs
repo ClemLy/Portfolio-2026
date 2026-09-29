@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { projectsData } from '../src/data/projectsData.js';
 
-const SITE_URL = 'https://clementin-portfolio.vercel.app';
+const SITE_URL = 'https://clementinly.fr';
 const OUT_PATH = path.resolve(fileURLToPath(import.meta.url), '../../public/sitemap.xml');
 const today = new Date().toISOString().slice(0, 10);
 

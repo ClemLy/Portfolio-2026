@@ -15,7 +15,7 @@ import useActiveSection from '../../hooks/useActiveSection';
 import { setAmbientSection } from '../../lib/sound';
 
 const SECTION_IDS = ['accueil', 'projets', 'apropos', 'parcours', 'stack'];
-const SITE_URL = 'https://clementin-portfolio.vercel.app';
+const SITE_URL = 'https://clementinly.fr';
 const OG_IMAGE = `${SITE_URL}/assets/og/og-image.jpg`;
 
 const Home = () => {

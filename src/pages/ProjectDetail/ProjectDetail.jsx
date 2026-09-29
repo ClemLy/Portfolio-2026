@@ -78,21 +78,21 @@ const ProjectDetail = () => {
         <html lang={lang} />
         <title>{pd.etudeDeCas(project.title)}</title>
         <meta name="description" content={`${project.title} : ${project.subtitle}`} />
-        <link rel="canonical" href={`https://clementin-portfolio.vercel.app/projet/${project.id}`} />
+        <link rel="canonical" href={`https://clementinly.fr/projet/${project.id}`} />
 
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://clementin-portfolio.vercel.app/projet/${project.id}`} />
+        <meta property="og:url" content={`https://clementinly.fr/projet/${project.id}`} />
         <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
         <meta property="og:site_name" content="Clémentin Ly | Portfolio" />
         <meta property="og:title" content={pd.etudeDeCas(project.title)} />
         <meta property="og:description" content={project.subtitle} />
-        <meta property="og:image" content={`https://clementin-portfolio.vercel.app${project.image}`} />
+        <meta property="og:image" content={`https://clementinly.fr${project.image}`} />
         <meta property="og:image:alt" content={project.title} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pd.etudeDeCas(project.title)} />
         <meta name="twitter:description" content={project.subtitle} />
-        <meta name="twitter:image" content={`https://clementin-portfolio.vercel.app${project.image}`} />
+        <meta name="twitter:image" content={`https://clementinly.fr${project.image}`} />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -102,17 +102,17 @@ const ProjectDetail = () => {
                 '@type': 'CreativeWork',
                 name: project.title,
                 description: project.subtitle,
-                url: `https://clementin-portfolio.vercel.app/projet/${project.id}`,
-                image: `https://clementin-portfolio.vercel.app${project.image}`,
+                url: `https://clementinly.fr/projet/${project.id}`,
+                image: `https://clementinly.fr${project.image}`,
                 keywords: project.techs.join(', '),
-                author: { '@id': 'https://clementin-portfolio.vercel.app/#person' },
+                author: { '@id': 'https://clementinly.fr/#person' },
                 ...(project.link ? { sameAs: [project.link] } : {}),
               },
               {
                 '@type': 'BreadcrumbList',
                 itemListElement: [
-                  { '@type': 'ListItem', position: 1, name: dict.nav.projets, item: 'https://clementin-portfolio.vercel.app/' },
-                  { '@type': 'ListItem', position: 2, name: project.title, item: `https://clementin-portfolio.vercel.app/projet/${project.id}` },
+                  { '@type': 'ListItem', position: 1, name: dict.nav.projets, item: 'https://clementinly.fr/' },
+                  { '@type': 'ListItem', position: 2, name: project.title, item: `https://clementinly.fr/projet/${project.id}` },
                 ],
               },
             ],
