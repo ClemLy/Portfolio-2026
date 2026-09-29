@@ -30,14 +30,16 @@ import { personSchema, websiteSchema } from './lib/site';
    fallback vide le temps du téléchargement. ProjectDetail et NotFound ne
    pèsent que quelques Ko ; le gros morceau (Three.js) reste scindé. */
 
-/* Remonte en haut de page à chaque navigation (y compris précédent/suivant) */
+/* Remonte en haut de page à chaque navigation (y compris précédent/suivant),
+   sauf lors d'un changement de langue qui garde la position de lecture */
 const ScrollReset = () => {
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
   const lenis = useLenis();
+  const keepScroll = Boolean(state?.keepScroll);
 
   useEffect(() => {
-    scrollTo(lenis, 0, { immediate: true });
-  }, [pathname, lenis]);
+    if (!keepScroll) scrollTo(lenis, 0, { immediate: true });
+  }, [pathname, lenis, keepScroll]);
 
   return null;
 };
@@ -83,6 +85,8 @@ const AppShell = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projet/:id" element={<ProjectDetail />} />
+              <Route path="/en" element={<Home />} />
+              <Route path="/en/projet/:id" element={<ProjectDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
 

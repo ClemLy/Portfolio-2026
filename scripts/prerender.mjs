@@ -10,8 +10,9 @@
  * font pas, et ne voyaient donc ni le contenu ni les balises propres à
  * chaque projet.
  *
- * Écrit dist/index.html, dist/projet/<id>.html (servis sans extension grâce
- * à cleanUrls dans vercel.json) et dist/404.html.
+ * Écrit dist/index.html, dist/projet/<id>.html, leurs équivalents anglais
+ * dist/en.html et dist/en/projet/<id>.html (servis sans extension grâce à
+ * cleanUrls dans vercel.json) et dist/404.html.
  */
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import path from 'node:path';
@@ -32,6 +33,8 @@ const { render } = await import(pathToFileURL(path.join(SSR_DIR, 'entry-server.j
 const pages = [
   { url: '/', file: 'index.html' },
   ...projectsData.map((project) => ({ url: `/projet/${project.id}`, file: `projet/${project.id}.html` })),
+  { url: '/en', file: 'en.html' },
+  ...projectsData.map((project) => ({ url: `/en/projet/${project.id}`, file: `en/projet/${project.id}.html` })),
   { url: '/404', file: '404.html' },
 ];
 

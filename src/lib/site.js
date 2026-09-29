@@ -1,3 +1,5 @@
+import { localizePath } from '../i18n/paths.js';
+
 export const SITE_URL = 'https://clementinly.fr';
 export const SITE_NAME = 'Clémentin Ly | Portfolio';
 export const OG_IMAGE = `${SITE_URL}/assets/og/og-image.jpg`;
@@ -7,6 +9,21 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/cl%C3%A9mentin-ly/';
 
 export const PERSON_ID = `${SITE_URL}/#person`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
+
+export const pageUrl = (path, lang) => {
+  const localized = localizePath(path, lang);
+  return localized === '/' ? `${SITE_URL}/` : SITE_URL + localized;
+};
+
+/* x-default : version servie aux internautes ni francophones ni anglophones */
+export const alternateUrls = (path) => [
+  { hrefLang: 'fr', href: pageUrl(path, 'fr') },
+  { hrefLang: 'en', href: pageUrl(path, 'en') },
+  { hrefLang: 'x-default', href: pageUrl(path, 'en') },
+];
+
+export const LOCALES = { fr: 'fr_FR', en: 'en_US' };
+export const IN_LANGUAGE = { fr: 'fr-FR', en: 'en-US' };
 
 export const personSchema = {
   '@type': 'Person',
@@ -18,11 +35,19 @@ export const personSchema = {
   alternateName: 'Clementin Ly',
   jobTitle: 'Développeur Full-Stack',
   description:
-    "Développeur full-stack basé à Paris, spécialisé React, Next.js et TypeScript, architectures headless et WordPress, et sites animés (GSAP, Three.js, Framer Motion).",
+    "Développeur full-stack basé en Normandie et à Paris, spécialisé React, Next.js et TypeScript, architectures headless et WordPress, et sites animés (GSAP, Three.js, Framer Motion).",
   url: `${SITE_URL}/`,
   image: OG_IMAGE,
   email: `mailto:${EMAIL}`,
-  address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressCountry: 'FR' },
+  address: [
+    { '@type': 'PostalAddress', addressRegion: 'Normandie', addressCountry: 'FR' },
+    { '@type': 'PostalAddress', addressLocality: 'Paris', addressRegion: 'Île-de-France', addressCountry: 'FR' },
+  ],
+  homeLocation: { '@type': 'Place', name: 'Normandie, France' },
+  workLocation: [
+    { '@type': 'Place', name: 'Normandie, France' },
+    { '@type': 'Place', name: 'Paris, France' },
+  ],
   knowsLanguage: ['fr', 'en'],
   knowsAbout: [
     'React',

@@ -1,33 +1,20 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '../i18n/dictionary';
+import { langFromPath, localizePath } from '../i18n/paths';
 import { LanguageContext } from './languageContext';
 
-const readInitialLang = () => {
-  if (typeof window === 'undefined') return 'fr';
-  const stored = window.localStorage.getItem('language');
-  if (stored === 'fr' || stored === 'en') return stored;
-  return navigator.language?.toLowerCase().startsWith('fr') ? 'fr' : 'en';
-};
-
-/* Langue du site : fr par défaut, en sinon détectée depuis le navigateur,
-   toujours persistée une fois choisie manuellement */
+/* Changer de langue ouvre la même page dans l'autre langue, sans remonter en haut */
 const LanguageProvider = ({ children }) => {
-  const [lang, setLangState] = useState(readInitialLang);
-
-  const setLang = useCallback((next) => {
-    setLangState(next);
-    window.localStorage.setItem('language', next);
-    document.documentElement.setAttribute('lang', next);
-  }, []);
+  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
+  const lang = langFromPath(pathname);
 
   const toggleLang = useCallback(() => {
-    setLang(lang === 'fr' ? 'en' : 'fr');
-  }, [lang, setLang]);
+    navigate(localizePath(pathname, lang === 'fr' ? 'en' : 'fr') + hash, { state: { keepScroll: true } });
+  }, [lang, pathname, hash, navigate]);
 
-  const value = useMemo(
-    () => ({ lang, setLang, toggleLang, dict: dictionary[lang] }),
-    [lang, setLang, toggleLang]
-  );
+  const value = useMemo(() => ({ lang, toggleLang, dict: dictionary[lang] }), [lang, toggleLang]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
