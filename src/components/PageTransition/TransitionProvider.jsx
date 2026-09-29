@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLenis, scrollTo } from '../SmoothScroll/lenisContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useLanguage } from '../../context/languageContext';
+import { localizePath } from '../../i18n/paths';
 import { TransitionContext } from './transitionContext';
 import styles from './TransitionProvider.module.css';
 
@@ -21,6 +23,7 @@ const TransitionProvider = ({ children }) => {
   const location = useLocation();
   const lenis = useLenis();
   const { reducedMotion } = usePreferences();
+  const { lang } = useLanguage();
   const [phase, setPhase] = useState('idle');
   /* Rideau simple pour la navigation entre pages, écran scindé réservé au
      tout premier chargement */
@@ -47,7 +50,7 @@ const TransitionProvider = ({ children }) => {
 
   const navigateTo = useCallback(
     (to) => {
-      const [path, hash] = to.split('#');
+      const [path, hash] = localizePath(to, lang).split('#');
       const targetPath = path || '/';
 
       /* Même page : simple défilement vers l'ancre ou le haut */
@@ -73,7 +76,7 @@ const TransitionProvider = ({ children }) => {
         }, 90);
       }, CURTAIN_DURATION * 1000 + 50);
     },
-    [location.pathname, lenis, reducedMotion, navigate, later]
+    [location.pathname, lang, lenis, reducedMotion, navigate, later]
   );
 
   return (

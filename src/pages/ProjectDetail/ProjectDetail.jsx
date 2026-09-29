@@ -15,7 +15,16 @@ import { projectsData } from '../../data/projectsData';
 import { localize } from '../../i18n/localize';
 import ResponsiveImage from '../../components/ResponsiveImage/ResponsiveImage';
 import NotFound from '../NotFound/NotFound';
-import { SITE_URL, SITE_NAME, PERSON_ID, WEBSITE_ID } from '../../lib/site';
+import {
+  SITE_URL,
+  SITE_NAME,
+  PERSON_ID,
+  WEBSITE_ID,
+  pageUrl,
+  alternateUrls,
+  LOCALES,
+  IN_LANGUAGE,
+} from '../../lib/site';
 import styles from './ProjectDetail.module.css';
 
 const ProjectDetail = () => {
@@ -64,7 +73,8 @@ const ProjectDetail = () => {
   if (!rawProject) return <NotFound />;
 
   const isGithub = project.link?.includes('github.com');
-  const projectUrl = `${SITE_URL}/projet/${project.id}`;
+  const projectPath = `/projet/${project.id}`;
+  const projectUrl = pageUrl(projectPath, lang);
   const projectImage = `${SITE_URL}${project.image}`;
 
   const goToSection = (sectionId) => scrollTo(lenis, `#${sectionId}`, { offset: -96 });
@@ -82,10 +92,14 @@ const ProjectDetail = () => {
         <title>{pd.etudeDeCas(project.title)}</title>
         <meta name="description" content={pd.metaDescription(project)} />
         <link rel="canonical" href={projectUrl} />
+        {alternateUrls(projectPath).map((alt) => (
+          <link key={alt.hrefLang} rel="alternate" hrefLang={alt.hrefLang} href={alt.href} />
+        ))}
 
         <meta property="og:type" content="article" />
         <meta property="og:url" content={projectUrl} />
-        <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+        <meta property="og:locale" content={LOCALES[lang]} />
+        <meta property="og:locale:alternate" content={LOCALES[lang === 'fr' ? 'en' : 'fr']} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:title" content={pd.etudeDeCas(project.title)} />
         <meta property="og:description" content={pd.metaDescription(project)} />
@@ -112,7 +126,7 @@ const ProjectDetail = () => {
                 image: projectImage,
                 dateCreated: project.year,
                 genre: project.category,
-                inLanguage: lang === 'fr' ? 'fr-FR' : 'en-US',
+                inLanguage: IN_LANGUAGE[lang],
                 keywords: project.techs.join(', '),
                 author: { '@id': PERSON_ID },
                 creator: { '@id': PERSON_ID },
@@ -122,7 +136,7 @@ const ProjectDetail = () => {
               {
                 '@type': 'BreadcrumbList',
                 itemListElement: [
-                  { '@type': 'ListItem', position: 1, name: dict.nav.projets, item: `${SITE_URL}/` },
+                  { '@type': 'ListItem', position: 1, name: dict.nav.projets, item: pageUrl('/', lang) },
                   { '@type': 'ListItem', position: 2, name: project.title, item: projectUrl },
                 ],
               },

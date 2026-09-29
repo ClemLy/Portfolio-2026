@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://clementinly.fr/</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/og/og-image.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/og/og-image.jpg</image:loc>
     </image:image>
@@ -13,6 +28,29 @@
     <loc>https://clementinly.fr/projet/athly</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/athly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/athly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/athly" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/athly/athly.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/athly/athly-1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/athly/athly-2.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/athly/athly-3.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/athly</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/athly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/athly" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/athly" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/athly/athly.webp</image:loc>
     </image:image>
@@ -30,6 +68,32 @@
     <loc>https://clementinly.fr/projet/apple-motion</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/apple-motion" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/apple-motion" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/apple-motion" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apple-motion/apple-motion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apple-motion/apple-motion-iphone.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apple-motion/apple-motion-macbook-pro.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apple-motion/apple-motion-macbook-neo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apple-motion/apple-motion-airpods-pro.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/apple-motion</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/apple-motion" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/apple-motion" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/apple-motion" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/apple-motion/apple-motion.webp</image:loc>
     </image:image>
@@ -50,6 +114,35 @@
     <loc>https://clementinly.fr/projet/apex-motion</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/apex-motion" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/apex-motion" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/apex-motion" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion-studio.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion-lap-telemetry.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion-aero-flow.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion-particle-reveal.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion-heritage.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/apex-motion</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/apex-motion" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/apex-motion" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/apex-motion" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/apex-motion/apex-motion.webp</image:loc>
     </image:image>
@@ -73,6 +166,20 @@
     <loc>https://clementinly.fr/projet/comptoir-aromes</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/comptoir-aromes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/comptoir-aromes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/comptoir-aromes" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/comptoir-aromes/comptoir-aromes.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/comptoir-aromes</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/comptoir-aromes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/comptoir-aromes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/comptoir-aromes" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/comptoir-aromes/comptoir-aromes.webp</image:loc>
     </image:image>
@@ -81,6 +188,20 @@
     <loc>https://clementinly.fr/projet/cosy-study</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/cosy-study" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/cosy-study" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/cosy-study" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/cosy-study/cosy-study.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/cosy-study</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/cosy-study" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/cosy-study" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/cosy-study" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/cosy-study/cosy-study.webp</image:loc>
     </image:image>
@@ -89,6 +210,29 @@
     <loc>https://clementinly.fr/projet/brokn</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/brokn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/brokn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/brokn" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/brokn/brokn.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/brokn/brokn-produit.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/brokn/brokn-collection.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/brokn/brokn-atelier.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/brokn</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/brokn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/brokn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/brokn" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/brokn/brokn.webp</image:loc>
     </image:image>
@@ -106,6 +250,20 @@
     <loc>https://clementinly.fr/projet/deauville-limousines</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/deauville-limousines" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/deauville-limousines" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/deauville-limousines" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/deauville-limousine/deauville-limousine.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/deauville-limousines</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/deauville-limousines" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/deauville-limousines" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/deauville-limousines" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/deauville-limousine/deauville-limousine.webp</image:loc>
     </image:image>
@@ -114,6 +272,20 @@
     <loc>https://clementinly.fr/projet/papaie</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/papaie" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/papaie" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/papaie" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/papaie/papaie.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/papaie</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/papaie" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/papaie" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/papaie" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/papaie/papaie.webp</image:loc>
     </image:image>
@@ -122,6 +294,20 @@
     <loc>https://clementinly.fr/projet/france-cuisine-concept</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/france-cuisine-concept" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/france-cuisine-concept" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/france-cuisine-concept" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/fcc/fcc.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/france-cuisine-concept</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/france-cuisine-concept" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/france-cuisine-concept" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/france-cuisine-concept" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/fcc/fcc.webp</image:loc>
     </image:image>
@@ -130,6 +316,38 @@
     <loc>https://clementinly.fr/projet/jackpot-solitaire</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/jackpot-solitaire" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/jackpot-solitaire" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/jackpot-solitaire" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire-partie.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire-jackpot.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire-regles.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire-stats.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire-themes.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/jackpot-solitaire</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/jackpot-solitaire" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/jackpot-solitaire" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/jackpot-solitaire" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/jackpot-solitaire/jackpot-solitaire.webp</image:loc>
     </image:image>
@@ -156,6 +374,50 @@
     <loc>https://clementinly.fr/projet/pocket-casino</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/pocket-casino" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/pocket-casino" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/pocket-casino" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-poker.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-boutique-de-manche.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-blackjack.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-roulette.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-quitte-ou-double.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-carnet-de-regles.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-trophees.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-magasin.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-banqueroute.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino-mobile.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/pocket-casino</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/pocket-casino" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/pocket-casino" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/pocket-casino" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/pocket-casino/pocket-casino.webp</image:loc>
     </image:image>
@@ -194,6 +456,32 @@
     <loc>https://clementinly.fr/projet/jeu-du-pendu</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/jeu-du-pendu" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/jeu-du-pendu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/jeu-du-pendu" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jeu-du-pendu/jeu-du-pendu.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jeu-du-pendu/jeu-du-pendu-partie.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jeu-du-pendu/jeu-du-pendu-victoire.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jeu-du-pendu/jeu-du-pendu-partie-clair.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/jeu-du-pendu/jeu-du-pendu-regles.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/jeu-du-pendu</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/jeu-du-pendu" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/jeu-du-pendu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/jeu-du-pendu" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/jeu-du-pendu/jeu-du-pendu.webp</image:loc>
     </image:image>
@@ -214,6 +502,20 @@
     <loc>https://clementinly.fr/projet/wp-reservations</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/wp-reservations" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/wp-reservations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/wp-reservations" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/wp-reservations/wp-reservations.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/wp-reservations</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/wp-reservations" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/wp-reservations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/wp-reservations" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/wp-reservations/wp-reservations.webp</image:loc>
     </image:image>
@@ -222,6 +524,20 @@
     <loc>https://clementinly.fr/projet/greenoco-player</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/greenoco-player" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/greenoco-player" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/greenoco-player" />
+    <image:image>
+      <image:loc>https://clementinly.fr/assets/projets/gvp/gvp.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clementinly.fr/en/projet/greenoco-player</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clementinly.fr/projet/greenoco-player" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clementinly.fr/en/projet/greenoco-player" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://clementinly.fr/en/projet/greenoco-player" />
     <image:image>
       <image:loc>https://clementinly.fr/assets/projets/gvp/gvp.webp</image:loc>
     </image:image>

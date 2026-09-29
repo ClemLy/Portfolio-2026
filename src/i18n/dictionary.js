@@ -1,9 +1,9 @@
 export const dictionary = {
   fr: {
     meta: {
-      title: 'Clémentin Ly, développeur full-stack React & Next.js à Paris',
+      title: 'Clémentin Ly, développeur React & Next.js en Normandie et à Paris',
       description:
-        "Portfolio de Clémentin Ly, développeur full-stack à Paris : React, Next.js et TypeScript, architectures headless et WordPress, sites animés avec GSAP et Three.js.",
+        'Portfolio de Clémentin Ly, développeur full-stack en Normandie et à Paris : sites et applications React, Next.js et WordPress, rapides et accessibles.',
     },
     skipLink: 'Aller au contenu',
     awayTitle: 'On se recroise ?',
@@ -28,7 +28,7 @@ export const dictionary = {
     },
     hero: {
       name: 'Clémentin Ly',
-      location: 'Basé à Paris, France',
+      location: 'Basé en Normandie et à Paris',
       titleLine1: 'Développeur',
       titleLine2: 'full-stack',
       titleLine3: 'créatif & responsable',
@@ -106,7 +106,7 @@ export const dictionary = {
       scrollTopAria: 'Retour en haut de page',
       copiedToast: 'Adresse copiée dans le presse-papier',
       legal: (year) => `© ${year} Clémentin Ly. Tous droits réservés.`,
-      craft: 'Conçu et développé à Paris, avec sobriété.',
+      craft: 'Conçu et développé entre la Normandie et Paris, avec sobriété.',
     },
     contactForm: {
       name: 'Nom',
@@ -205,9 +205,9 @@ export const dictionary = {
 
   en: {
     meta: {
-      title: 'Clémentin Ly, Full-Stack React & Next.js Developer in Paris',
+      title: 'Clémentin Ly, React & Next.js Developer in Normandy and Paris',
       description:
-        'Portfolio of Clémentin Ly, full-stack developer in Paris: React, Next.js and TypeScript, headless and WordPress architectures, motion-rich sites built with GSAP and Three.js.',
+        'Portfolio of Clémentin Ly, full-stack developer in Normandy and Paris, France: fast, accessible websites and apps built with React, Next.js and WordPress.',
     },
     skipLink: 'Skip to content',
     awayTitle: 'See you soon?',
@@ -232,7 +232,7 @@ export const dictionary = {
     },
     hero: {
       name: 'Clémentin Ly',
-      location: 'Based in Paris, France',
+      location: 'Based in Normandy and Paris',
       titleLine1: 'Full-stack',
       titleLine2: 'developer',
       titleLine3: 'creative & responsible',
@@ -310,7 +310,7 @@ export const dictionary = {
       scrollTopAria: 'Back to top',
       copiedToast: 'Address copied to clipboard',
       legal: (year) => `© ${year} Clémentin Ly. All rights reserved.`,
-      craft: 'Designed and built in Paris, with restraint.',
+      craft: 'Designed and built between Normandy and Paris, with restraint.',
     },
     contactForm: {
       name: 'Name',

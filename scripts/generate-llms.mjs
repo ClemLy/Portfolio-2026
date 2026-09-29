@@ -42,9 +42,9 @@ const stack = techGroups
 
 const content = `# Clémentin Ly
 
-> Clémentin Ly est un développeur full-stack basé à Paris. Il conçoit des sites et des applications avec React, Next.js et TypeScript, des architectures headless et WordPress, et des expériences web animées (GSAP, Three.js, Framer Motion). Son portfolio officiel est ${SITE_URL}.
+> Clémentin Ly est un développeur full-stack basé en Normandie et à Paris. Il conçoit des sites et des applications avec React, Next.js et TypeScript, des architectures headless et WordPress, et des expériences web animées (GSAP, Three.js, Framer Motion). Son portfolio officiel est ${SITE_URL}.
 
-Clémentin Ly is a full-stack developer based in Paris, France, specialized in React, Next.js and TypeScript, headless and WordPress architectures, and motion-rich websites. The site is available in French and English.
+Clémentin Ly is a full-stack developer based in Normandy and Paris, France, specialized in React, Next.js and TypeScript, headless and WordPress architectures, and motion-rich websites. The site is available in French (${SITE_URL}/) and English (${SITE_URL}/en).
 
 ## Profil
 
@@ -52,6 +52,7 @@ Clémentin Ly is a full-stack developer based in Paris, France, specialized in R
 - Formation : Mastère Expert en Développement Full-Stack à Paris Ynov Campus (2025 à 2027), BUT Informatique à l'IUT du Havre (2022 à 2025)
 - Certification : ${personSchema.hasCredential.name}, délivré par l'${personSchema.hasCredential.recognizedBy.name}
 - VivaTech 2025 : présentation du projet startup Greenoco (éco-conception web) pendant quatre jours sur le pavillon de la RATP
+- Localisation : Normandie et Paris (France)
 - Langues : français, anglais
 - Contact : ${EMAIL}
 
@@ -70,6 +71,7 @@ ${stack}
 ## Liens
 
 - [Portfolio](${SITE_URL}/)
+- [Portfolio (English)](${SITE_URL}/en)
 - [GitHub](${GITHUB_URL})
 - [LinkedIn](${LINKEDIN_URL})
 - [CV (PDF)](${CV_URL})

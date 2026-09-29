@@ -13,7 +13,16 @@ import { useLanguage } from '../../context/languageContext';
 import useSoftScrollSnap from '../../hooks/useSoftScrollSnap';
 import useActiveSection from '../../hooks/useActiveSection';
 import { setAmbientSection } from '../../lib/sound';
-import { SITE_URL, SITE_NAME, OG_IMAGE, PERSON_ID, WEBSITE_ID } from '../../lib/site';
+import {
+  SITE_NAME,
+  OG_IMAGE,
+  PERSON_ID,
+  WEBSITE_ID,
+  pageUrl,
+  alternateUrls,
+  LOCALES,
+  IN_LANGUAGE,
+} from '../../lib/site';
 import { projectsData } from '../../data/projectsData';
 
 const SECTION_IDS = ['accueil', 'projets', 'apropos', 'parcours', 'stack'];
@@ -23,17 +32,19 @@ const Home = () => {
   const lenis = useLenis();
   const { reducedMotion } = usePreferences();
   const { lang, dict } = useLanguage();
+  const url = pageUrl('/', lang);
+  const otherLang = lang === 'fr' ? 'en' : 'fr';
 
   const structuredData = {
     '@context': 'https://schema.org/',
     '@graph': [
       {
         '@type': 'ProfilePage',
-        '@id': `${SITE_URL}/#profilepage`,
-        url: `${SITE_URL}/`,
+        '@id': `${url}#profilepage`,
+        url,
         name: dict.meta.title,
         description: dict.meta.description,
-        inLanguage: lang === 'fr' ? 'fr-FR' : 'en-US',
+        inLanguage: IN_LANGUAGE[lang],
         isPartOf: { '@id': WEBSITE_ID },
         mainEntity: { '@id': PERSON_ID },
         about: { '@id': PERSON_ID },
@@ -46,7 +57,7 @@ const Home = () => {
           '@type': 'ListItem',
           position: index + 1,
           name: project.title,
-          url: `${SITE_URL}/projet/${project.id}`,
+          url: pageUrl(`/projet/${project.id}`, lang),
         })),
       },
     ],
@@ -75,11 +86,17 @@ const Home = () => {
         <html lang={lang} />
         <title>{dict.meta.title}</title>
         <meta name="description" content={dict.meta.description} />
-        <link rel="canonical" href={SITE_URL + '/'} />
+        <link rel="canonical" href={url} />
+        {alternateUrls('/').map((alt) => (
+          <link key={alt.hrefLang} rel="alternate" hrefLang={alt.hrefLang} href={alt.href} />
+        ))}
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={SITE_URL + '/'} />
-        <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+        <meta property="og:type" content="profile" />
+        <meta property="profile:first_name" content="Clémentin" />
+        <meta property="profile:last_name" content="Ly" />
+        <meta property="og:url" content={url} />
+        <meta property="og:locale" content={LOCALES[lang]} />
+        <meta property="og:locale:alternate" content={LOCALES[otherLang]} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:title" content={dict.meta.title} />
         <meta property="og:description" content={dict.meta.description} />
