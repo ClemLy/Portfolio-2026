@@ -9,6 +9,7 @@ const subscribe = (callback) => {
 };
 
 const getSnapshot = () => window.matchMedia(QUERY).matches;
+const getServerSnapshot = () => false;
 
 /* Vrai uniquement pour les pointeurs précis (souris, trackpad) */
-export const useFinePointer = () => useSyncExternalStore(subscribe, getSnapshot);
+export const useFinePointer = () => useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

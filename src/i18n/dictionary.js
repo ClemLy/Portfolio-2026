@@ -1,9 +1,9 @@
 export const dictionary = {
   fr: {
     meta: {
-      title: 'Clémentin Ly, Développeur full-stack créatif à Paris',
+      title: 'Clémentin Ly, développeur full-stack React & Next.js à Paris',
       description:
-        "Portfolio de Clémentin Ly, développeur full-stack spécialisé React, Next.js et TypeScript, avec une solide expérience Node.js et WordPress. Des expériences web rapides, accessibles et éco-conçues.",
+        "Portfolio de Clémentin Ly, développeur full-stack à Paris : React, Next.js et TypeScript, architectures headless et WordPress, sites animés avec GSAP et Three.js.",
     },
     skipLink: 'Aller au contenu',
     awayTitle: 'On se recroise ?',
@@ -190,6 +190,8 @@ export const dictionary = {
       apercuDe: (title) => `Aperçu du projet ${title}`,
       apercuAlt: (n, title) => `${title}, aperçu ${n}`,
       etudeDeCas: (title) => `${title}, étude de cas de Clémentin Ly`,
+      metaDescription: (project) =>
+        `${project.subtitle}. Projet ${project.year} de Clémentin Ly, développeur full-stack, réalisé avec ${project.techs.slice(0, 3).join(', ')}.`,
       lighthouseLabels: { performance: 'Performance', accessibilité: 'Accessibilité', bonnesPratiques: 'Bonnes pratiques', seo: 'SEO' },
     },
     easterEgg: {
@@ -203,9 +205,9 @@ export const dictionary = {
 
   en: {
     meta: {
-      title: 'Clémentin Ly, Creative Full-Stack Developer in Paris',
+      title: 'Clémentin Ly, Full-Stack React & Next.js Developer in Paris',
       description:
-        'Portfolio of Clémentin Ly, full-stack developer specialized in React, Next.js and TypeScript, with strong experience in Node.js and WordPress. Fast, accessible, eco-designed web experiences.',
+        'Portfolio of Clémentin Ly, full-stack developer in Paris: React, Next.js and TypeScript, headless and WordPress architectures, motion-rich sites built with GSAP and Three.js.',
     },
     skipLink: 'Skip to content',
     awayTitle: 'See you soon?',
@@ -392,6 +394,8 @@ export const dictionary = {
       apercuDe: (title) => `Preview of the ${title} project`,
       apercuAlt: (n, title) => `${title}, preview ${n}`,
       etudeDeCas: (title) => `${title}, case study by Clémentin Ly`,
+      metaDescription: (project) =>
+        `${project.subtitle}. A ${project.year} project by Clémentin Ly, full-stack developer, built with ${project.techs.slice(0, 3).join(', ')}.`,
       lighthouseLabels: { performance: 'Performance', accessibilité: 'Accessibility', bonnesPratiques: 'Best practices', seo: 'SEO' },
     },
     easterEgg: {

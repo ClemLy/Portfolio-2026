@@ -8,11 +8,12 @@ import styles from './NotFound.module.css';
 
 const NotFound = () => {
   const { openPalette } = useCommandPalette();
-  const { dict } = useLanguage();
+  const { lang, dict } = useLanguage();
 
   return (
     <main className={styles.page} id="contenu" tabIndex={-1}>
       <Helmet>
+        <html lang={lang} />
         <title>{dict.notFound.title}</title>
         <meta name="robots" content="noindex" />
       </Helmet>
