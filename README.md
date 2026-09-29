@@ -8,7 +8,7 @@
 
 Portfolio personnel de **Clémentin Ly**, développeur full-stack basé à Paris. Il présente mon parcours, mes projets et ma stack technique à travers une expérience éditoriale animée au scroll : typographie massive, matière papier/encre, et micro-interactions pensées pour rester sobres et accessibles plutôt que démonstratives.
 
-**Site en ligne : [clementin-portfolio.vercel.app](https://clementin-portfolio.vercel.app)**
+**Site en ligne : [clementin-portfolio.vercel.app](https://clementin-portfolio.vercel.app)](https://www.clementinly.fr/)**
 
 ## Aperçu
 
