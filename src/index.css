@@ -132,6 +132,9 @@
 html {
   scroll-behavior: auto;
   scroll-padding-top: calc(var(--header-height) + 1rem);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html.lenis,
@@ -350,8 +353,12 @@ html.reduced-motion *::after {
   }
 }
 
-.ink-hover:hover {
-  animation: ink-bleed 0.55s var(--ease-out-expo);
+/* Au doigt, le survol se déclenche au tap et floute le lien pile au moment
+   où on le touche : l'effet est réservé aux vrais pointeurs */
+@media (hover: hover) {
+  .ink-hover:hover {
+    animation: ink-bleed 0.55s var(--ease-out-expo);
+  }
 }
 
 /* Contraste renforcé : bordures et texte secondaire plus marqués */

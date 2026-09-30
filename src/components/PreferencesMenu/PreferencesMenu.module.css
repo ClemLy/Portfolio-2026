@@ -47,6 +47,18 @@
   background-color: var(--accent);
 }
 
+.triggerMenu {
+  width: 44px;
+  height: 44px;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.triggerMenu:hover,
+.triggerMenu[aria-expanded='true'] {
+  color: var(--paper-fixed);
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -135,4 +147,27 @@
 
 .switchTrackOn .switchThumb {
   transform: translateX(16px);
+}
+
+/* Sous 900px, un bouton flottant masquerait en permanence un coin du
+   contenu : les réglages y passent par le menu mobile et le footer. Le
+   panneau s'ouvre alors en feuille en bas d'écran, quel que soit
+   l'emplacement du bouton (ancré à droite, il sortait de l'écran quand le
+   bouton était à gauche). */
+@media (max-width: 899px) {
+  .floating {
+    display: none;
+  }
+
+  .panel {
+    position: fixed;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: calc(var(--gutter) + env(safe-area-inset-bottom));
+    width: auto;
+  }
+
+  .switchRow {
+    min-height: 56px;
+  }
 }

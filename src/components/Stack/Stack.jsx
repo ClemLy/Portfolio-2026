@@ -5,6 +5,7 @@ import { Fade } from '../Reveal/Reveal';
 import SectionHeading from '../SectionHeading/SectionHeading';
 import { useLanguage } from '../../context/languageContext';
 import { usePreferences } from '../../context/preferencesContext';
+import { useFinePointer } from '../../hooks/useFinePointer';
 import { localizeList } from '../../i18n/localize';
 import { techGroups, certifications } from '../../data/techStackData';
 import styles from './Stack.module.css';
@@ -23,6 +24,9 @@ const Stack = () => {
   const [constraint, setConstraint] = useState(0);
   const { lang, dict } = useLanguage();
   const { reducedMotion } = usePreferences();
+  /* Au doigt, défilement natif (inertie et accroche de la plateforme)
+     plutôt qu'un glisser simulé, moins fluide qu'un vrai scroll tactile */
+  const finePointer = useFinePointer();
   const x = useMotionValue(0);
 
   /* Léger tilt proportionnel à la vitesse du glisser-déposer, comme des
@@ -41,7 +45,7 @@ const Stack = () => {
   const dragHint = (
     <span className={styles.dragHint}>
       <MoveHorizontal size={13} strokeWidth={1.75} />
-      {dict.stack.dragHint}
+      {finePointer ? dict.stack.dragHint : dict.stack.swipeHint}
     </span>
   );
 
@@ -90,18 +94,18 @@ const Stack = () => {
       <SectionHeading index="04" label={dict.stack.sectionLabel} count={dragHint} />
 
       <div
-        className={styles.railViewport}
+        className={`${styles.railViewport} ${finePointer ? styles.railViewportDrag : styles.railViewportNative}`}
         ref={viewportRef}
         tabIndex={0}
         role="group"
         aria-label={dict.stack.railAria}
-        onKeyDown={handleRailKeyDown}
+        onKeyDown={finePointer ? handleRailKeyDown : undefined}
       >
         <motion.div
-          className={styles.rail}
+          className={`${styles.rail} ${finePointer ? styles.railDrag : ''}`}
           ref={railRef}
-          style={{ x, rotate: smoothTilt }}
-          drag="x"
+          style={finePointer ? { x, rotate: smoothTilt } : undefined}
+          drag={finePointer ? 'x' : false}
           dragConstraints={{ left: constraint, right: 0 }}
           dragElastic={0.08}
           dragTransition={{ power: 0.3, timeConstant: 220 }}

@@ -12,6 +12,7 @@ import { usePreferences } from '../../context/preferencesContext';
 import { useLanguage } from '../../context/languageContext';
 import useSoftScrollSnap from '../../hooks/useSoftScrollSnap';
 import useActiveSection from '../../hooks/useActiveSection';
+import { useFinePointer } from '../../hooks/useFinePointer';
 import { setAmbientSection } from '../../lib/sound';
 import {
   SITE_NAME,
@@ -31,6 +32,7 @@ const Home = () => {
   const location = useLocation();
   const lenis = useLenis();
   const { reducedMotion } = usePreferences();
+  const finePointer = useFinePointer();
   const { lang, dict } = useLanguage();
   const url = pageUrl('/', lang);
   const otherLang = lang === 'fr' ? 'en' : 'fr';
@@ -63,7 +65,9 @@ const Home = () => {
     ],
   };
 
-  useSoftScrollSnap(lenis, '#accueil, #projets, #apropos, #parcours, #stack', !reducedMotion);
+  /* Pas d'aimantation au doigt : elle contredirait l'inertie native du
+     défilement tactile et donnerait l'impression que la page résiste */
+  useSoftScrollSnap(lenis, '#accueil, #projets, #apropos, #parcours, #stack', !reducedMotion && finePointer);
 
   /* La nappe d'ambiance (si activée) module légèrement sa hauteur selon la
      section visitée, sans effet audible si le son d'ambiance est coupé */

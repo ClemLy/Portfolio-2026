@@ -19,6 +19,7 @@ import useFocusTrap from '../../hooks/useFocusTrap';
 import { projectsData } from '../../data/projectsData';
 import { localizeList } from '../../i18n/localize';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
+import PreferencesMenu from '../PreferencesMenu/PreferencesMenu';
 import styles from './Header.module.css';
 
 /* Sections observées pour surligner le lien actif dans la navigation */
@@ -304,9 +305,15 @@ const Header = () => {
               <a href="https://github.com/ClemLy" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="https://linkedin.com/in/clémentin-ly/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="/assets/CV/CV - Clémentin LY.pdf" target="_blank" rel="noopener noreferrer">{dict.nav.cv}</a>
-              <button type="button" onClick={toggleLang} className={styles.menuLangButton}>
+              <button
+                type="button"
+                onClick={toggleLang}
+                className={styles.menuLangButton}
+                aria-label={lang === 'fr' ? dict.lang.switchTo : dict.lang.switchToFr}
+              >
                 {lang === 'fr' ? 'EN' : 'FR'}
               </button>
+              <PreferencesMenu variant="menu" />
             </motion.div>
           </motion.div>
         )}

@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
   padding: 1.1rem var(--gutter);
 }
 
@@ -35,6 +35,7 @@
   font-size: 1.4rem;
   line-height: 1;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 /* Anneau de progression de lecture, autour d'un point à côté du logo */
@@ -74,7 +75,11 @@
 .nav {
   display: none;
   align-items: center;
-  gap: 1.9rem;
+  gap: clamp(1rem, 1.8vw, 1.9rem);
+}
+
+.nav > * {
+  flex-shrink: 0;
 }
 
 .navLink {
@@ -82,6 +87,7 @@
   font-size: var(--text-sm);
   font-weight: 500;
   padding-block: 0.3rem;
+  white-space: nowrap;
 }
 
 .navLink::after {
@@ -286,16 +292,21 @@
   z-index: 90;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 3rem;
-  padding: var(--gutter);
+  padding: calc(var(--header-height) + 1rem) var(--gutter) calc(var(--gutter) + env(safe-area-inset-bottom));
   background-color: var(--paper-soft);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
+/* Centrage par marges automatiques plutôt que justify-content: center,
+   qui rendait le haut du menu inatteignable quand il dépasse l'écran
+   (téléphone à l'horizontale) */
 .menuNav {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  margin-top: auto;
 }
 
 .menuItemMask {
@@ -311,7 +322,9 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  /* Borné aussi par la hauteur : téléphone à l'horizontale, les cinq liens
+     ne tenaient pas à l'écran */
+  font-size: clamp(2rem, min(9vw, 10svh), 4.5rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -327,7 +340,10 @@
 
 .menuFooter {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.75rem;
+  margin-bottom: auto;
   font-size: var(--text-sm);
   font-weight: 500;
   text-transform: uppercase;
@@ -335,11 +351,23 @@
   color: var(--ink-soft);
 }
 
-@media (min-width: 900px) {
+.menuFooter > a,
+.menuLangButton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* L'heure n'arrive qu'une fois la navigation complète assurée de tenir :
+   entre 900 et 1100px, elle forçait le nom et les liens sur deux lignes */
+@media (min-width: 1100px) {
   .meta {
     display: flex;
+    white-space: nowrap;
   }
+}
 
+@media (min-width: 900px) {
   .nav {
     display: flex;
   }

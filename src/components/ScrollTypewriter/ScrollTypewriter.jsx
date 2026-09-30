@@ -5,7 +5,7 @@ import styles from './ScrollTypewriter.module.css';
 const Char = ({ char, index, roundedCount }) => {
   const opacity = useTransform(roundedCount, (count) => (index < count ? 1 : 0));
   return (
-    <motion.span aria-hidden="true" style={{ opacity }}>
+    <motion.span aria-hidden="true" className={styles.char} style={{ opacity }}>
       {char}
     </motion.span>
   );

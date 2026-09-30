@@ -25,7 +25,7 @@
   top: var(--header-height);
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
 }
 
 .scrollStageStatic .pinWrap {
@@ -92,6 +92,43 @@
   font-size: var(--text-sm);
   color: var(--ink-soft);
   text-wrap: balance;
+}
+
+/* Téléphone et tablette : les trois chiffres passent en ligne sous le
+   texte. Empilés, ils faisaient dépasser le bloc épinglé de l'écran et les
+   derniers restaient hors de vue pendant toute la lecture. */
+@media (max-width: 899px) {
+  .layout {
+    gap: 1.5rem;
+    margin-block: 1.5rem;
+  }
+
+  .manifesto {
+    font-size: clamp(1.25rem, 5.2vw, 1.75rem);
+  }
+
+  .margin {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* Chiffre au-dessus du libellé, pour que les trois chiffres restent
+     alignés quelle que soit la longueur des libellés */
+  .note {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+
+  .noteLabel {
+    margin-bottom: 0;
+    font-size: var(--text-xs);
+    line-height: 1.35;
+  }
 }
 
 @media (min-width: 900px) {

@@ -181,7 +181,7 @@ const ProjectDetail = () => {
               <dt>{pd.categorie}</dt>
               <dd>{project.category}</dd>
             </div>
-            <div className={styles.metaCell}>
+            <div className={`${styles.metaCell} ${styles.metaCellStack}`}>
               <dt>{pd.stackLabel}</dt>
               <dd className={styles.metaTechs}>{project.techs.join(', ')}</dd>
             </div>

@@ -116,7 +116,7 @@ const ContactFooter = () => {
           </nav>
 
           <div className={styles.actions} ref={actionsRef}>
-            <PreferencesMenu docked={actionsInView} />
+            <PreferencesMenu variant={actionsInView ? 'docked' : 'floating'} />
 
             <Magnetic strength={0.3}>
               <button onClick={handleScrollTop} className={styles.topButton} aria-label={dict.contact.scrollTopAria}>

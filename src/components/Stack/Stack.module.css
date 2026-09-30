@@ -9,19 +9,45 @@
 }
 
 .railViewport {
-  overflow: hidden;
   margin-block: 2rem clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.railViewportDrag {
+  overflow: hidden;
+}
+
+/* De bord à bord de l'écran : la colonne suivante dépasse à droite et
+   montre qu'il reste du contenu à faire défiler */
+.railViewportNative {
+  overflow-x: auto;
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.railViewportNative::-webkit-scrollbar {
+  display: none;
+}
+
+.railViewportNative .group {
+  scroll-snap-align: start;
 }
 
 .rail {
   display: flex;
   gap: clamp(1.5rem, 3vw, 2rem);
   width: max-content;
+}
+
+.railDrag {
   cursor: grab;
   touch-action: pan-y;
 }
 
-.rail:active {
+.railDrag:active {
   cursor: grabbing;
 }
 
@@ -49,8 +75,10 @@
   transition: transform 0.35s var(--ease-out-expo), background-color 0.35s ease;
 }
 
-.item:hover {
-  transform: translateX(0.5rem);
+@media (hover: hover) {
+  .item:hover {
+    transform: translateX(0.5rem);
+  }
 }
 
 .itemIndex {
@@ -124,6 +152,14 @@
   opacity: 1;
   transform: translate(0, 0) rotate(45deg);
   color: var(--accent);
+}
+
+/* Sans survol, la flèche reste affichée pour signaler la carte cliquable */
+@media (hover: none) {
+  .certArrow {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .certIcon {

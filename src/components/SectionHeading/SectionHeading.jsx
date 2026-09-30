@@ -21,7 +21,7 @@ const letterVariants = {
    les moteurs de recherche et les lecteurs d'écran. */
 const SectionHeading = ({ index, label, count }) => {
   const { reducedMotion } = usePreferences();
-  const letters = label.split('');
+  const words = label.split(' ');
 
   return (
     <div className={`${styles.heading} section-heading-sticky`}>
@@ -49,16 +49,28 @@ const SectionHeading = ({ index, label, count }) => {
             viewport={{ once: true, margin: '0px 0px -20% 0px' }}
             style={{ display: 'inline-block' }}
           >
-            {letters.map((char, index2) => (
-              <motion.span
-                key={index2}
-                custom={index2}
-                variants={letterVariants}
-                style={{ display: 'inline-block' }}
-              >
-                {char === ' ' ? ' ' : char}
-              </motion.span>
-            ))}
+            {/* Lettres groupées par mot : sur un écran étroit, le retour à
+                la ligne tombe entre deux mots, jamais au milieu d'un mot */}
+            {words.map((word, wordIndex) => {
+              const offset = words.slice(0, wordIndex).join(' ').length + (wordIndex > 0 ? 1 : 0);
+              return (
+                <span key={wordIndex}>
+                  {wordIndex > 0 && ' '}
+                  <span className={styles.word}>
+                    {word.split('').map((char, charIndex) => (
+                      <motion.span
+                        key={charIndex}
+                        custom={offset + charIndex}
+                        variants={letterVariants}
+                        style={{ display: 'inline-block' }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                </span>
+              );
+            })}
           </motion.span>
         )}
       </h2>
