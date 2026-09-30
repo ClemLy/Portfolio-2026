@@ -89,6 +89,7 @@ export const dictionary = {
     stack: {
       sectionLabel: 'Stack & outils',
       dragHint: 'Glisser ou flèches ← →',
+      swipeHint: 'Glisser',
       railAria: 'Liste des technologies, défilement horizontal : flèches gauche/droite, Origine et Fin pour les extrémités',
       groups: {
         frontend: 'Frontend',
@@ -293,6 +294,7 @@ export const dictionary = {
     stack: {
       sectionLabel: 'Stack & tools',
       dragHint: 'Drag or arrow keys ← →',
+      swipeHint: 'Swipe',
       railAria: 'List of technologies, horizontal scroll: left/right arrows, Home and End for the ends',
       groups: {
         frontend: 'Frontend',

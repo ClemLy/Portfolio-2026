@@ -47,12 +47,15 @@
   padding-bottom: clamp(2rem, 5vw, 3.5rem);
 }
 
+/* Plafonné à la largeur d'écran : un nom de projet en un seul mot
+   (COSY&STUDY) débordait de la page sur les petits téléphones */
 .title {
-  font-size: var(--display-lg);
+  font-size: min(var(--display-lg), 12vw);
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -0.03em;
   text-transform: uppercase;
+  overflow-wrap: break-word;
 }
 
 .subtitle {
@@ -76,6 +79,28 @@
   padding: 1.25rem 1.5rem;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+
+/* Téléphone : deux colonnes plutôt que six blocs empilés qui repoussaient
+   l'image du projet sous plusieurs écrans. La stack, plus longue, passe
+   en dernier sur toute la largeur. */
+@media (max-width: 699px) {
+  .meta {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .metaCell {
+    padding: 1rem 1.1rem;
+  }
+
+  .metaCellStack {
+    grid-column: 1 / -1;
+    order: 1;
+  }
+
+  .metaCell:nth-child(6) {
+    grid-column: 1 / -1;
+  }
 }
 
 .metaCell dt {
@@ -192,8 +217,10 @@
   transition: background-color 0.35s ease;
 }
 
-.archRow:hover {
-  background-color: var(--paper-soft);
+@media (hover: hover) {
+  .archRow:hover {
+    background-color: var(--paper-soft);
+  }
 }
 
 .archName {
@@ -229,8 +256,44 @@
   transition: transform 0.6s var(--ease-out-expo);
 }
 
-.galleryItem:hover img {
-  transform: scale(1.04);
+@media (hover: hover) {
+  .galleryItem:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* Téléphone : carrousel horizontal de bord à bord plutôt qu'une colonne
+   de captures pleine largeur (plusieurs écrans de défilement pour les
+   captures d'application, en portrait). La capture suivante dépasse à
+   droite pour signaler la suite ; un tap ouvre la version complète. */
+@media (max-width: 699px) {
+  .galleryGrid {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    overflow-x: auto;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .galleryGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .galleryGrid > * {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  .galleryItem img {
+    max-height: 62svh;
+    object-fit: cover;
+    object-position: top;
+  }
 }
 
 /* Scores Lighthouse */
@@ -411,9 +474,29 @@
   transition: transform 0.5s var(--ease-out-expo);
 }
 
-.navPanel:hover::before {
-  transform: scaleY(1);
-  transform-origin: top;
+@media (hover: hover) {
+  .navPanel:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  .navPanel:hover::after {
+    opacity: 1;
+  }
+
+  .navPanel:hover {
+    color: var(--paper-fixed);
+  }
+
+  .navPanel:hover .navPanelTitle {
+    transform: translateY(-4px);
+  }
+}
+
+@media (hover: none) {
+  .navPanel:active {
+    background-color: var(--paper-soft);
+  }
 }
 
 .navPanel::after {
@@ -429,14 +512,6 @@
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
-}
-
-.navPanel:hover::after {
-  opacity: 1;
-}
-
-.navPanel:hover {
-  color: var(--paper-fixed);
 }
 
 .navPanelInner {
@@ -471,10 +546,6 @@
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.navPanel:hover .navPanelTitle {
-  transform: translateY(-4px);
-}
-
 @media (min-width: 700px) {
   .prevNext {
     grid-template-columns: 1fr 1fr;
@@ -487,16 +558,6 @@
   .navPanelPrev {
     border-right: 1px solid var(--line-strong);
   }
-}
-
-.nextMeta {
-  font-size: var(--text-sm);
-  color: var(--ink-soft);
-  transition: color 0.3s ease;
-}
-
-.next:hover .nextMeta {
-  color: rgba(var(--paper-fixed-rgb), 0.65);
 }
 
 /* Lightbox */
@@ -513,8 +574,9 @@
 
 .lightboxClose {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: calc(1rem + env(safe-area-inset-top));
+  right: 1rem;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -533,7 +595,7 @@
 
 .lightboxImage {
   max-width: min(90vw, 1100px);
-  max-height: 85vh;
+  max-height: 85svh;
   object-fit: contain;
   border-radius: 6px;
 }

@@ -310,13 +310,11 @@
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.row:hover::before,
 .rowActive::before {
   transform: scaleY(1);
   transform-origin: top;
 }
 
-.row:hover,
 .rowActive {
   color: var(--paper-fixed);
 }
@@ -350,7 +348,6 @@
   transition: transform 0.6s var(--ease-out-expo);
 }
 
-.row:hover .thumb img,
 .rowActive .thumb img {
   transform: scale(1.06);
 }
@@ -371,7 +368,6 @@
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.row:hover .rowTitle,
 .rowActive .rowTitle {
   transform: translateX(clamp(0.5rem, 1.5vw, 1.25rem));
 }
@@ -383,7 +379,6 @@
   transition: color 0.3s ease;
 }
 
-.row:hover .rowSubtitle,
 .rowActive .rowSubtitle {
   color: rgba(var(--paper-fixed-rgb), 0.65);
 }
@@ -401,7 +396,6 @@
   transition: color 0.3s ease;
 }
 
-.row:hover .rowMeta,
 .rowActive .rowMeta {
   color: rgba(var(--paper-fixed-rgb), 0.65);
 }
@@ -415,10 +409,46 @@
   transition: transform 0.45s var(--ease-out-expo);
 }
 
-.row:hover .rowArrow,
 .rowActive .rowArrow {
   transform: translate(4px, -4px) rotate(45deg);
   color: var(--accent);
+}
+
+/* Survol réservé aux vrais pointeurs : au doigt, :hover s'active au tap et
+   la ligne restait encrée jusqu'au tap suivant */
+@media (hover: hover) {
+  .row:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  .row:hover {
+    color: var(--paper-fixed);
+  }
+
+  .row:hover .thumb img {
+    transform: scale(1.06);
+  }
+
+  .row:hover .rowTitle {
+    transform: translateX(clamp(0.5rem, 1.5vw, 1.25rem));
+  }
+
+  .row:hover .rowSubtitle,
+  .row:hover .rowMeta {
+    color: rgba(var(--paper-fixed-rgb), 0.65);
+  }
+
+  .row:hover .rowArrow {
+    transform: translate(4px, -4px) rotate(45deg);
+    color: var(--accent);
+  }
+}
+
+@media (hover: none) {
+  .row:active {
+    background-color: var(--paper-soft);
+  }
 }
 
 /* Pagination : remplace l'ancien "Charger plus" désormais peu lisible
@@ -542,8 +572,10 @@
   transition: transform 0.6s var(--ease-out-expo);
 }
 
-.gridCard:hover .gridImage img {
-  transform: scale(1.05);
+@media (hover: hover) {
+  .gridCard:hover .gridImage img {
+    transform: scale(1.05);
+  }
 }
 
 .gridArrow {
@@ -563,9 +595,20 @@
   transition: opacity 0.3s ease, transform 0.35s var(--ease-out-expo);
 }
 
-.gridCard:hover .gridArrow {
-  opacity: 1;
-  transform: translate(0, 0) rotate(45deg);
+@media (hover: hover) {
+  .gridCard:hover .gridArrow {
+    opacity: 1;
+    transform: translate(0, 0) rotate(45deg);
+  }
+}
+
+/* Sans survol, la flèche reste affichée : c'est le seul signe que la carte
+   s'ouvre */
+@media (hover: none) {
+  .gridArrow {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .gridMeta {
@@ -597,9 +640,38 @@
 
 /* Mobile : touch targets 44px min, colonne meta masquée (pas de place) */
 @media (max-width: 899px) {
+  .toolbar {
+    gap: 0.75rem;
+    margin-block: 1rem 1.75rem;
+  }
+
+  /* Catégories sur une seule ligne qui défile au doigt, de bord à bord :
+     en retour à la ligne, elles occupaient tout le premier écran avant le
+     moindre projet. La pastille coupée au bord signale la suite. */
+  .filters {
+    flex: 1 1 100%;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0.3rem var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filters > * {
+    flex-shrink: 0;
+  }
+
   .filter {
     min-height: 44px;
     padding: 0.65rem 1.1rem;
+    white-space: nowrap;
   }
 
   .row {
@@ -627,17 +699,30 @@
   }
 
   .search {
-    flex: 1;
+    flex: 1 1 7.5rem;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding-inline: 0.8rem;
   }
 
+  /* 16px minimum : en dessous, iOS zoome toute la page au focus du champ */
   .searchInput {
     width: 100%;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+  }
+
+  .searchClear {
+    width: 32px;
+    height: 32px;
+    margin-right: -0.4rem;
   }
 
   .typeButton {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+    padding-inline: 0.85rem;
   }
 
   .viewToggle button {
@@ -653,7 +738,11 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
-    padding-bottom: 2px;
+    padding-block: 0.3rem;
+  }
+
+  .techChip {
+    min-height: 36px;
   }
 
   .techChips::-webkit-scrollbar {
@@ -672,5 +761,29 @@
 
   .pageDots {
     height: 44px;
+  }
+}
+
+/* Téléphone : le numéro de ligne cède sa place au titre, qui sinon se
+   faisait couper (COSY&STUDY à 320px) */
+@media (max-width: 599px) {
+  .row {
+    grid-template-columns: 76px 1fr auto;
+    gap: 0.9rem;
+    padding: 1.1rem 0;
+  }
+
+  .rowIndex {
+    display: none;
+  }
+
+  .rowTitle {
+    font-size: clamp(1.2rem, 5.6vw, 1.6rem);
+    overflow-wrap: anywhere;
+  }
+
+  .rowArrow svg {
+    width: 22px;
+    height: 22px;
   }
 }

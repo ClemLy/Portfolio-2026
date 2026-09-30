@@ -1,8 +1,9 @@
 .heading {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 1rem;
+  gap: 0.5rem 1rem;
   padding-block: 1.25rem;
   font-size: var(--text-sm);
   font-weight: 500;
@@ -29,7 +30,7 @@
   top: -0.35em;
   z-index: -1;
   font-family: var(--font-sans);
-  font-size: clamp(6rem, 20vw, 16rem);
+  font-size: clamp(4.5rem, 20vw, 16rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -48,6 +49,11 @@
   overflow: hidden;
   font-size: inherit;
   font-weight: inherit;
+}
+
+.word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .count {

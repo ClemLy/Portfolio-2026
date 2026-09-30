@@ -49,8 +49,19 @@
   transition: background-color 0.4s ease;
 }
 
-.row:hover {
-  background-color: var(--paper-soft);
+@media (hover: hover) {
+  .row:hover {
+    background-color: var(--paper-soft);
+  }
+
+  .row:hover .year {
+    color: var(--accent);
+    -webkit-text-stroke-color: var(--accent);
+  }
+
+  .row:hover .yearEnd {
+    color: var(--accent);
+  }
 }
 
 .year {
@@ -67,11 +78,6 @@
   transition: color 0.4s ease;
 }
 
-.row:hover .year {
-  color: var(--accent);
-  -webkit-text-stroke-color: var(--accent);
-}
-
 /* Borne de fin (ou "aujourd'hui") d'une étape sur plusieurs années :
    texte plein, bien plus petit, pour ne pas rivaliser avec le grand
    chiffre de départ */
@@ -82,10 +88,6 @@
   color: var(--ink-soft);
   -webkit-text-stroke: 0;
   transition: color 0.4s ease;
-}
-
-.row:hover .yearEnd {
-  color: var(--accent);
 }
 
 .main {
@@ -125,6 +127,28 @@
   border-radius: 99px;
   color: var(--ink-soft);
   white-space: nowrap;
+}
+
+/* Une seule colonne : le repère fléché n'a plus de marge où vivre et
+   chevauchait la première année, et les tags calés à droite flottaient
+   loin du texte qu'ils complètent */
+@media (max-width: 899px) {
+  .timelineWrap {
+    padding-left: 0;
+  }
+
+  .scrollCue {
+    display: none;
+  }
+
+  .row {
+    gap: 0.9rem;
+  }
+
+  .tags {
+    justify-content: flex-start;
+    justify-self: start;
+  }
 }
 
 @media (min-width: 900px) {

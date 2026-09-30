@@ -19,3 +19,15 @@
     animation: none;
   }
 }
+
+/* Sur téléphone, le texte arrive déjà écrit : à l'ouverture, l'écran
+   n'affichait sinon qu'un curseur clignotant dans un grand vide */
+@media (max-width: 700px) {
+  .char {
+    opacity: 1 !important;
+  }
+
+  .cursor {
+    display: none;
+  }
+}

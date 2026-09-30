@@ -38,7 +38,7 @@
 .title {
   display: flex;
   flex-direction: column;
-  font-size: clamp(2.4rem, 10.5vw, 9rem);
+  font-size: clamp(2rem, 10.5vw, 9rem);
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -0.03em;

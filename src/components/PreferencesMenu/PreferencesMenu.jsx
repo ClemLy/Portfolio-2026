@@ -26,11 +26,16 @@ const Switch = ({ checked, onChange, label, description, icon: Icon }) => (
   </button>
 );
 
-/* docked=true : rangé à sa place dans le footer. docked=false : détaché,
-   flotte en bas à droite par-dessus la page : le déclencheur gagne alors
-   son propre fond (--ink-fixed), transparent le reste du temps car porté
-   par le fond déjà sombre du footer. */
-const PreferencesMenu = ({ docked = true }) => {
+const TRIGGER_VARIANTS = {
+  docked: '',
+  floating: styles.triggerFloating,
+  menu: styles.triggerMenu,
+};
+
+/* docked : rangé à sa place dans le footer, porté par son fond sombre.
+   floating : détaché, flotte en bas à droite par-dessus la page avec son
+   propre fond (--ink-fixed). menu : dans le menu mobile, sur fond clair. */
+const PreferencesMenu = ({ variant = 'docked' }) => {
   const {
     reducedMotion,
     toggleReducedMotion,
@@ -55,12 +60,12 @@ const PreferencesMenu = ({ docked = true }) => {
     <motion.div
       layout
       transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-      className={`${styles.wrapper} ${docked ? '' : styles.floating}`}
+      className={`${styles.wrapper} ${variant === 'floating' ? styles.floating : ''}`}
     >
       <button
         ref={triggerRef}
         type="button"
-        className={`${styles.trigger} ${docked ? '' : styles.triggerFloating}`}
+        className={`${styles.trigger} ${TRIGGER_VARIANTS[variant]}`}
         onClick={() => setOpen((prev) => !prev)}
         aria-haspopup="true"
         aria-expanded={open}
