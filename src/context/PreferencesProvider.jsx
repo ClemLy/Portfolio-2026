@@ -24,8 +24,7 @@ const PreferencesProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === 'undefined') return false;
     const stored = window.localStorage.getItem('prefers-dark-theme');
-    if (stored !== null) return stored === 'true';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return stored === 'true';
   });
 
   useEffect(() => {
