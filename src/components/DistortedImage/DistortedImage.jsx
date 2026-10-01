@@ -66,10 +66,10 @@ const FRAGMENT = /* glsl */ `
    fichier canonique (~1200px) : bien assez net pour la taille d'affichage
    d'une vignette, sans charger une texture GPU inutilement lourde. */
 const pickTextureSrc = (src) => {
-  const widths = imageManifest[src]?.widths;
+  const { widths, v } = imageManifest[src] ?? {};
   if (!widths || widths.length === 0) return src;
   const target = widths.find((w) => w >= 800) || widths[widths.length - 1];
-  return `${src.replace(/\.\w+$/, '')}-${target}.webp`;
+  return `${src.replace(/\.\w+$/, '')}-${target}.webp${v ? `?v=${v}` : ''}`;
 };
 
 /* Vignette projet avec distorsion WebGL au survol. Se dégrade sans bruit

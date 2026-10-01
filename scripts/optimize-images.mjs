@@ -23,7 +23,8 @@
  * et déduisent automatiquement les variantes -{largeur}.webp/.avif : il n'y a
  * donc rien à changer dans les données quand on remplace une photo.
  */
-import { readdirSync, statSync, mkdirSync, existsSync, writeFileSync } from 'node:fs';
+import { readdirSync, statSync, mkdirSync, existsSync, writeFileSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, extname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -150,8 +151,14 @@ const main = async () => {
        data/projectsData.js (ex: /assets/projets/papaie/papaie.webp). Le
        ratio (hauteur/largeur de l'original) permet à ResponsiveImage de
        réserver la bonne hauteur avant même que l'image ne charge, pour
-       éviter un saut de mise en page (CLS) au chargement. */
-    manifest[`/assets/projets/${projectDir}/${baseName}.webp`] = { widths: result.widths, ratio: result.ratio };
+       éviter un saut de mise en page (CLS) au chargement. `v` est l'empreinte
+       de l'image source : ajoutée aux URLs, elle force les navigateurs à
+       recharger une image remplacée sous le même nom malgré le cache d'un an. */
+    manifest[`/assets/projets/${projectDir}/${baseName}.webp`] = {
+      widths: result.widths,
+      ratio: result.ratio,
+      v: createHash('sha1').update(readFileSync(sourcePath)).digest('hex').slice(0, 8),
+    };
 
     if (result.filesWritten === 0) {
       skipped += 1;

@@ -38,9 +38,10 @@ const ResponsiveImage = ({ src, alt, sizes = '100vw', className, loading = 'lazy
   }
 
   const base = src.replace(/\.\w+$/, '');
-  const avifSrcSet = widths.map((w) => `${base}-${w}.avif ${w}w`).join(', ');
-  const webpSrcSet = widths.map((w) => `${base}-${w}.webp ${w}w`).join(', ');
-  const fallbackSrc = `${base}-${widths[widths.length - 1]}.webp`;
+  const version = entry.v ? `?v=${entry.v}` : '';
+  const avifSrcSet = widths.map((w) => `${base}-${w}.avif${version} ${w}w`).join(', ');
+  const webpSrcSet = widths.map((w) => `${base}-${w}.webp${version} ${w}w`).join(', ');
+  const fallbackSrc = `${base}-${widths[widths.length - 1]}.webp${version}`;
 
   return (
     <picture>
