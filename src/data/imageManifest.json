@@ -197,6 +197,16 @@
     ],
     "ratio": 0.8818
   },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-boutique.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-jackpot.webp": {
     "widths": [
       400,
@@ -206,6 +216,13 @@
       2400
     ],
     "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile-victoire.webp": {
+    "widths": [
+      400,
+      800
+    ],
+    "ratio": 2.1641
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp": {
     "widths": [
@@ -234,6 +251,16 @@
     ],
     "ratio": 0.625
   },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-roue.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-stats.webp": {
     "widths": [
       400,
@@ -244,7 +271,27 @@
     ],
     "ratio": 0.625
   },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire-tables.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-themes.webp": {
+    "widths": [
+      400,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "ratio": 0.625
+  },
+  "/assets/projets/jackpot-solitaire/jackpot-solitaire.webp": {
     "widths": [
       400,
       800,

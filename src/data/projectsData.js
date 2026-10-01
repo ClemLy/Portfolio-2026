@@ -391,10 +391,12 @@ export const projectsData = [
     gallery: [
       "/assets/projets/jackpot-solitaire/jackpot-solitaire-partie.webp",
       "/assets/projets/jackpot-solitaire/jackpot-solitaire-jackpot.webp",
-      "/assets/projets/jackpot-solitaire/jackpot-solitaire-regles.webp",
+      "/assets/projets/jackpot-solitaire/jackpot-solitaire-boutique.webp",
+      "/assets/projets/jackpot-solitaire/jackpot-solitaire-tables.webp",
+      "/assets/projets/jackpot-solitaire/jackpot-solitaire-roue.webp",
       "/assets/projets/jackpot-solitaire/jackpot-solitaire-stats.webp",
-      "/assets/projets/jackpot-solitaire/jackpot-solitaire-themes.webp",
-      "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp"
+      "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp",
+      "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile-victoire.webp"
     ],
     t: {
       en: {
