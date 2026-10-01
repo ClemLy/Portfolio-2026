@@ -6,7 +6,8 @@
       1200,
       1600
     ],
-    "ratio": 0.5952
+    "ratio": 0.5952,
+    "v": "369f78d6"
   },
   "/assets/projets/apex-motion/apex-motion-heritage.webp": {
     "widths": [
@@ -15,7 +16,8 @@
       1200,
       1600
     ],
-    "ratio": 0.5952
+    "ratio": 0.5952,
+    "v": "1a15186b"
   },
   "/assets/projets/apex-motion/apex-motion-lap-telemetry.webp": {
     "widths": [
@@ -24,7 +26,8 @@
       1200,
       1600
     ],
-    "ratio": 0.5952
+    "ratio": 0.5952,
+    "v": "503c7532"
   },
   "/assets/projets/apex-motion/apex-motion-particle-reveal.webp": {
     "widths": [
@@ -33,7 +36,8 @@
       1200,
       1600
     ],
-    "ratio": 0.5952
+    "ratio": 0.5952,
+    "v": "310764bc"
   },
   "/assets/projets/apex-motion/apex-motion-studio.webp": {
     "widths": [
@@ -42,7 +46,8 @@
       1200,
       1600
     ],
-    "ratio": 0.5952
+    "ratio": 0.5952,
+    "v": "f91eb4e6"
   },
   "/assets/projets/apex-motion/apex-motion.webp": {
     "widths": [
@@ -51,7 +56,8 @@
       1200,
       1600
     ],
-    "ratio": 0.5952
+    "ratio": 0.5952,
+    "v": "5f52a8ab"
   },
   "/assets/projets/apple-motion/apple-motion-airpods-pro.webp": {
     "widths": [
@@ -60,7 +66,8 @@
       1200,
       1600
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "3d348023"
   },
   "/assets/projets/apple-motion/apple-motion-iphone.webp": {
     "widths": [
@@ -69,7 +76,8 @@
       1200,
       1600
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "49113659"
   },
   "/assets/projets/apple-motion/apple-motion-macbook-neo.webp": {
     "widths": [
@@ -78,7 +86,8 @@
       1200,
       1600
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "7da85187"
   },
   "/assets/projets/apple-motion/apple-motion-macbook-pro.webp": {
     "widths": [
@@ -87,7 +96,8 @@
       1200,
       1600
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "f1bf823b"
   },
   "/assets/projets/apple-motion/apple-motion.webp": {
     "widths": [
@@ -96,32 +106,37 @@
       1200,
       1600
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "1f3a0923"
   },
   "/assets/projets/athly/athly-1.webp": {
     "widths": [
       400
     ],
-    "ratio": 1.6925
+    "ratio": 1.6925,
+    "v": "5c9de93f"
   },
   "/assets/projets/athly/athly-2.webp": {
     "widths": [
       400
     ],
-    "ratio": 1.6724
+    "ratio": 1.6724,
+    "v": "821cf6f8"
   },
   "/assets/projets/athly/athly-3.webp": {
     "widths": [
       400
     ],
-    "ratio": 1.6938
+    "ratio": 1.6938,
+    "v": "52d33c9f"
   },
   "/assets/projets/athly/athly.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.6664
+    "ratio": 0.6664,
+    "v": "7616428e"
   },
   "/assets/projets/brokn/brokn-atelier.webp": {
     "widths": [
@@ -131,7 +146,8 @@
       1600,
       2400
     ],
-    "ratio": 0.5625
+    "ratio": 0.5625,
+    "v": "859ae19b"
   },
   "/assets/projets/brokn/brokn-collection.webp": {
     "widths": [
@@ -141,7 +157,8 @@
       1600,
       2400
     ],
-    "ratio": 0.5625
+    "ratio": 0.5625,
+    "v": "553b621d"
   },
   "/assets/projets/brokn/brokn-produit.webp": {
     "widths": [
@@ -151,7 +168,8 @@
       1600,
       2400
     ],
-    "ratio": 0.5625
+    "ratio": 0.5625,
+    "v": "8a0de2de"
   },
   "/assets/projets/brokn/brokn.webp": {
     "widths": [
@@ -161,41 +179,47 @@
       1600,
       2400
     ],
-    "ratio": 0.5625
+    "ratio": 0.5625,
+    "v": "7dd98b3d"
   },
   "/assets/projets/comptoir-aromes/comptoir-aromes.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.4391
+    "ratio": 0.4391,
+    "v": "1af5fd2e"
   },
   "/assets/projets/cosy-study/cosy-study.webp": {
     "widths": [
       400
     ],
-    "ratio": 0.9234
+    "ratio": 0.9234,
+    "v": "b8b4c624"
   },
   "/assets/projets/deauville-limousine/deauville-limousine.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.4964
+    "ratio": 0.4964,
+    "v": "55e517fe"
   },
   "/assets/projets/fcc/fcc.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.4964
+    "ratio": 0.4964,
+    "v": "74bee0f2"
   },
   "/assets/projets/gvp/gvp.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.8818
+    "ratio": 0.8818,
+    "v": "12f23b05"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-boutique.webp": {
     "widths": [
@@ -205,7 +229,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "94ee442d"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-jackpot.webp": {
     "widths": [
@@ -215,21 +240,24 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "e8c7f05e"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile-victoire.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 2.1641
+    "ratio": 2.1641,
+    "v": "cec736ab"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-mobile.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 2.1641
+    "ratio": 2.1641,
+    "v": "6f35f11b"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-partie.webp": {
     "widths": [
@@ -239,7 +267,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "be4d47c8"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-regles.webp": {
     "widths": [
@@ -249,7 +278,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "c3d46827"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-roue.webp": {
     "widths": [
@@ -259,7 +289,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "8d701416"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-stats.webp": {
     "widths": [
@@ -269,7 +300,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "5c81ef12"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-tables.webp": {
     "widths": [
@@ -279,7 +311,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "71108ce1"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire-themes.webp": {
     "widths": [
@@ -289,7 +322,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "2c5ffaad"
   },
   "/assets/projets/jackpot-solitaire/jackpot-solitaire.webp": {
     "widths": [
@@ -299,7 +333,8 @@
       1600,
       2400
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "24531430"
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie-clair.webp": {
     "widths": [
@@ -308,7 +343,8 @@
       1200,
       1600
     ],
-    "ratio": 1.3111
+    "ratio": 1.3111,
+    "v": "57164366"
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-partie.webp": {
     "widths": [
@@ -317,7 +353,8 @@
       1200,
       1600
     ],
-    "ratio": 1.3111
+    "ratio": 1.3111,
+    "v": "7054a199"
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-regles.webp": {
     "widths": [
@@ -326,7 +363,8 @@
       1200,
       1600
     ],
-    "ratio": 1.3111
+    "ratio": 1.3111,
+    "v": "cf102892"
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu-victoire.webp": {
     "widths": [
@@ -335,7 +373,8 @@
       1200,
       1600
     ],
-    "ratio": 1.3111
+    "ratio": 1.3111,
+    "v": "9743819a"
   },
   "/assets/projets/jeu-du-pendu/jeu-du-pendu.webp": {
     "widths": [
@@ -344,14 +383,16 @@
       1200,
       1600
     ],
-    "ratio": 1.3111
+    "ratio": 1.3111,
+    "v": "72ed1bc7"
   },
   "/assets/projets/papaie/papaie.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.4955
+    "ratio": 0.4955,
+    "v": "a3cd9318"
   },
   "/assets/projets/pocket-casino/pocket-casino-banqueroute.webp": {
     "widths": [
@@ -359,7 +400,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "98602c7c"
   },
   "/assets/projets/pocket-casino/pocket-casino-blackjack.webp": {
     "widths": [
@@ -367,7 +409,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "10d2e337"
   },
   "/assets/projets/pocket-casino/pocket-casino-boutique-de-manche.webp": {
     "widths": [
@@ -375,7 +418,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "997a376c"
   },
   "/assets/projets/pocket-casino/pocket-casino-carnet-de-regles.webp": {
     "widths": [
@@ -383,7 +427,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "de895937"
   },
   "/assets/projets/pocket-casino/pocket-casino-magasin.webp": {
     "widths": [
@@ -391,13 +436,15 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "532beb7f"
   },
   "/assets/projets/pocket-casino/pocket-casino-mobile.webp": {
     "widths": [
       390
     ],
-    "ratio": 2.1641
+    "ratio": 2.1641,
+    "v": "65c02ac2"
   },
   "/assets/projets/pocket-casino/pocket-casino-poker.webp": {
     "widths": [
@@ -405,7 +452,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "123384f8"
   },
   "/assets/projets/pocket-casino/pocket-casino-quitte-ou-double.webp": {
     "widths": [
@@ -413,7 +461,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "631f899e"
   },
   "/assets/projets/pocket-casino/pocket-casino-roulette.webp": {
     "widths": [
@@ -421,7 +470,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "ae9275a9"
   },
   "/assets/projets/pocket-casino/pocket-casino-trophees.webp": {
     "widths": [
@@ -429,7 +479,8 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "73eb2364"
   },
   "/assets/projets/pocket-casino/pocket-casino.webp": {
     "widths": [
@@ -437,13 +488,15 @@
       800,
       1200
     ],
-    "ratio": 0.625
+    "ratio": 0.625,
+    "v": "abc91da4"
   },
   "/assets/projets/wp-reservations/wp-reservations.webp": {
     "widths": [
       400,
       800
     ],
-    "ratio": 0.8
+    "ratio": 0.8,
+    "v": "b5d14663"
   }
 }
